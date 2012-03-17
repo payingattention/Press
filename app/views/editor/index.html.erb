@@ -1,0 +1,12 @@
+<h1>Editor#index</h1>
+
+<%= form_for :post, :url => {:action => 'index'} do |f| %>
+
+    <%= f.hidden_field :user_id %>
+    <%= f.text_field :title, :class => 'test' %>
+    <%= f.text_area :content %>
+    
+    <%= submit_tag "Create Post" %>
+    
+<% end %>
+<p>Find me in app/views/editor/index.html.erb</p>
