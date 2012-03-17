@@ -1,4 +1,4 @@
-class EditorController < ApplicationController
+class PostsController < ApplicationController
 
   layout 'admin'
 

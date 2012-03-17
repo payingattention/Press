@@ -20,12 +20,12 @@
         <ul class='nav'>
           <li class='dropdown'><a href="#" class='dropdown-toggle' data-toggle='dropdown'>New <b class="caret"></b></a>
             <ul class='dropdown-menu'>
-              <li><a href='<%= url_for :controller => 'editor', :action => 'new' %>'>
+              <li><a href='<%= url_for :controller => 'posts', :action => 'new' %>'>
                 <i class='icon-plus'></i>
                 New Post</a></li>
             </ul>
           </li>
-          <li><a href="<%= url_for :controller => 'editor', :action => 'index' %>">Posts</a></li>
+          <li><a href="<%= url_for :controller => 'posts', :action => 'index' %>">Posts</a></li>
           <li><a href="<%= url_for :controller => 'users', :action => 'index' %>">Users</a></li>
         </ul>
       </div>
@@ -33,36 +33,38 @@
   </div>
 </div>
 
-<!-- @TODO This should be a view helper -->
-<% if flash[:success] %>
-    <div class='alert alert-success'>
-      <a class="close" data-dismiss='alert'>&times;</a>
-      <strong>Success!</strong> <%= flash[:success] %>
-    </div>
-<% end %>
-
-<% if flash[:error] %>
-    <div class='alert alert-error'>
-      <a class="close" data-dismiss='alert'>&times;</a>
-      <strong>Error!</strong> <%= flash[:error] %>
-    </div>
-<% end %>
-
-<% if flash[:info] %>
-    <div class='alert alert-info'>
-      <a class="close" data-dismiss='alert'>&times;</a>
-      <strong>Information!</strong> <%= flash[:info] %>
-    </div>
-<% end %>
-
-<% if flash[:warning] %>
-    <div class='alert'>
-      <a class="close" data-dismiss='alert'>&times;</a>
-      <strong>Warning!</strong> <%= flash[:warning] %>
-    </div>
-<% end %>
-
 <div class='container'>
+  <div class='row'>
+    <!-- @TODO This should be a view helper -->
+    <% if flash[:success] %>
+        <div class='alert alert-success'>
+          <a class="close" data-dismiss='alert'>&times;</a>
+          <strong>Success!</strong> <%= flash[:success] %>
+        </div>
+    <% end %>
+
+    <% if flash[:error] %>
+        <div class='alert alert-error'>
+          <a class="close" data-dismiss='alert'>&times;</a>
+          <strong>Error!</strong> <%= flash[:error] %>
+        </div>
+    <% end %>
+
+    <% if flash[:info] %>
+        <div class='alert alert-info'>
+          <a class="close" data-dismiss='alert'>&times;</a>
+          <strong>Information!</strong> <%= flash[:info] %>
+        </div>
+    <% end %>
+
+    <% if flash[:warning] %>
+        <div class='alert'>
+          <a class="close" data-dismiss='alert'>&times;</a>
+          <strong>Warning!</strong> <%= flash[:warning] %>
+        </div>
+    <% end %>
+  </div>
+
   <div class='row'>
     <div class='span9'><%= yield %></div>
     <div class='span3'></div>
