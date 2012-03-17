@@ -1,15 +1,11 @@
 class EditorController < ApplicationController
+  # LIST -- Shows a list of posts
   def index
     # Show a list
-    # Click to edit, then edit one
-    # Click new to create, then create one
-#    puts params
-#    post = params :post
-
-#    puts post
+    @posts = Post.order('created_at ASC')
   end
 
-  # New post form method
+  # NEW -- New post form method
   def new
     # Map all users out to a name, id pair for the select box
     @all_users = User.all.map { |a| [a.display_name, a.id] }
@@ -17,6 +13,7 @@ class EditorController < ApplicationController
     @post = Post.new
   end
 
+  # CREATE -- Does the work of saving new post or back to new
   def create
     # Instance new object
     @post = Post.new params[:post]

@@ -3,6 +3,8 @@
 <p>This file will allow me to add/edit posts for testing purposes.</p>
 <p>This will eventually go into the admin area.</p>
 
+<%= link_to "Go Back", {:action => 'index'}, :class => 'btn' %>
+
 <%= form_for :post, :url => {:action => 'create'} do |f| %>
 
     <div class='container'>

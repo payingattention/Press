@@ -3,4 +3,24 @@
 <p>This file will allow me to add/edit posts for testing purposes.</p>
 <p>This will eventually go into the admin area.</p>
 
-<%= link_to "Add New Post", {:action=>'new'} %>
+<%= link_to "Add New Post", {:action => 'new'}, :class => 'btn' %>
+
+<table class='table table-striped'>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= link_to post.title, {} %></td>
+        <td>
+          <%= link_to 'Edit', {}, :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', {}, :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
