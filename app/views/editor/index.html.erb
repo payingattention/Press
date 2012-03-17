@@ -17,7 +17,7 @@
       <tr>
         <td><%= link_to post.title, {} %></td>
         <td>
-          <%= link_to 'Edit', {}, :class => 'btn btn-mini' %>
+          <%= link_to 'Edit', {:action => 'edit', :id => post.id}, :class => 'btn btn-mini' %>
           <%= link_to 'Destroy', {}, :class => 'btn btn-mini btn-danger' %>
         </td>
       </tr>

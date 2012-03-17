@@ -1,4 +1,5 @@
 class EditorController < ApplicationController
+
   # LIST -- Shows a list of posts
   def index
     # Show a list
@@ -20,10 +21,33 @@ class EditorController < ApplicationController
     # Save object
     if @post.save
       # if success send back to index
-      redirect_to :action => index
+      redirect_to :action => 'index'
     else
       # if fail send back to form and rerender the @post new form
       render 'new'
     end
   end
+
+  # EDIT
+  def edit
+    # Map all users out to a name, id pair for the select box
+    @all_users = User.all.map { |a| [a.display_name, a.id] }
+    # Instance the post
+    @post = Post.find params[:id]
+  end
+  
+  # UPDATE
+  def update
+    # Instance post object
+    @post = Post.find params[:id]
+    # Update object
+    if @post.update_attributes params[:post]
+      # if success send back to index
+      redirect_to :action => 'index'
+    else
+      # if fail send back to form and rerender the @post form
+      render 'edit'
+    end
+  end
+
 end
