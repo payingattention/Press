@@ -33,13 +33,20 @@ class EditorController < ApplicationController
     # Map all users out to a name, id pair for the select box
     @all_users = User.all.map { |a| [a.display_name, a.id] }
     # Instance the post
-    @post = Post.find params[:id]
+    @post = Post.find_by_id params[:id]
+    unless @post
+      redirect_to :action => 'index'
+    end
   end
   
   # UPDATE
   def update
     # Instance post object
-    @post = Post.find params[:id]
+    @post = Post.find_by_id params[:id]
+    unless @post
+      redirect_to :action => 'index'
+    end
+
     # Update object
     if @post.update_attributes params[:post]
       # if success send back to index
