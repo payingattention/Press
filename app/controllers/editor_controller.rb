@@ -41,7 +41,6 @@ class EditorController < ApplicationController
   
   # UPDATE
   def update
-    # Instance post object
     @post = Post.find_by_id params[:id]
     unless @post
       redirect_to :action => 'index'
@@ -49,11 +48,27 @@ class EditorController < ApplicationController
 
     # Update object
     if @post.update_attributes params[:post]
-      # if success send back to index
+      # todo Add a flash message saying we updated
       redirect_to :action => 'index'
     else
-      # if fail send back to form and rerender the @post form
+      # todo Add a flash message explaining the error
       render 'edit'
+    end
+  end
+
+  # DESTROY
+  def destroy
+    @post = Post.find_by_id params[:id]
+    unless @post
+      redirect_to :action => 'index'
+    end
+
+    if @post.destroy
+      # todo Add a flash message saying we deleted something
+      redirect_to :action => 'index'
+    else
+      # todo Add a flash message explaining the error
+      redirect_to :action => 'index'
     end
   end
 
