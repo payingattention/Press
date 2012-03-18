@@ -1,7 +1,5 @@
 Press::Application.routes.draw do
 
-  get "users/index"
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -52,7 +50,8 @@ Press::Application.routes.draw do
   #   end
 
   namespace :admin do
-    resources :admin, :posts, :users
+    resources :posts
+    resources :users
   end
 
   # You can have the root of your site routed with "root"
