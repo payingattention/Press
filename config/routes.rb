@@ -1,13 +1,13 @@
 Press::Application.routes.draw do
 
-  get "editor/index"
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
+
+  match 'admin/' => 'admin#index'
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
@@ -49,6 +49,10 @@ Press::Application.routes.draw do
   #     resources :products
   #   end
 
+  namespace :admin do
+    resources :admin, :posts, :users
+  end
+
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'default#index'
@@ -57,5 +61,5 @@ Press::Application.routes.draw do
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  match ':controller(/:action(/:id))(.:format)'
+  #match ':module(/:controller(/:action(/:id)))(.:format)'
 end
