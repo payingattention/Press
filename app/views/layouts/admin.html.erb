@@ -29,6 +29,7 @@
                 New User</a></li>
             </ul>
           </li>
+          <li class='divider-vertical'></li>
           <li><a href="<%= url_for :controller => 'admin/posts', :action => 'index' %>">Posts</a></li>
           <li><a href="<%= url_for :controller => 'admin/users', :action => 'index' %>">Users</a></li>
         </ul>
@@ -89,6 +90,19 @@
     <div class='span3'></div>
   </div>
 </div>
+
+<div class='navbar navbar-fixed-bottom bottombar'>
+  <div class='navbar-inner bottombar-inner'>
+    <div class='container'>
+      <a class='brand' href="<%= url_for :controller => '/admin', :action => 'index' %>">RubyPress</a>
+      <div class='nav-collapse'>
+        <ul class='nav'>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 </body>
 </html>
