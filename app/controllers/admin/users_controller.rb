@@ -43,6 +43,12 @@ class Admin::UsersController < ApplicationController
       redirect_to :action => 'index'
     end
 
+    if params[:user][:password] == ''
+      params[:user][:password] = @user.password
+    else
+      params[:user][:password] = Digest::MD5.hexdigest(@user.salt + params[:user][:password])
+    end
+
     if @user.update_attributes params[:user]
       flash[:success] = 'User Edited.'
       redirect_to :action => 'index'
