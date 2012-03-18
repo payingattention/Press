@@ -1,0 +1,30 @@
+
+    <fieldset>
+      <legend><%= form_legend %></legend>
+
+      <div class='control-group'>
+        <label class='control-label'>Author</label>
+        <div class='controls'><%= f.select :user_id, @all_users %></div>
+      </div>
+
+      <div class='control-group'>
+        <label class='control-label'>Title</label>
+        <div class='controls'><%= f.text_field :title, :class => 'input-xlarge ' %></div>
+      </div>
+
+      <div class='control-group'>
+        <label class='control-label'>SEO Url</label>
+        <div class='controls'><%= f.text_field :seo_url, :class => 'input-xlarge ' %></div>
+      </div>
+
+      <div class='control-group'>
+        <label class='control-label'>Content</label>
+        <div class='controls'><%= f.text_area :content, :size => '50x8', :class => 'input-xlarge ' %></div>
+      </div>
+
+      <div class='form-actions'>
+        <%= submit_tag submit_label, :class => 'btn btn-primary' %>
+        <%= link_to "Cancel", {:action => 'index'}, :class => 'btn' %>
+      </div>
+
+    </fieldset>

@@ -1,32 +1,12 @@
 <% @breadcrumbs = [link_to('Posts Editor', {:action => 'index'}), 'Add New Post'] %>
 
-<%= form_for :post, :url => {:action => 'create'} do |f| %>
+<%= form_for :post, :url => {:action => 'create'}, :html => { :class => 'form-horizontal' } do |f| %>
 
-    <div class='container'>
-      <div class='row'>
-        <div class='span1'><label>User</label></div>
-        <div class='span8'><%= f.select :user_id, @all_users %></div>
-      </div>
-      <div class='row'>
-        <div class='span1'><label>Title</label></div>
-        <div class='span8'><%= f.text_field :title %></div>
-      </div>
-      <div class='row'>
-        <div class='span1'><label>SEO Url</label></div>
-        <div class='span8'><%= f.text_field :seo_url %></div>
-      </div>
-      <div class='row'>
-        <div class='span1'><label>Content</label></div>
-        <div class='span8'><%= f.text_area :content, :class => 'span6' %></div>
-      </div>
-      <div class='row'>
-        <div class='span1'><label> </label></div>
-        <div class='span8'>
-          <%= submit_tag "Create Post", :class => 'btn btn-primary' %>
-          <%= link_to "Cancel", {:action => 'index'}, :class => 'btn' %>
-        </div>
-      </div>
-    </div>
+    <%= render :partial => 'post_form', :locals => {
+        :f => f,
+        :form_legend => "Create new post",
+        :submit_label => "Create Post"
+    } %>
 
 <% end %>
 
