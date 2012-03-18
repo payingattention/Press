@@ -1,5 +1,7 @@
 class Admin::UsersController < ApplicationController
 
+  require 'digest/md5'
+
   layout 'admin'
 
   # LIST
@@ -15,7 +17,9 @@ class Admin::UsersController < ApplicationController
   # CREATE
   def create
     @user = User.new params[:user]
-    @user.salt ||= '123456' # @TODO Temporary user salt
+    @user.salt = Digest::MD5.hexdigest(Time.now.utc.to_s)
+    @user.password = Digest::MD5.hexdigest(@user.salt + @user.password)
+
     if @user.save
       flash[:success] = 'User Created.'
       redirect_to :action => 'index'
