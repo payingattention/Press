@@ -33,9 +33,24 @@
   </div>
 </div>
 
+
 <div class='container'>
+
+  <!-- @TODO This should be a view helper -->
+  <% if @breadcrumbs %>
   <div class='row'>
-    <!-- @TODO This should be a view helper -->
+    <ul class='breadcrumb'>
+      <% active = @breadcrumbs.pop %>
+      <% @breadcrumbs.each do |b| %>
+      <li><%= b %> <span class='divider'>/</span></li>
+      <% end %>
+      <li class='active'><%= active %></li>
+    </ul>
+  </div>
+  <% end %>
+
+  <!-- @TODO This should be a view helper -->
+  <div class='row'>
     <% if flash[:success] %>
         <div class='alert alert-success'>
           <a class="close" data-dismiss='alert'>&times;</a>

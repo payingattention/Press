@@ -1,4 +1,4 @@
-<h1>Temporary Post Editor System :: Add New Post</h1>
+<% @breadcrumbs = [link_to('Posts Editor', {:action => 'index'}), 'Add New Post'] %>
 
 <%= form_for :post, :url => {:action => 'create'} do |f| %>
 

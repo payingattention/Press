@@ -1,4 +1,4 @@
-<h1>Temporary Post Editor System :: Edit Post</h1>
+<% @breadcrumbs = [link_to('Posts Editor', {:action => 'index'}), 'Edit Post'] %>
 
 <%= form_for :post, :url => {:action => 'update', :id => @post.id} do |f| %>
 
