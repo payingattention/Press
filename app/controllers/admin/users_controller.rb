@@ -15,6 +15,7 @@ class Admin::UsersController < ApplicationController
   # CREATE
   def create
     @user = User.new params[:user]
+    @user.salt ||= '123456' # @TODO Temporary user salt
     if @user.save
       flash[:success] = 'User Created.'
       redirect_to :action => 'index'

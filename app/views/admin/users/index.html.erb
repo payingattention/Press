@@ -12,6 +12,7 @@
   <% @users.each do |user| %>
       <tr>
         <td><%= link_to user.first_name, {} %></td>
+        <td><%= user.email %></td>
         <td>
           <%= link_to 'Edit', {:action => 'edit', :id => user.id}, :class => 'btn btn-mini' %>
           <%= link_to 'Destroy', {:action => 'destroy', :id => user.id}, :confirm => "You've chosen to delete this user, this can't be undone. Are you sure?", :class => 'btn btn-mini btn-danger' %>
