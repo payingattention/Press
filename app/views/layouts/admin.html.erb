@@ -15,7 +15,7 @@
 <div class='navbar navbar-fixed-top'>
   <div class='navbar-inner'>
     <div class='container'>
-      <a class='brand' href="<%= url_for :controller => 'admin', :action => 'index' %>">RubyPress Administration</a>
+      <a class='brand' href="<%= url_for :controller => '/admin', :action => 'index' %>">RubyPress Administration</a>
       <div class='nav-collapse'>
         <ul class='nav'>
           <li class='dropdown'><a href="#" class='dropdown-toggle' data-toggle='dropdown'>New <b class="caret"></b></a>
@@ -25,8 +25,8 @@
                 New Post</a></li>
             </ul>
           </li>
-          <li><a href="<%= url_for :controller => 'posts', :action => 'index' %>">Posts</a></li>
-          <li><a href="<%= url_for :controller => 'users', :action => 'index' %>">Users</a></li>
+          <li><a href="<%= url_for :controller => 'admin/posts', :action => 'index' %>">Posts</a></li>
+          <li><a href="<%= url_for :controller => 'admin/users', :action => 'index' %>">Users</a></li>
         </ul>
       </div>
     </div>
