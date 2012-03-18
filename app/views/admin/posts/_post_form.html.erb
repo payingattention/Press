@@ -22,6 +22,22 @@
         <div class='controls'><%= f.text_area :content, :size => '50x8', :class => 'input-xlarge ' %></div>
       </div>
 
+      <div class='control-group warning'>
+        <label class='control-label'>State</label>
+        <div class='controls'>
+          <%= f.enum_select :state %>
+          <span class='help-inline'>Temporary</span>
+        </div>
+      </div>
+
+      <div class='control-group warning'>
+        <label class='control-label'>Post Type</label>
+        <div class='controls'>
+          <%= f.enum_select :type %>
+          <span class='help-inline'>Temporary</span>
+        </div>
+      </div>
+
       <div class='form-actions'>
         <%= submit_tag submit_label, :class => 'btn btn-primary' %>
         <%= link_to "Cancel", {:action => 'index'}, :class => 'btn' %>
