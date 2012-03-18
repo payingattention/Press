@@ -1,2 +1,27 @@
-<h1>Users</h1>
+<% @breadcrumbs = [link_to('Users Editor', {:action => 'index'}), 'User List'] %>
+
+<table class='table table-striped'>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.first_name, {} %></td>
+        <td>
+          <%= link_to 'Edit', {:action => 'edit', :id => user.id}, :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', {:action => 'destroy', :id => user.id}, :confirm => "You've chosen to delete this user, this can't be undone. Are you sure?", :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to({:action => 'new'}, :class => 'btn btn-primary') do %>
+    <i class='icon-plus icon-white'></i> Add New User
+<% end %>
 
