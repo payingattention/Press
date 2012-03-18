@@ -14,20 +14,20 @@
 ActiveRecord::Schema.define(:version => 20120316202312) do
 
   create_table "posts", :force => true do |t|
-    t.integer  "user_id",                                         :null => false
+    t.integer  "user_id",                                                                     :null => false
     t.integer  "post_id"
     t.text     "content"
     t.string   "title"
     t.string   "seo_url"
     t.string   "password",       :limit => 40
     t.string   "type",           :limit => 20
-    t.string   "state",          :limit => 20
-    t.boolean  "allow_comments",               :default => true
-    t.boolean  "is_sticky",                    :default => false
+    t.enum     "state",          :limit => [:draft, :published, :frozen], :default => :draft
+    t.boolean  "allow_comments",                                          :default => true
+    t.boolean  "is_sticky",                                               :default => false
     t.datetime "go_live"
     t.datetime "go_dead"
-    t.datetime "created_at",                                      :null => false
-    t.datetime "updated_at",                                      :null => false
+    t.datetime "created_at",                                                                  :null => false
+    t.datetime "updated_at",                                                                  :null => false
   end
 
   add_index "posts", ["seo_url"], :name => "index_posts_on_seo_url"

@@ -8,7 +8,7 @@ class CreatePosts < ActiveRecord::Migration
       t.string    "seo_url"                   # Perma link to this object
       t.string    "password", :limit => 40    # PW if set
       t.string    "type", :limit => 20        # Type of object, post, page, comment, message
-      t.string    "state", :limit => 20       # published, draft, whatever
+      t.enum      "state", :limit => [:draft, :published, :frozen], :default => :draft # published, draft, whatever
       t.boolean   "allow_comments", :default => true # are comments on this thing allowed?
       t.boolean   "is_sticky", :default => false # keep at top of matched listing?
       t.datetime  "go_live"                   # Go live date

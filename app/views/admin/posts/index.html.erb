@@ -3,14 +3,19 @@
 <table class='table table-striped'>
   <thead>
     <tr>
+      <th>ID</th>
       <th>Title</th>
+      <th>SEO Url</th>
+      <th>State</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     <% @posts.each do |post| %>
       <tr>
+        <td><%= post.id %></td>
         <td><%= link_to post.title, {} %></td>
+        <td><%= post.seo_url %></td>
         <td>
           <%= link_to 'Edit', {:action => 'edit', :id => post.id}, :class => 'btn btn-mini' %>
           <%= link_to 'Destroy', {:action => 'destroy', :id => post.id}, :method => :delete, :confirm => "You've chosen to delete this post, this can't be undone. Are you sure?", :class => 'btn btn-mini btn-danger' %>
@@ -20,6 +25,22 @@
   </tbody>
 </table>
 
-<%= link_to({:action => 'new'}, :class => 'btn btn-primary') do %>
-    <i class='icon-plus icon-white'></i> Add New Post
-<% end %>
+
+<div class="btn-toolbar">
+  <div class="btn-group">
+    <%= link_to({:action => 'new'}, :class => 'btn btn-primary') do %>
+      <i class='icon-plus icon-white'></i> Add New Post
+    <% end %>
+  </div>
+  <div class="btn-group">
+    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+      <i class="icon-upload"></i> Import
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li><a href="#">from Wordpress XML</a></li>
+    </ul>
+  </div>
+
+</div>
+
