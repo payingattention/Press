@@ -1,0 +1,12 @@
+<% @breadcrumbs = [link_to('Users Editor', {:action => 'index'}), 'Edit User'] %>
+
+<%= form_for :user, :url => { :action => 'update', :id => @user.id }, :html => { :class => 'form-horizontal' } do |f| %>
+
+    <%= render :partial => 'user_form', :locals => {
+            :f => f,
+            :form_legend => "Edit user",
+            :submit_label => "Update User"
+    } %>
+
+<% end %>
+

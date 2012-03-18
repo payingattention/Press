@@ -1,61 +1,12 @@
 <% @breadcrumbs = [link_to('Users Editor', {:action => 'index'}), 'Add New User'] %>
 
-
 <%= form_for :user, :url => {:action => 'create'}, :html => { :class => 'form-horizontal' } do |f| %>
-    <fieldset>
-      <legend>Add New User</legend>
 
-      <div class='control-group<%= " error" if @user.errors.has_key?(:email) %>'>
-        <label class='control-label'>Email</label>
-        <div class='controls'>
-          <%= f.text_field :email, :class => 'input-xlarge' %>
-          <% if @user.errors.has_key?(:email) %>
-              <span class='help-inline'>Email <%= @user.errors.get(:email).first %></span>
-          <% end %>
-        </div>
-      </div>
-
-      <div class='control-group'>
-        <label class='control-label'>Password</label>
-        <div class='controls'><%= f.password_field :password, :class => 'input-xlarge ' %></div>
-      </div>
-
-      <div class='control-group'>
-        <label class='control-label'> </label>
-        <div class='controls'><%= password_field_tag 'password_confirmation', "", { :class => 'input-xlarge ', :placeholder => 'Password Confirmation...' } %></div>
-      </div>
-
-      <div class='control-group'>
-        <label class='control-label'>First Name</label>
-        <div class='controls'><%= f.text_field :first_name, :class => 'input-xlarge ' %></div>
-      </div>
-
-      <div class='control-group'>
-        <label class='control-label'>Last Name</label>
-        <div class='controls'><%= f.text_field :last_name, :class => 'input-xlarge ' %></div>
-      </div>
-
-      <div class='control-group'>
-        <label class='control-label'>Display Name</label>
-        <div class='controls'><%= f.text_field :display_name, :class => 'input-xlarge ' %></div>
-      </div>
-
-      <div class='control-group'>
-        <label class='control-label'>Admin</label>
-        <div class='controls'>
-          <label class='checkbox'>
-            <%= f.check_box :admin %>
-            This user is a site administrator
-          </label>
-        </div>
-      </div>
-
-      <div class='form-actions'>
-        <%= submit_tag "Create User", :class => 'btn btn-primary' %>
-        <%= link_to "Cancel", {:action => 'index'}, :class => 'btn' %>
-      </div>
-    </fieldset>
-
+    <%= render :partial => 'user_form', :locals => {
+            :f => f,
+            :form_legend => "Create new user",
+            :submit_label => "Create User"
+    } %>
 
 <% end %>
 
