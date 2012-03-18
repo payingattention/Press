@@ -15,7 +15,7 @@
         <td><%= user.email %></td>
         <td>
           <%= link_to 'Edit', {:action => 'edit', :id => user.id}, :class => 'btn btn-mini' %>
-          <%= link_to 'Destroy', {:action => 'destroy', :id => user.id}, :confirm => "You've chosen to delete this user, this can't be undone. Are you sure?", :class => 'btn btn-mini btn-danger' %>
+          <%= link_to 'Destroy', {:action => 'destroy', :id => user.id}, :method => :delete, :confirm => "You've chosen to delete this user, this can't be undone. Are you sure?", :class => 'btn btn-mini btn-danger' %>
         </td>
       </tr>
   <% end %>

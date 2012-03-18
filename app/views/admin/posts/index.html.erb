@@ -13,7 +13,7 @@
         <td><%= link_to post.title, {} %></td>
         <td>
           <%= link_to 'Edit', {:action => 'edit', :id => post.id}, :class => 'btn btn-mini' %>
-          <%= link_to 'Destroy', {:action => 'destroy', :id => post.id}, :confirm => "You've chosen to delete this post, this can't be undone. Are you sure?", :class => 'btn btn-mini btn-danger' %>
+          <%= link_to 'Destroy', {:action => 'destroy', :id => post.id}, :method => :delete, :confirm => "You've chosen to delete this post, this can't be undone. Are you sure?", :class => 'btn btn-mini btn-danger' %>
         </td>
       </tr>
     <% end %>
