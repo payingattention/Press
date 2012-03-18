@@ -38,7 +38,7 @@ class Admin::PostsController < ApplicationController
       redirect_to :action => 'index'
     end
   end
-  
+
   # UPDATE
   def update
     @post = Post.find_by_id params[:id]

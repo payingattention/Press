@@ -50,8 +50,7 @@ Press::Application.routes.draw do
   #   end
 
   namespace :admin do
-    resources :posts
-    resources :users
+    resources :posts, :users
   end
 
   # You can have the root of your site routed with "root"

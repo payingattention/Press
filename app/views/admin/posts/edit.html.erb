@@ -1,6 +1,6 @@
 <% @breadcrumbs = [link_to('Posts Editor', {:action => 'index'}), 'Edit Post'] %>
 
-<%= form_for :post, :url => { :action => 'update', :id => @post.id }, :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for :post, :url => { :action => 'update', :id => @post.id }, :method => :put, :html => { :class => 'form-horizontal' } do |f| %>
 
     <%= render :partial => 'post_form', :locals => {
             :f => f,
