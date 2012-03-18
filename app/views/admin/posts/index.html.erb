@@ -16,9 +16,10 @@
         <td><%= post.id %></td>
         <td><%= post.title %></td>
         <td><%= post.seo_url %></td>
-        <td>
-          <%= link_to 'Edit', {:action => 'edit', :id => post.id}, :class => 'btn btn-mini' %>
-          <%= link_to 'Destroy', {:action => 'destroy', :id => post.id}, :method => :delete, :confirm => "You've chosen to delete this post, this can't be undone. Are you sure?", :class => 'btn btn-mini btn-danger' %>
+        <td><%= post.state %></td>
+        <td class='span2 center'>
+            <%= link_to 'Edit', {:action => 'edit', :id => post.id}, :class => 'btn btn-mini' %>
+            <%= link_to 'Destroy', {:action => 'destroy', :id => post.id}, :method => :delete, :confirm => "You've chosen to delete this post, this can't be undone. Are you sure?", :class => 'btn btn-mini btn-danger' %>
         </td>
       </tr>
     <% end %>
