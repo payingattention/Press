@@ -52,8 +52,13 @@ class Admin::ImportWordpressController < ApplicationController
             else
               post.state = :published
           end
+
           # Author -- @TODO Try to parse the user and pick, give "add new" option, or just use admin
           post.user_id = author
+
+          # Parse out the publish date and use it
+          publish_date = i['pubDate'].split(', ')[1]
+          post.go_live = DateTime.parse(publish_date)
 
           # Sticky
           post.is_sticky = i['is_sticky']

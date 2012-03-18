@@ -4,7 +4,7 @@ class Admin::PostsController < ApplicationController
 
   # LIST -- Shows a list of posts
   def index
-    @posts = Post.order('created_at DESC')
+    @posts = Post.order('go_live DESC')
   end
 
   # NEW -- New post form method

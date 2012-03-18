@@ -11,7 +11,7 @@ class CreatePosts < ActiveRecord::Migration
       t.enum      "state", :limit => [:draft, :published, :frozen], :default => :draft # published, draft, whatever
       t.boolean   "allow_comments", :default => true # are comments on this thing allowed?
       t.boolean   "is_sticky", :default => false # keep at top of matched listing?
-      t.datetime  "go_live"                   # Go live date
+      t.datetime  "go_live", :null => false   # Go live date
       t.datetime  "go_dead"                   # Go dead date
       t.timestamps
     end

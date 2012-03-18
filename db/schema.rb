@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(:version => 20120316202312) do
     t.enum     "state",          :limit => [:draft, :published, :frozen],           :default => :draft
     t.boolean  "allow_comments",                                                    :default => true
     t.boolean  "is_sticky",                                                         :default => false
-    t.datetime "go_live"
+    t.datetime "go_live",                                                                               :null => false
     t.datetime "go_dead"
     t.datetime "created_at",                                                                            :null => false
     t.datetime "updated_at",                                                                            :null => false
