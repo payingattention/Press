@@ -14,7 +14,7 @@
     <% @posts.each do |post| %>
       <tr>
         <td><%= post.id %></td>
-        <td><%= link_to post.title, {} %></td>
+        <td><%= post.title %></td>
         <td><%= post.seo_url %></td>
         <td>
           <%= link_to 'Edit', {:action => 'edit', :id => post.id}, :class => 'btn btn-mini' %>
@@ -38,7 +38,7 @@
       <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">
-      <li><a href="#">from Wordpress XML</a></li>
+      <li><%= link_to 'from Wordpress XML Export', { :controller => 'admin/import_wordpress', :action => 'new' } %></li>
     </ul>
   </div>
 

@@ -50,7 +50,7 @@ Press::Application.routes.draw do
   #   end
 
   namespace :admin do
-    resources :posts, :users
+    resources :posts, :users, :import_wordpress
   end
 
   # You can have the root of your site routed with "root"

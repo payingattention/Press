@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20120316202312) do
     t.string   "title"
     t.string   "seo_url"
     t.string   "password",       :limit => 40
-    t.enum     "type",           :limit => [:post, :page, :comment, :message, :ad], :default => :post
+    t.enum     "object_type",    :limit => [:post, :page, :comment, :message, :ad], :default => :post
     t.enum     "state",          :limit => [:draft, :published, :frozen],           :default => :draft
     t.boolean  "allow_comments",                                                    :default => true
     t.boolean  "is_sticky",                                                         :default => false
