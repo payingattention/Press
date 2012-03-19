@@ -1,6 +1,66 @@
 
 body {
     background-color: #f5f6f7;
+
+    .container[role='header'] {
+        position: relative;
+        height: 120px;
+        background-color: #95b2d6;
+        background-image: -moz-linear-gradient(center top , #e3eaee, #95b2d6);
+        border-radius: 0 0 4px 4px;
+        box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
+        border-left: 1px solid #a8a8a8;
+        border-right: 1px solid #a8a8a8;
+        margin-bottom: 20px;
+
+        .header-image {
+            img {
+                margin: 10px 0 0 14px;
+            }
+        }
+
+        .navbar {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            margin-bottom: 0;
+            border-top: 1px solid #a8a8a8;
+            .navbar-inner {
+                border-top: 1px solid #d8d8d8;
+                border-radius: 0 0 4px 4px;
+                background-color: #f2f2f2;
+                background-image: -moz-linear-gradient(center top , #f2f2f2, #dfdfdf);
+
+                ul.nav li a {
+                    padding: 5px 10px 4px;
+                    &:hover {
+                        color: #000;
+                    }
+                    b {
+                        border-bottom-color: #000;
+                        border-top-color: #000;
+                    }
+                }
+                ul.nav li.open {
+                    a {
+                        color: #000;
+                    }
+                }
+                ul.nav li.divider-vertical {
+                    height: 27px;
+                    background-color: #d8d8d8;
+                    border-right: 1px solid #f2f2f2;
+                }
+            }
+        }
+    }
+
+
+}
+
+body[role='admin'] {
+    padding-top: 60px;
 }
 
 .container[role='main'] {
@@ -25,3 +85,4 @@ body {
         float: right;
     }
 }
+

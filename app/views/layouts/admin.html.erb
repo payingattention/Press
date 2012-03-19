@@ -10,7 +10,7 @@
   <%= csrf_meta_tags %>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 </head>
-<body>
+<body role='admin'>
 
 <div class='navbar navbar-fixed-top'>
   <div class='navbar-inner'>
@@ -32,6 +32,9 @@
           <li class='divider-vertical'></li>
           <li><a href="<%= url_for :controller => 'admin/posts', :action => 'index' %>">Posts</a></li>
           <li><a href="<%= url_for :controller => 'admin/users', :action => 'index' %>">Users</a></li>
+        </ul>
+        <ul class='nav pull-right'>
+          <li><a href="<%= url_for "/" %>">Back to Site</a></li>
         </ul>
       </div>
     </div>

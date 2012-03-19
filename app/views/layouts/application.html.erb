@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Press</title>
+  <title>RubyPress</title>
   <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
   <![endif]-->
@@ -12,7 +12,40 @@
 </head>
 <body>
 
-<div class='container'>
+<div class='container' role="header">
+  <div class='row'>
+    <div class='span9 header-image'>
+      <img src='/assets/rsow.com.png'/>
+    </div>
+    <div class='span3'>
+
+    </div>
+  </div>
+
+  <div class='navbar'>
+    <div class='navbar-inner'>
+      <div class='container'>
+        <ul class='nav pull-right'>
+          <li class='divider-vertical'></li>
+          <li class='dropdown'><a href="#" class='dropdown-toggle' data-toggle='dropdown'>Temporary <b class="caret"></b></a>
+            <ul class='dropdown-menu'>
+              <li><a href='<%= url_for :controller => 'admin/posts', :action => 'new' %>'>
+                <i class='icon-plus'></i>
+                New Post</a></li>
+              <li class='divider'></li>
+              <li><a href='<%= url_for :controller => 'admin/users', :action => 'new' %>'>
+                <i class='icon-plus'></i>
+                New User</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class='container' role="main">
   <div class='row'>
     <div class='span9'><%= yield %></div>
     <div class='span3'></div>
