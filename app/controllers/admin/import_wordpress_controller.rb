@@ -41,8 +41,11 @@ class Admin::ImportWordpressController < ApplicationController
           post.title = i['title']
           # Seo Url -- @TODO Check for link collision -- this should be unique
           post.seo_url = i['post_name']
+
           # content -- @TODO Will need to reap the caption system out
-          post.content = i['encoded']
+          post.content = i['encoded'][0]
+          # Strip beginning extra crap from content (This is the CDATA extra shit prepended)
+          post.content = post.content.gsub('/^---\n-\s!','')
 
           case i['status']
             when 'publish'
