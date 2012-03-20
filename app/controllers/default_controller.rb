@@ -3,20 +3,30 @@ class DefaultController < ApplicationController
   layout 'application'
   #
   def index
-    # Get the 5 latest
+    # Get the 5 latest -- TODO this should be configurable
     limit = 5;
+    # Our page number
     page = (params[:page].to_i - 1) || 1
+    # Our filter if there is one set
     @filter = params[:filter] || ''
 
+    # Get the latest posts by go_live
     @posts = Post.order('go_live DESC')
-    @total_post_count = @posts.count
+    # Make sure we are only getting those that are published
+    @posts = @posts.where( :state => :published )
+    # Make sure we are talking about posts or messages
+    t = Post.arel_table
+    @posts = @posts.where( t[:object_type].matches(:post).or(t[:object_type].matches(:message)))
+    # Make sure they don't have a password.. those are "private"
+    @posts = @posts.where( :password => nil )
+    # If a filter is set, use it
     @posts = @posts.where(["title like ?", '%'+@filter+'%'] ) if @filter
-    @filtered_post_count = @posts.count
+    # Limit the number of posts to show
     @posts = @posts.limit(limit)
+    # Set the offset if we aren't on the first page.
     @posts = @posts.offset(limit.to_i * page.to_i) if page > 0
-
+    # Need this to show a previous/next button
     @pagination_current_page = (page.to_i + 1) > 0 ? (page.to_i + 1) : 1
-    @pagination_number_of_pages = (@filtered_post_count / limit) +1
 
   end
 
