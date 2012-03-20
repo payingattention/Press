@@ -1,41 +1,72 @@
 
+<div class='span12'>
     <fieldset>
       <legend><%= form_legend %></legend>
 
-      <div class='control-group'>
-        <label class='control-label'>Author</label>
-        <div class='controls'><%= f.select :user_id, @all_users %></div>
-      </div>
 
-      <div class='control-group'>
-        <label class='control-label'>Title</label>
-        <div class='controls'><%= f.text_field :title, :class => 'input-xlarge ' %></div>
-      </div>
+      <ul class="nav nav-tabs">
+        <li class='active'><a href="#content" data-toggle='tab'>Content</a></li>
+        <li class='dropdown'><a class='dropdown-toggle' data-toggle='dropdown' href="#">Settings <b class="caret"></b></a>
+          <ul class='dropdown-menu'>
+            <li><a href="#settings" data-toggle='tab'>Standard Settings</a></li>
+            <li><a href="#administration" data-toggle='tab'>Administration Settings</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class='tab-content'>
 
-      <div class='control-group'>
-        <label class='control-label'>SEO Url</label>
-        <div class='controls'><%= f.text_field :seo_url, :class => 'input-xlarge ' %></div>
-      </div>
+        <div class='tab-pane active' id='content'>
 
-      <div class='control-group'>
-        <label class='control-label'>Content</label>
-        <div class='controls'><%= f.text_area :content, :size => '50x8', :class => 'input-xlarge ' %></div>
-      </div>
+          <div class='control-group'>
+            <label class='control-label'>Title</label>
+            <div class='controls'><%= f.text_field :title, :class => 'input-xlarge ' %></div>
+          </div>
 
-      <div class='control-group warning'>
-        <label class='control-label'>State</label>
-        <div class='controls'>
-          <%= f.enum_select :state %>
-          <span class='help-inline'>Temporary</span>
+          <div class='control-group'>
+            <label class='control-label'>Content</label>
+            <div class='controls'><%= f.text_area :content, :size => '50x8', :class => 'input-xlarge ' %></div>
+          </div>
+
         </div>
-      </div>
 
-      <div class='control-group warning'>
-        <label class='control-label'>Post Type</label>
-        <div class='controls'>
-          <%= f.enum_select :object_type %>
-          <span class='help-inline'>Temporary</span>
+        <div class='tab-pane' id='settings'>
+
+          <div class='control-group'>
+            <label class='control-label'>SEO Url</label>
+            <div class='controls'><%= f.text_field :seo_url, :class => 'input-xlarge ' %></div>
+          </div>
+
+
         </div>
+
+        <div class='tab-pane' id='administration'>
+
+          <div class='control-group warning'>
+            <label class='control-label'>Author</label>
+            <div class='controls'>
+              <%= f.select :user_id, @all_users %>
+              <span class='help-inline'> </span>
+            </div>
+          </div>
+
+          <div class='control-group warning'>
+            <label class='control-label'>State</label>
+            <div class='controls'>
+              <%= f.enum_select :state %>
+              <span class='help-inline'> </span>
+            </div>
+          </div>
+
+          <div class='control-group warning'>
+            <label class='control-label'>Post Type</label>
+            <div class='controls'>
+              <%= f.enum_select :object_type %>
+              <span class='help-inline'> </span>
+            </div>
+          </div>
+
+        </div>
+
       </div>
 
       <div class='form-actions'>
@@ -44,3 +75,4 @@
       </div>
 
     </fieldset>
+</div>
