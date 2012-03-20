@@ -47,13 +47,15 @@
   <!-- @TODO This should be a view helper -->
   <% if @breadcrumbs %>
   <div class='row'>
-    <ul class='breadcrumb'>
-      <% active = @breadcrumbs.pop %>
-      <% @breadcrumbs.each do |b| %>
-      <li><%= b %> <span class='divider'>/</span></li>
-      <% end %>
-      <li class='active'><%= active %></li>
-    </ul>
+    <div class='span12'>
+        <ul class='breadcrumb'>
+          <% active = @breadcrumbs.pop %>
+          <% @breadcrumbs.each do |b| %>
+          <li><%= b %> <span class='divider'>/</span></li>
+          <% end %>
+          <li class='active'><%= active %></li>
+        </ul>
+    </div>
   </div>
   <% end %>
 
