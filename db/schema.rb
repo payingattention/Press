@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20120316202312) do
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
   create_table "users", :force => true do |t|
+    t.string   "display_name",           :limit => 50,                                  :null => false
     t.string   "first_name",             :limit => 50,                                  :null => false
     t.string   "last_name",              :limit => 50,                                  :null => false
     t.enum     "gender",                 :limit => [:male, :female],                    :null => false
