@@ -7,25 +7,18 @@
 
         <div class='content-panel'>
           <h3><%= post.title %></h3>
-
-          <%= simple_format(post.content) %>
+          <% content = post.content.split(/<!--more-->/) %>
+          <%= simple_format(content[0]) %>
         </div>
           
       <% end %>
       
-    <div class='content-panel'>
-          <p>Content Panel</p>
-          <p>Content Panel</p>
-          <p>Content Panel</p>
-          <p>Content Panel</p>
-        </div>
-
     </div>
+
     <div class='span3'>
 
-
-
     </div>
+
   </div>
 </div>
 
