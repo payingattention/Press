@@ -1,62 +1,67 @@
 <% @breadcrumbs = [link_to('Posts Editor', {:action => 'index'}), 'Posts List'] %>
 
-<%= form_tag({ :action => 'index' }, { :method => 'get', :class => 'pull-right' }) do %>
-  <%= text_field_tag('filter', @filter, { :class => 'search-query span2', :placeholder => 'Search Filter...' })  %>
-<% end %>
+
+<div class='row'>
+  <div class='span12'>
 
 
-<table class='table table-striped'>
-  <thead>
-    <tr>
-      <th><%= check_box_tag "all-posts" %></th>
-      <th>Title</th>
-      <th>State</th>
-      <th>Publish Date</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= check_box_tag "posts[#{post.id}]" %></td>
-        <td><%= post.title %></td>
-        <td><%= post.state.capitalize %></td>
-        <td class='small'><%= post.go_live %></td>
-        <td class='span2 center'>
-            <%= link_to 'Edit', {:action => 'edit', :id => post.id}, :class => 'btn btn-mini' %>
-            <%= link_to 'Destroy', {:action => 'destroy', :id => post.id}, :method => :delete, :confirm => "You've chosen to delete this post, this can't be undone. Are you sure?", :class => 'btn btn-mini btn-danger' %>
-        </td>
-      </tr>
+    <%= form_tag({ :action => 'index' }, { :method => 'get', :class => 'pull-right' }) do %>
+      <%= text_field_tag('filter', @filter, { :class => 'search-query span2', :placeholder => 'Search Filter...' })  %>
     <% end %>
-  </tbody>
-</table>
 
+    <table class='table table-striped'>
+      <thead>
+        <tr>
+          <th><%= check_box_tag "all-posts" %></th>
+          <th>Title</th>
+          <th>State</th>
+          <th>Publish Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @posts.each do |post| %>
+          <tr>
+            <td><%= check_box_tag "posts[#{post.id}]" %></td>
+            <td><%= post.title %></td>
+            <td><%= post.state.capitalize %></td>
+            <td class='small'><%= post.go_live %></td>
+            <td class='span2 center'>
+                <%= link_to 'Edit', {:action => 'edit', :id => post.id}, :class => 'btn btn-mini' %>
+                <%= link_to 'Destroy', {:action => 'destroy', :id => post.id}, :method => :delete, :confirm => "You've chosen to delete this post, this can't be undone. Are you sure?", :class => 'btn btn-mini btn-danger' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-<div class="btn-toolbar">
-  <div class="btn-group">
-    <%= link_to({:action => 'new'}, :class => 'btn btn-primary') do %>
-      <i class='icon-plus icon-white'></i> Add New Post
-    <% end %>
-  </div>
-  <div class="btn-group">
-    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-      <i class="icon-upload"></i> Import
-      <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu">
-      <li><%= link_to 'from Wordpress XML Export', { :controller => 'admin/import_wordpress', :action => 'new' } %></li>
-    </ul>
-  </div>
+    <div class="btn-toolbar">
+      <div class="btn-group">
+        <%= link_to({:action => 'new'}, :class => 'btn btn-primary') do %>
+          <i class='icon-plus icon-white'></i> Add New Post
+        <% end %>
+      </div>
+      <div class="btn-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+          <i class="icon-upload"></i> Import
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><%= link_to 'from Wordpress XML Export', { :controller => 'admin/import_wordpress', :action => 'new' } %></li>
+        </ul>
+      </div>
 
-  <% if @pagination_number_of_pages > 1 %>
-      <%= form_tag({ :action => 'index' }, { :method => 'get', :class => 'pull-right' }) do %>
-        <%= hidden_field_tag('filter', @filter)  %>
-        <div class="btn-group pull-right">      
-            <% @pagination_number_of_pages.times do |i| %>
-                <button name='page' value='<%= i+1 %>' class='btn btn-mini <%= ' active' if i+1 == @pagination_current_page %>'><%= i+1 %></button>
-            <% end %>
-        </div>
+      <% if @pagination_number_of_pages > 1 %>
+          <%= form_tag({ :action => 'index' }, { :method => 'get', :class => 'pull-right' }) do %>
+            <%= hidden_field_tag('filter', @filter)  %>
+            <div class="btn-group pull-right">
+                <% @pagination_number_of_pages.times do |i| %>
+                    <button name='page' value='<%= i+1 %>' class='btn btn-mini <%= ' active' if i+1 == @pagination_current_page %>'><%= i+1 %></button>
+                <% end %>
+            </div>
+          <% end %>
       <% end %>
-  <% end %>
-</div>
+    </div>
 
+  </div>
+</div>
