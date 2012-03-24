@@ -21,8 +21,9 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 
   gem 'twitter-bootstrap-rails'
+  gem 'devise', '>= 2.0.4'
+
   gem 'enum_column3'
-  gem 'devise'
 
 end
 
