@@ -21,7 +21,12 @@
         <label class='control-label'> </label>
         <div class='controls'><%= password_field_tag 'password_confirmation', "", { :class => 'input-xlarge ', :placeholder => 'Password Confirmation...' } %></div>
       </div>
-    
+
+      <div class='control-group'>
+        <label class='control-label'>Display Name</label>
+        <div class='controls'><%= f.text_field :display_name, :class => 'input-xlarge ' %></div>
+      </div>
+
       <div class='control-group'>
         <label class='control-label'>First Name</label>
         <div class='controls'><%= f.text_field :first_name, :class => 'input-xlarge ' %></div>
@@ -31,17 +36,19 @@
         <label class='control-label'>Last Name</label>
         <div class='controls'><%= f.text_field :last_name, :class => 'input-xlarge ' %></div>
       </div>
-    
+
       <div class='control-group'>
-        <label class='control-label'>Display Name</label>
-        <div class='controls'><%= f.text_field :display_name, :class => 'input-xlarge ' %></div>
+        <label class='control-label'>Gender</label>
+        <div class='controls'><%= f.enum_select :gender, {}, :class => 'input-xlarge ' %></div>
       </div>
-    
+
+
+
       <div class='control-group'>
         <label class='control-label'>Admin</label>
         <div class='controls'>
           <label class='checkbox'>
-            <%= f.check_box :admin %>
+            <%= f.check_box :is_admin %>
             This user is a site administrator
           </label>
         </div>
