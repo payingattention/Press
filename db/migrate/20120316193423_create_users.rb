@@ -1,11 +1,12 @@
 class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users do |t|
+      t.string    :display_name,        :limit => 50,               :null => false
       t.string    :first_name,          :limit => 50,               :null => false
       t.string    :last_name,           :limit => 50,               :null => false
       t.enum      :gender,              :limit => [:male, :female], :null => false
       t.datetime  :date_of_birth
-      t.boolean   :is_admin,            :default => false,           :null => false
+      t.boolean   :is_admin,            :default => false
 
       ## Database authenticatable
       t.string    :email,               :null => false, :default => ""
