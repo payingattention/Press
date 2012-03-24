@@ -5,10 +5,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :gender
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :display_name, :gender
 
   # Ultra simple "not null" validators
-  validates_presence_of :first_name, :last_name, :gender, :email
+  validates_presence_of :first_name, :last_name, :display_name, :gender, :email
 
   # To configure a different table name
   # set_table_name("some_other_table") OR change the class name and file name
