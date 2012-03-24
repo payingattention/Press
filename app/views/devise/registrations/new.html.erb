@@ -1,18 +1,86 @@
-<h2>Sign up</h2>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+  <fieldset>
+    <legend>Sign up!</legend>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+    <div class='control-group<%= " error" if @user.errors.has_key?(:email) %>'>
+      <label class='control-label'>Email</label>
+      <div class='controls'>
+        <%= f.text_field :email, :class => 'input-xlarge' %>
+        <% if @user.errors.has_key?(:email) %>
+          <span class='help-inline'>Email <%= @user.errors.get(:email).first %></span>
+        <% end %>
+      </div>
+    </div>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+    <div class='control-group<%= " error" if @user.errors.has_key?(:password) %>'>
+      <label class='control-label'>Password</label>
+      <div class='controls'>
+        <%= f.password_field :password, :class => 'input-xlarge ' %>
+        <% if @user.errors.has_key?(:password) %>
+          <span class='help-inline'>Password <%= @user.errors.get(:password).first %></span>
+        <% end %>
+      </div>
+    </div>
 
-  <div><%= f.submit "Sign up" %></div>
+    <div class='control-group<%= " error" if @user.errors.has_key?(:password) %>'>
+      <label class='control-label'> </label>
+      <div class='controls'>
+        <%= password_field_tag :password_confirmation, "", { :class => 'input-xlarge ', :placeholder => 'Password Confirmation...' } %>
+        <% if @user.errors.has_key?(:password_confirmation) %>
+          <span class='help-inline'>Password <%= @user.errors.get(:password_confirmation).first %></span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class='control-group<%= " error" if @user.errors.has_key?(:display_name) %>'>
+      <label class='control-label'>Display Name</label>
+      <div class='controls'>
+        <%= f.text_field :display_name, :class => 'input-xlarge ' %>
+        <% if @user.errors.has_key?(:display_name) %>
+          <span class='help-inline'>Password <%= @user.errors.get(:display_name).first %></span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class='control-group<%= " error" if @user.errors.has_key?(:first_name) %>'>
+      <label class='control-label'>First Name</label>
+      <div class='controls'>
+        <%= f.text_field :first_name, :class => 'input-xlarge ' %>
+        <% if @user.errors.has_key?(:first_name) %>
+          <span class='help-inline'>Password <%= @user.errors.get(:first_name).first %></span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class='control-group<%= " error" if @user.errors.has_key?(:last_name) %>'>
+      <label class='control-label'>Last Name</label>
+      <div class='controls'>
+        <%= f.text_field :last_name, :class => 'input-xlarge ' %>
+        <% if @user.errors.has_key?(:last_name) %>
+          <span class='help-inline'>Password <%= @user.errors.get(:last_name).first %></span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class='control-group<%= " error" if @user.errors.has_key?(:gender) %>'>
+      <label class='control-label'>Gender</label>
+      <div class='controls'>
+        <%= f.enum_select :gender, {}, :class => 'input-xlarge ' %>
+        <% if @user.errors.has_key?(:gender) %>
+          <span class='help-inline'>Password <%= @user.errors.get(:gender).first %></span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class='form-actions'>
+      <%= submit_tag 'Sign Up!', :class => 'btn btn-primary' %>
+      <%= link_to "Cancel", { :action => 'index' }, :class => 'btn' %>
+    </div>
+
 <% end %>
+</fieldset>
 
 <%= render "links" %>
