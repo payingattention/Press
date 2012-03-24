@@ -43,6 +43,7 @@
 
           <div class='control-group warning'>
             <label class='control-label'>Author</label>
+
             <div class='controls'>
               <%= f.select :user_id, @all_users %>
               <span class='help-inline'> </span>
@@ -51,6 +52,7 @@
 
           <div class='control-group warning'>
             <label class='control-label'>State</label>
+
             <div class='controls'>
               <%= f.enum_select :state %>
               <span class='help-inline'> </span>
@@ -59,6 +61,7 @@
 
           <div class='control-group warning'>
             <label class='control-label'>Post Type</label>
+
             <div class='controls'>
               <%= f.enum_select :object_type %>
               <span class='help-inline'> </span>

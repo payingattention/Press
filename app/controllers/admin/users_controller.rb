@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
 
-  require 'digest/md5'
+  before_filter :authenticate_user!
 
   layout 'admin'
 
@@ -17,8 +17,8 @@ class Admin::UsersController < ApplicationController
   # CREATE
   def create
     @user = User.new params[:user]
-    @user.salt = Digest::MD5.hexdigest(Time.now.utc.to_s)
-    @user.password = Digest::MD5.hexdigest(@user.salt + @user.password)
+#    @user.salt = Digest::MD5.hexdigest(Time.now.utc.to_s)
+#    @user.password = Digest::MD5.hexdigest(@user.salt + @user.password)
 
     if @user.save
       flash[:success] = 'User Created.'

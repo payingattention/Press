@@ -1,5 +1,7 @@
 class Admin::PostsController < ApplicationController
 
+  before_filter :authenticate_user!
+
   layout 'admin'
 
   # LIST -- Shows a list of posts

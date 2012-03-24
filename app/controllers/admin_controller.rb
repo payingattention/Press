@@ -1,5 +1,7 @@
 class AdminController < ApplicationController
-  #http_basic_authenticate_with :name => "foo", :password => "bar"
+
+  before_filter :authenticate_user!
+
   layout 'admin'
 
   def index

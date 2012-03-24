@@ -22,6 +22,7 @@ group :assets do
 
   gem 'twitter-bootstrap-rails'
   gem 'enum_column3'
+  gem 'devise'
 
 end
 

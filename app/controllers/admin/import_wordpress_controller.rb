@@ -1,5 +1,7 @@
 class Admin::ImportWordpressController < ApplicationController
 
+  before_filter :authenticate_user!
+
   layout 'admin'
 
   def new
