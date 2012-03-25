@@ -4,7 +4,12 @@ body {
 
     .container[role='header'] {
 
-      position: relative;
+        &.fixed {
+          position: fixed;
+          z-index: 100;
+        }
+
+        position: relative;
         height: 120px;
         background-color: #95b2d6;
         background-image: -moz-linear-gradient(center top , #e3eaee, #95b2d6);

@@ -14,3 +14,16 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+
+$(window).scroll(function() {
+    if (this.scrollY > 90) {
+        $('div.container[role="header"]').css('left',
+            $('div.container[role="header"]').position().left
+        );
+        $('div.container[role="header"]').addClass('fixed');
+    } else {
+        $('div.container[role="header"]').css('left', 0 );
+        $('div.container[role="header"]').removeClass('fixed');
+    }
+
+})
