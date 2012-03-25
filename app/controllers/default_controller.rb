@@ -21,7 +21,7 @@ class DefaultController < ApplicationController
     # Make sure they don't have a password.. those are "private"
     @posts = @posts.where( :password => nil )
     # If a filter is set, use it
-    @posts = @posts.where(["title like ?", '%'+@filter+'%'] ) if @filter.present?
+    @posts = @posts.where(["title like ? or content like ?", '%'+@filter+'%', '%'+@filter+'%'] ) if @filter.present?
     # Limit the number of posts to show
     @posts = @posts.limit(limit)
     # Set the offset if we aren't on the first page.
