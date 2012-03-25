@@ -9,7 +9,7 @@
 
       <div class='content-panel'>
         <h3><%= @post.title %></h3>
-        
+        <% @post.content.gsub!(/<!--more-->/,'') %>
         <%= simple_format(@post.content) %>
         
       </div>
