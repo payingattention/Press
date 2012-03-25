@@ -27,30 +27,41 @@ body {
             margin-bottom: 0;
             border-top: 1px solid #a8a8a8;
             .navbar-inner {
-                border-top: 1px solid #d8d8d8;
-                border-radius: 0 0 4px 4px;
-                background-color: #f2f2f2;
-                background-image: -moz-linear-gradient(center top , #f2f2f2, #dfdfdf);
+                &.main {
+                    height: 30px;
+                    border-top: 1px solid #d8d8d8;
+                    border-radius: 0 0 4px 4px;
+                    background-color: #f2f2f2;
+                    background-image: -moz-linear-gradient(center top , #f2f2f2, #dfdfdf);
+                    padding-left: 5px;
+                    padding-right: 5px;
 
-                ul.nav li a {
-                    padding: 5px 10px 4px;
-                    &:hover {
-                        color: #000;
+                    ul.nav li a {
+                        padding: 5px 10px 4px;
+                        &:hover {
+                            color: #000;
+                        }
+                        b {
+                            border-bottom-color: #000;
+                            border-top-color: #000;
+                        }
                     }
-                    b {
-                        border-bottom-color: #000;
-                        border-top-color: #000;
+                    ul.nav li.open {
+                        a {
+                            color: #000;
+                        }
                     }
-                }
-                ul.nav li.open {
-                    a {
-                        color: #000;
+                    ul.nav li.divider-vertical {
+                        height: 29px;
+                        background-color: #d8d8d8;
+                        border-right: 1px solid #f2f2f2;
                     }
-                }
-                ul.nav li.divider-vertical {
-                    height: 27px;
-                    background-color: #d8d8d8;
-                    border-right: 1px solid #f2f2f2;
+                    ul.nav li.divider-arrow {
+                        width: 11px;
+                        height: 30px;
+                        background: url(/assets/divider-menubar.png) no-repeat;
+
+                    }
                 }
             }
         }
