@@ -9,6 +9,7 @@
           <h3><%= link_to post.title, '/' + post.seo_url + '/' %></h3>
           <% content = post.content.split(/<!--more-->/) %>
           <%= simple_format(content[0]) %>
+          <div class='readmore'><%= link_to 'Read more...', '/' + post.seo_url + '/' %></div>
         </div>
           
       <% end %>
