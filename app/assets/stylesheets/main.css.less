@@ -121,7 +121,10 @@ div.content-panel {
     overflow: auto;
 
     h3 {
-      border-bottom: 1px solid #efefef;
+        border-bottom: 1px solid #efefef;
+        a {
+            color: #000;
+        }
     }
 
     a {
@@ -150,4 +153,36 @@ div.content-panel {
         }
     }
 
+    // Changes to the navbar inside a content block
+    // To do the date, user, comment stuff.
+    div.navbar {
+        overflow: auto;
+        margin-bottom: 0px;
+        .navbar-inner {
+            padding: 0;
+            ul {
+                width: 100%;
+                li {
+                    padding-right: 10px;
+                    a {
+                        padding: 2px;
+                        text-shadow: none;
+                        color: #ad3cdd;
+                        &:hover {
+                            color: #ad3cdd;
+                            text-decoration: underline;
+                        }
+                        i {
+                            padding-right: 5px;
+                        }
+                    }
+                    &.pull-right {
+                        float: right;
+                        padding-right: 0;
+                        padding-left: 10px;
+                    }
+                }
+            }
+        }
+    }
 }

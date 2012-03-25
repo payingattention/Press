@@ -9,6 +9,16 @@
 
       <div class='content-panel'>
         <h3><%= @post.title %></h3>
+        <div class="navbar">
+          <div class="navbar-inner">
+            <ul class="nav">
+              <li><a href="/"><i class="icon-calendar"></i><%= @post.go_live %></a></li>
+              <li><a href="/"><i class="icon-user"></i><%= @post.user.display_name %></a></li>
+              <li class='pull-right'><a href="/"><i class="icon-comment"></i>Comments</a></li>
+            </ul>
+          </div>
+        </div>
+
         <% content = @post.content.gsub(/<!--more-->/,'') %>
         <%= simple_format(content) %>
         

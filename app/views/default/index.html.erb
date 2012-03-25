@@ -1,5 +1,4 @@
-
-<div class='container' role="main">
+<div class='container' role="main" xmlns="http://www.w3.org/1999/html">
   <div class='row'>
     <div class='span9'>
 
@@ -7,6 +6,16 @@
 
         <div class='content-panel'>
           <h3><%= link_to post.title, '/' + post.seo_url + '/' %></h3>
+          <div class="navbar">
+            <div class="navbar-inner">
+              <ul class="nav">
+                <li><a href="/"><i class="icon-calendar"></i><%= post.go_live %></a></li>
+                <li><a href="/"><i class="icon-user"></i><%= post.user.display_name %></a></li>
+                <li class='pull-right'><a href="/"><i class="icon-comment"></i>Comments</a></li>
+              </ul>
+            </div>
+          </div>
+
           <% content = post.content.split(/<!--more-->/) %>
           <%= simple_format(content[0]) %>
           <div class='readmore'><%= link_to 'Read more...', '/' + post.seo_url + '/' %></div>
