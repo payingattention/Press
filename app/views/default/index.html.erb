@@ -1,3 +1,4 @@
+<% url_query = (@query.present?)?'?query='+@query:'' %>
 <div class='container' role="main" xmlns="http://www.w3.org/1999/html">
   <div class='row'>
     <div class='span9'>
@@ -5,7 +6,9 @@
       <% @posts.each do |post| %>
 
         <div class='content-panel'>
-          <h3><%= link_to post.title, '/' + post.seo_url + '/' %></h3>
+          <% title = post.title %>
+          <% title = title.gsub(/(#{@query})/i, '<span class="highlight">\1</span>') if @query.present? %>
+          <h3><a href="<%= url_for '/' + post.seo_url + '/' + url_query %>"><%= title.html_safe %></a></h3>
           <div class="navbar">
             <div class="navbar-inner">
               <ul class="nav">
@@ -16,9 +19,10 @@
             </div>
           </div>
 
-          <% content = post.content.split(/<!--more-->/) %>
-          <%= simple_format(content[0]) %>
-          <div class='readmore'><%= link_to 'Read more...', '/' + post.seo_url + '/' %></div>
+          <% content = post.content.split(/<!--more-->/)[0] %>
+          <% content = content.gsub(/(#{@query})/i, '<span class="highlight">\1</span>') if @query.present? %>
+          <%= simple_format(content) %>
+          <div class='readmore'><%= link_to 'Read more...', '/' + post.seo_url + '/' + url_query %></div>
         </div>
           
       <% end %>

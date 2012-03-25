@@ -8,7 +8,9 @@
     <div class='span9'>
 
       <div class='content-panel'>
-        <h3><%= @post.title %></h3>
+        <% title = @post.title %>
+        <% title = title.gsub(/(#{@query})/i, '<span class="highlight">\1</span>') if @query.present? %>
+        <h3><%= title.html_safe %></h3>
         <div class="navbar">
           <div class="navbar-inner">
             <ul class="nav">
@@ -20,6 +22,7 @@
         </div>
 
         <% content = @post.content.gsub(/<!--more-->/,'') %>
+        <% content = content.gsub(/(#{@query})/i, '<span class="highlight">\1</span>') if @query.present? %>
         <%= simple_format(content) %>
         
       </div>

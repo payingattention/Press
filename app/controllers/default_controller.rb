@@ -8,8 +8,8 @@ class DefaultController < ApplicationController
     limit = 6;
     # Our page number
     page = (params[:page].to_i - 1) || 1
-    # Our filter if there is one set
-    @filter = params[:filter] || ''
+    # Our query if there is one set
+    @query = params[:query] || ''
 
     # Get the latest posts by go_live
     @posts = Post.order('go_live DESC')
@@ -20,8 +20,8 @@ class DefaultController < ApplicationController
     @posts = @posts.where( t[:object_type].matches(:post).or(t[:object_type].matches(:message)))
     # Make sure they don't have a password.. those are "private"
     @posts = @posts.where( :password => nil )
-    # If a filter is set, use it
-    @posts = @posts.where(["title like ? or content like ?", '%'+@filter+'%', '%'+@filter+'%'] ) if @filter.present?
+    # If a query is set, use it
+    @posts = @posts.where(["title like ? or content like ?", '%'+@query+'%', '%'+@query+'%'] ) if @query.present?
     # Limit the number of posts to show
     @posts = @posts.limit(limit)
     # Set the offset if we aren't on the first page.
@@ -39,6 +39,8 @@ class DefaultController < ApplicationController
     unless @post.present?
       redirect_to :action => 'index'
     end
+
+    @query = params[:query] || ''
 
   end
 
