@@ -1,7 +1,8 @@
 class DefaultController < ApplicationController
 
   layout 'application'
-  #
+
+  # Show the front page!
   def index
     # Get the 5 latest -- TODO this should be configurable
     limit = 5;
@@ -27,6 +28,18 @@ class DefaultController < ApplicationController
     @posts = @posts.offset(limit.to_i * page.to_i) if page > 0
     # Need this to show a previous/next button
     @pagination_current_page = (page.to_i + 1) > 0 ? (page.to_i + 1) : 1
+
+  end
+
+
+  # Show a post or page, based on the SEO Url
+  def show
+    #load the post or page by seo url or return to index if not found
+    @post = Post.find_by_seo_url params[:seo_url]
+    unless @post.present?
+      redirect_to :action => 'index'
+    end
+
 
   end
 
