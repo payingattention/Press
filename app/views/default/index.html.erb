@@ -13,7 +13,24 @@
         </div>
           
       <% end %>
-      
+
+      <div class="container">
+        <div class='row'>
+          <div class='span9'>
+            <ul class='breadcrumb'>
+              <% if @pagination_current_page > 1 %>
+                <% if @pagination_current_page.to_i - 1 == 1 %>
+                  <li><%= link_to 'Newer Entries', '/' %></li>
+                <% else %>
+                  <li><%= link_to 'Newer Entries', '/page/' + (@pagination_current_page.to_i - 1).to_s + '/' %></li>
+                <% end %>
+              <% end %>
+              <li class='pull-right'><%= link_to 'Older Entries', '/page/' + (@pagination_current_page.to_i + 1).to_s + '/' %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <div class='span3'>
