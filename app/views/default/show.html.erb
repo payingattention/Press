@@ -1,3 +1,7 @@
+<% @breadcrumbs = [
+        link_to('Home', { :action => 'index' }),
+        link_to('Category', {}),
+        @post.title] %>
 
 <div class='container' role="main">
   <div class='row'>
@@ -5,6 +9,9 @@
 
       <div class='content-panel'>
         <h3><%= @post.title %></h3>
+        
+        <%= simple_format(@post.content) %>
+        
       </div>
 
     </div>
