@@ -48,6 +48,8 @@ class Admin::ImportWordpressController < ApplicationController
           post.content = i['encoded'][0]
           # Strip beginning extra crap from content (This is the CDATA extra shit prepended)
           post.content = post.content.gsub('/^---\n-\s!','')
+          # Replace [caption] stuff with actual divs
+          post.content = post.content.gsub(/\[caption.*?align="(.*?)".*?caption="(.*?)"*?\](.*?)\[\/caption\]/, '<div class="caption \\1">\\3<div class="caption-text">\\2</div></div>')
 
           case i['status']
             when 'publish'
