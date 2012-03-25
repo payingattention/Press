@@ -4,8 +4,8 @@ class DefaultController < ApplicationController
 
   # Show the front page!
   def index
-    # Get the 5 latest -- TODO this should be configurable
-    limit = 5;
+    # Get the 6 latest -- TODO this should be configurable
+    limit = 6;
     # Our page number
     page = (params[:page].to_i - 1) || 1
     # Our filter if there is one set
