@@ -19,6 +19,11 @@
     </div>
     <div class='span3'>
 
+      <%= form_tag({ :action => 'index' }, { :method => 'get', :class => 'site-search pull-right' }) do %>
+        <%= text_field_tag('query', @query, { :class => 'search-query span2', :placeholder => 'Search Filter...' })  %>
+        <a href="<%= url_for '/' %>">&nbsp;</a>
+      <% end %>
+
     </div>
   </div>
 
@@ -29,7 +34,6 @@
           <li><a href="<%= url_for :action => 'index' %>"><i class="icon-home"></i></a></li>
           <li class='divider-arrow'></li>
         </ul>
-        
         
         <ul class='nav pull-right'>
           <li class='divider-vertical'></li>
