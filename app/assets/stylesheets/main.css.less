@@ -1,4 +1,22 @@
 
+.pmOpacity (@level: 0.5) {
+    @levelFloat: @level * 100;
+    filter:~`'alpha(opacity=@{levelFloat})'`;
+    -moz-opacity: @level;
+    -khtml-opacity: @level;
+    opacity: @level;
+}
+
+.pmLinearGradient(@stop1:0, @color1:#ccc, @stop2:50%, @color2:#ddd, @stop3:100%, @color3:#ccc){
+    background-color:@color2;
+    background-image:-webkit-gradient(linear, left top, left bottom, color-stop(@stop1, @color1), color-stop(@stop2, @color2), color-stop(@stop3, @color3));
+    background-image:-moz-linear-gradient(center top, @color1 @stop1, @color2 @stop2, @color3 @stop3);
+    background-image:-ms-linear-gradient(center top, @color1 @stop1, @color2 @stop2, @color3 @stop3);
+    background-image:-o-linear-gradient(center top, @color1 @stop1, @color2 @stop2, @color3 @stop3);
+    background-image:linear-gradient(center top, @color1 @stop1, @color2 @stop2, @color3 @stop3);
+    filter: e(%("progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=%d,endColorstr=%d)", @color1, @color3));
+}
+
 body {
     background-color: #f5f6f7;
 
@@ -34,10 +52,9 @@ body {
 
         position: relative;
         height: 120px;
-        background-color: #95b2d6;
-        background-image: -moz-linear-gradient(center top , #e3eaee, #95b2d6);
+
+        .pmLinearGradient(0, #e3eaee, 100%, #95b2d6, 100%, #95b2d6);
         border-radius: 0 0 4px 4px;
-        box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
         border-left: 1px solid #b8b8b8;
         border-right: 1px solid #b8b8b8;
         margin-bottom: 20px;
@@ -60,8 +77,9 @@ body {
                     height: 30px;
                     border-top: 1px solid #d8d8d8;
                     border-radius: 0 0 4px 4px;
-                    background-color: #f2f2f2;
-                    background-image: -moz-linear-gradient(center top , #f2f2f2, #dfdfdf);
+
+                    .pmLinearGradient(0, #f2f2f2, 100%, #dfdfdf, 100%, #dfdfdf);
+
                     padding-left: 5px;
                     padding-right: 5px;
 
@@ -108,8 +126,8 @@ body[role='admin'] {
 }
 
 .bottombar .bottombar-inner {
-    background-color: #eee;
-    background-image: -moz-linear-gradient(center top, #ddd, #eee);
+    .pmLinearGradient(0, #ddd, 100%, #eee, 100%, #eee);
+
     background-repeat: repeat-x;
     border-radius: 4px 4px 4px 4px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.25), 0 1px 0 rgba(0,0,0,0.05) inset;
@@ -151,17 +169,17 @@ div.content-panel {
     }
 
     a {
-      color: #ad3cdd;
-      &:hover {
         color: #ad3cdd;
-      }
+        &:hover {
+            color: #ad3cdd;
+        }
     }
 
     .alignright {
-      float: right;
+        float: right;
     }
     .alignleft {
-      float: left;
+        float: left;
     }
 
     span.highlight {
@@ -186,7 +204,9 @@ div.content-panel {
         overflow: auto;
         margin-bottom: 0px;
         .navbar-inner {
-            padding: 0;
+          .pmLinearGradient(0, #fff, 100%, #fff, 100%, #fff);
+
+          padding: 0;
             ul {
                 width: 100%;
                 li {
@@ -200,6 +220,7 @@ div.content-panel {
                             text-decoration: underline;
                         }
                         i {
+                            .pmOpacity;
                             padding-right: 5px;
                         }
                     }
