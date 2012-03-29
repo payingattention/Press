@@ -19,15 +19,15 @@
       </tr>
       </thead>
       <tbody>
-      <% @admin_tags.each do |admin_tag| %>
+      <% @tags.each do |tag| %>
         <tr>
-          <td><%= check_box_tag "tags[#{admin_tag.id}]" %></td>
-          <td><%= admin_tag.name %></td>
-          <td><%= admin_tag.description %></td>
-          <td><%= admin_tag.classification.capitalize %></td>
+          <td><%= check_box_tag "tags[#{tag.id}]" %></td>
+          <td><%= tag.name %></td>
+          <td><%= tag.description %></td>
+          <td><%= tag.classification.capitalize %></td>
           <td class='span2 center'>
-            <%= link_to 'Edit', edit_admin_tag_path(admin_tag), :class => 'btn btn-mini' %>
-            <%= link_to 'Destroy', admin_tag, confirm: "You've chosen to delete this tag. Are you sure?", method: :delete, :class => 'btn btn-mini btn-danger' %>
+            <%= link_to 'Edit', edit_admin_tag_path(tag), :class => 'btn btn-mini' %>
+            <%= link_to 'Destroy', [:admin, tag], confirm: "You've chosen to delete this tag. Are you sure?", method: :delete, :class => 'btn btn-mini btn-danger' %>
           </td>
         </tr>
       <% end %>

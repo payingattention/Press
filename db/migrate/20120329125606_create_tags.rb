@@ -1,6 +1,6 @@
-class CreateAdminTags < ActiveRecord::Migration
+class CreateTags < ActiveRecord::Migration
   def change
-    create_table :admin_tags do |t|
+    create_table :tags do |t|
       t.string    :name,                                                          :null => false
       t.string    :seo_url,                                                       :null => false
       t.text      :description

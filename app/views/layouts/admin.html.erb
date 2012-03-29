@@ -62,10 +62,10 @@
   <!-- @TODO This should be a view helper -->
   <div class='row'>
     <div class='span12'>
-      <% if flash[:success] %>
+      <% if flash[:success] || flash[:notice] %>
           <div class='alert alert-success'>
             <a class="close" data-dismiss='alert'>&times;</a>
-            <strong>Success!</strong> <%= flash[:success] %>
+            <strong>Success!</strong> <%= flash[:success] %> <%= flash[:notice] %>
           </div>
       <% end %>
 
