@@ -29,6 +29,10 @@ class DefaultController < ApplicationController
     # Need this to show a previous/next button
     @pagination_current_page = (page.to_i + 1) > 0 ? (page.to_i + 1) : 1
 
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @posts }
+    end
   end
 
 
@@ -42,6 +46,10 @@ class DefaultController < ApplicationController
 
     @query = params[:query] || ''
 
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @post }
+    end
   end
 
 end
