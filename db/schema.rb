@@ -11,16 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120329125606) do
-
-  create_table "admin_tags", :force => true do |t|
-    t.string   "name",                                                          :null => false
-    t.string   "seo_url",                                                       :null => false
-    t.text     "description"
-    t.enum     "classification", :limit => [:tag, :category], :default => :tag, :null => false
-    t.datetime "created_at",                                                    :null => false
-    t.datetime "updated_at",                                                    :null => false
-  end
+ActiveRecord::Schema.define(:version => 20120329223146) do
 
   create_table "posts", :force => true do |t|
     t.integer  "user_id",                                                                               :null => false
@@ -41,6 +32,20 @@ ActiveRecord::Schema.define(:version => 20120329125606) do
 
   add_index "posts", ["seo_url"], :name => "index_posts_on_seo_url"
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
+
+  create_table "posts_tags", :id => false, :force => true do |t|
+    t.integer "post_id"
+    t.integer "tag_id"
+  end
+
+  create_table "tags", :force => true do |t|
+    t.string   "name",                                                          :null => false
+    t.string   "seo_url",                                                       :null => false
+    t.text     "description"
+    t.enum     "classification", :limit => [:tag, :category], :default => :tag, :null => false
+    t.datetime "created_at",                                                    :null => false
+    t.datetime "updated_at",                                                    :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "display_name",           :limit => 50,                                  :null => false
