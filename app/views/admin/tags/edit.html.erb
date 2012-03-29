@@ -1,0 +1,17 @@
+<% @breadcrumbs = [link_to('Tag Editor', {:action => 'index'}), 'Edit Tag'] %>
+
+<div class='row'>
+  <div class='span12'>
+
+    <%= form_for @admin_tag, :html => { :class => 'form-horizontal' } do |f| %>
+
+      <%= render :partial => 'form', :locals => {
+              :f => f,
+              :form_legend => "Edit tag",
+              :submit_label => "Update tag"
+      } %>
+
+    <% end %>
+
+  </div>
+</div>

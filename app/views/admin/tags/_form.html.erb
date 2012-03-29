@@ -1,0 +1,50 @@
+
+  <fieldset>
+    <legend><%=  form_legend  %></legend>
+
+    <div class='control-group<%= " error" if @admin_tag.errors.has_key?(:name) %>'>
+      <label class='control-label'>Name</label>
+      <div class='controls'>
+        <%= f.text_field :name, :class => 'input-xlarge' %>
+        <% if @admin_tag.errors.has_key?(:name) %>
+          <span class='help-inline'>Name <%= @admin_tag.errors.get(:name).first %></span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class='control-group<%= " error" if @admin_tag.errors.has_key?(:seo_url) %>'>
+      <label class='control-label'>SEO Url</label>
+      <div class='controls'>
+        <%= f.text_field :seo_url, :class => 'input-xlarge' %>
+        <% if @admin_tag.errors.has_key?(:seo_url) %>
+          <span class='help-inline'>SEO Url <%= @admin_tag.errors.get(:seo_url).first %></span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class='control-group<%= " error" if @admin_tag.errors.has_key?(:description) %>'>
+      <label class='control-label'>Description</label>
+      <div class='controls'>
+        <%= f.text_area :description, :size => '50x8', :class => 'input-xlarge' %>
+        <% if @admin_tag.errors.has_key?(:description) %>
+          <span class='help-inline'>Description <%= @admin_tag.errors.get(:description).first %></span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class='control-group<%= " error" if @admin_tag.errors.has_key?(:classification) %>'>
+      <label class='control-label'>Classification</label>
+      <div class='controls'>
+        <%= f.enum_select :classification, {}, :class => 'input-xlarge' %>
+        <% if @admin_tag.errors.has_key?(:classification) %>
+          <span class='help-inline'>Classification <%= @admin_tag.errors.get(:classification).first %></span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class='form-actions'>
+      <%= submit_tag submit_label, :class => 'btn btn-primary' %>
+      <%= link_to "Cancel", {:action => 'index'}, :class => 'btn' %>
+    </div>
+
+

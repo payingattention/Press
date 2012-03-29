@@ -1,0 +1,57 @@
+<% @breadcrumbs = [link_to('Tags Editor', {:action => 'index'}), 'Tags List'] %>
+
+<div class='row'>
+  <div class='span12'>
+
+
+    <%= form_tag({ :action => 'index' }, { :method => 'get', :class => 'pull-right' }) do %>
+      <%= text_field_tag('filter', @filter, { :class => 'search-query span2', :placeholder => 'Search Filter...' })  %>
+    <% end %>
+
+    <table class='table table-striped'>
+      <thead>
+      <tr>
+        <th><%= check_box_tag "all-posts" %></th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @admin_tags.each do |admin_tag| %>
+        <tr>
+          <td><%= check_box_tag "tags[#{admin_tag.id}]" %></td>
+          <td><%= admin_tag.name %></td>
+          <td><%= admin_tag.description %></td>
+          <td><%= admin_tag.classification.capitalize %></td>
+          <td class='span2 center'>
+            <%= link_to 'Edit', edit_admin_tag_path(admin_tag), :class => 'btn btn-mini' %>
+            <%= link_to 'Destroy', admin_tag, confirm: "You've chosen to delete this tag. Are you sure?", method: :delete, :class => 'btn btn-mini btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <div class="btn-toolbar">
+      <div class="btn-group">
+        <%= link_to(new_admin_tag_path, :class => 'btn btn-primary') do %>
+          <i class='icon-plus icon-white'></i> Add New Tag
+        <% end %>
+      </div>
+
+      <% if @pagination_number_of_pages > 1 %>
+        <%= form_tag({ :action => 'index' }, { :method => 'get', :class => 'pull-right' }) do %>
+          <%= hidden_field_tag('filter', @filter)  %>
+          <div class="btn-group pull-right">
+            <% @pagination_number_of_pages.times do |i| %>
+              <button name='page' value='<%= i+1 %>' class='btn btn-mini <%= ' active' if i+1 == @pagination_current_page %>'><%= i+1 %></button>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+  </div>
+</div>
