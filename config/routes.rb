@@ -5,6 +5,7 @@ Press::Application.routes.draw do
   namespace :admin do
     resources :posts
     resources :users
+    resources :tags
     resources :import_wordpress
   end
   # Admin route that gets us entry to the above namespace
