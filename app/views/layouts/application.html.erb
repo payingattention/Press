@@ -56,16 +56,24 @@
 </div>
 
 <!-- @TODO This should be a view helper -->
-<% if @breadcrumbs %>
+<% if @breadcrumbs.present? || @query.present? %>
   <div class='container'>
     <div class='row'>
       <div class='span12'>
         <ul class='breadcrumb'>
-          <% active = @breadcrumbs.pop %>
-          <% @breadcrumbs.each do |b| %>
-            <li><%= b %> <span class='divider'>/</span></li>
+          <% if @breadcrumbs.present? %>
+            <% active = @breadcrumbs.pop %>
+            <% @breadcrumbs.each do |b| %>
+              <li><%= b %> <span class='divider'>/</span></li>
+            <% end %>
+            <li class='active'><%= active %></li>
           <% end %>
-          <li class='active'><%= active %></li>
+          <% if @breadcrumbs.present? && @query.present? %>
+          ::
+          <% end %>
+          <% if @query.present? %>
+            <li>Filtering by "<span class="highlight"><%= @query %></span>"</li>
+          <% end %>
         </ul>
       </div>
     </div>
