@@ -29,13 +29,13 @@
               <ul class="nav">
 
                 <% post.categories.each do |c| %>
-                  <li><a href="/"><% if c == post.categories.first %><i class="icon-folder-open"></i><% end %>
+                  <li><a href="/category/<%= c.seo_url %>"><% if c == post.categories.first %><i class="icon-folder-open"></i><% end %>
                     <%= c.name.capitalize %></a>
                   </li>
                 <% end %>
 
                 <% post.tags.each do |t| %>
-                  <li><a href=""><% if t == post.tags.first %><i class="icon-tags"></i><% end %>
+                  <li><a href="/tag/<%= t.seo_url %>"><% if t == post.tags.first %><i class="icon-tags"></i><% end %>
                     <%= t.name.capitalize %></a>
                   </li>
                 <% end %>
