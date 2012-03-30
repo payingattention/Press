@@ -11,16 +11,13 @@ class Admin::ImportWordpressController < ApplicationController
   def create
 
     xml_file = params[:xml_file]
-    import = false
 
     # is the file readable? then do it and convert it
     if xml_file.respond_to?(:read)
       xml_contents = xml_file.read
-#      import = Hash.from_xml(xml_contents)
     # is this just a path to a readable file?  then do it and convert it
     elsif xml_file.respond_to?(:path)
       xml_contents = File.read(xml_file.path)
-#      import = Hash.from_xml(xml_contents)
     else
       flash[:error] = 'Unable to read the file you provided'
     end
@@ -68,7 +65,6 @@ class Admin::ImportWordpressController < ApplicationController
 
           # POST TAGS -- Generate the tags for this piece of content
           item.xpath('category[@domain="post_tag"]').each do |t|
-
             # For each of the tags, load a similar tag from the db, or create a new one
             tag = Tag.find_by_seo_url(t.attributes['nicename'].text) || Tag.new
             # If new, assign the text and the nicename then save it
@@ -83,7 +79,6 @@ class Admin::ImportWordpressController < ApplicationController
 
           # CATEGORIES -- Generate the categories for this piece of content
           item.xpath('category[@domain="category"]').each do |t|
-
             # For each of the tags, load a similar tag from the db, or create a new one
             tag = Tag.find_by_seo_url(t.attributes['nicename'].text) || Tag.new
             # If new, assign the text and the nicename then save it
@@ -96,7 +91,6 @@ class Admin::ImportWordpressController < ApplicationController
             # Add this tag to our post
             post.tags << tag unless post.tags.include? tag
           end
-
 
         end
 
