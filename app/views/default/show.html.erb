@@ -1,6 +1,6 @@
 <% @breadcrumbs = [
         link_to('Home', { :action => 'index' }),
-        link_to('Category', {}),
+        link_to( @post.categories.first.name.capitalize, '/category/' + @post.categories.first.seo_url),
         @post.title] %>
 
 <div class='container' role="main">
