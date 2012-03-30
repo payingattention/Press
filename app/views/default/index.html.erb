@@ -27,10 +27,19 @@
           <div class="navbar">
             <div class="navbar-inner">
               <ul class="nav">
-                <li><a href="/"><i class="icon-folder-open"></i><%= post.categories %></a></li>
 
-                <li><a href="/"><i class="icon-tags"></i><%= post.tags %></a></li>
-                
+                <% post.categories.each do |c| %>
+                  <li><a href="/"><% if c == post.categories.first %><i class="icon-folder-open"></i><% end %>
+                    <%= c.name.capitalize %></a>
+                  </li>
+                <% end %>
+
+                <% post.tags.each do |t| %>
+                  <li><a href=""><% if t == post.tags.first %><i class="icon-tags"></i><% end %>
+                    <%= t.name.capitalize %></a>
+                  </li>
+                <% end %>
+
               </ul>
             </div>
           </div>
