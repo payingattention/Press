@@ -24,7 +24,26 @@
         <% content = @post.content.gsub(/<!--more-->/,'') %>
         <% content = content.gsub(/(#{@query})/i, '<span class="highlight">\1</span>') if @query.present? %>
         <%= simple_format(content) %>
-        
+
+        <div class="navbar">
+          <div class="navbar-inner">
+            <ul class="nav">
+
+              <% @post.categories.each do |c| %>
+                <li><a href="/category/<%= c.seo_url %>"><% if c == @post.categories.first %><i class="icon-folder-open"></i><% end %>
+                  <%= c.name.capitalize %></a>
+                </li>
+              <% end %>
+
+              <% @post.tags.each do |t| %>
+                <li><a href="/tag/<%= t.seo_url %>"><% if t == @post.tags.first %><i class="icon-tags"></i><% end %>
+                  <%= t.name.capitalize %></a>
+                </li>
+              <% end %>
+
+            </ul>
+          </div>
+        </div>
       </div>
 
     </div>
