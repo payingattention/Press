@@ -19,9 +19,9 @@
     </div>
     <div class='span3'>
 
-      <%= form_tag({ :action => 'index' }, { :method => 'get', :class => 'site-search pull-right' }) do %>
+      <%= form_tag '', { :method => 'get', :class => 'site-search pull-right' } do %>
         <%= text_field_tag('query', @query, { :class => 'search-query span2', :placeholder => 'Search Filter...' })  %>
-        <a href="<%= url_for '/' %>">&nbsp;</a>
+        <a href="<%= url_for :query_string => nil %>">&nbsp;</a>
       <% end %>
 
     </div>
