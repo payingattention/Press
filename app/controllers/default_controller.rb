@@ -4,13 +4,21 @@ class DefaultController < ApplicationController
 
   # Show the front page!
   def index
-    @posts = Post.order
-    get_posts
+    # Catch old legacy wordpress routing ?p=####
+    post = Post.find_by_id params[:p]
+    if post.present?
+      redirect_to :action => 'show', :seo_url => post.seo_url
+    else
+      # Most likely this is the way it will always go.. show me the list
+      @posts = Post.order
+      get_posts
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @posts }
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @posts }
+      end
     end
+
   end
 
   # Show a post or page, based on the SEO Url
