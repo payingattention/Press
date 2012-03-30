@@ -1,6 +1,6 @@
-class CreateTags < ActiveRecord::Migration
+class CreateTaxonomies < ActiveRecord::Migration
   def change
-    create_table :tags do |t|
+    create_table :taxonomies do |t|
       t.string    :name,                                                          :null => false
       t.string    :seo_url,                                                       :null => false
       t.text      :description

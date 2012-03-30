@@ -63,33 +63,33 @@ class Admin::ImportWordpressController < ApplicationController
           # Increment our count
           import_count += 1
 
-          # POST TAGS -- Generate the tags for this piece of content
+          # POST TAGS -- Generate the taxonomies for this piece of content
           item.xpath('category[@domain="post_tag"]').each do |t|
-            # For each of the tags, load a similar tag from the db, or create a new one
-            tag = Tag.find_by_seo_url(t.attributes['nicename'].text) || Tag.new
+            # For each of the taxonomies, load a similar taxonomy from the db, or create a new one
+            taxonomy = Taxonomy.find_by_seo_url(t.attributes['nicename'].text) || Taxonomy.new
             # If new, assign the text and the nicename then save it
-            if tag.new_record?
-              tag.name = t.text.downcase
-              tag.seo_url = t.attributes['nicename'].text.downcase
-              tag.save
+            if taxonomy.new_record?
+              taxonomy.name = t.text.downcase
+              taxonomy.seo_url = t.attributes['nicename'].text.downcase
+              taxonomy.save
             end
-            # Add this tag to our post
-            post.tags << tag unless post.tags.include? tag
+            # Add this taxonomy to our post
+            post.taxonomies << taxonomy unless post.taxonomies.include? taxonomy
           end
 
           # CATEGORIES -- Generate the categories for this piece of content
           item.xpath('category[@domain="category"]').each do |t|
-            # For each of the tags, load a similar tag from the db, or create a new one
-            tag = Tag.find_by_seo_url(t.attributes['nicename'].text) || Tag.new
+            # For each of the taxonomies, load a similar taxonomy from the db, or create a new one
+            taxonomy = Taxonomy.find_by_seo_url(t.attributes['nicename'].text) || Taxonomy.new
             # If new, assign the text and the nicename then save it
-            if tag.new_record?
-              tag.name = t.text.downcase
-              tag.seo_url = t.attributes['nicename'].text.downcase
-              tag.classification = :category
-              tag.save
+            if taxonomy.new_record?
+              taxonomy.name = t.text.downcase
+              taxonomy.seo_url = t.attributes['nicename'].text.downcase
+              taxonomy.classification = :category
+              taxonomy.save
             end
-            # Add this tag to our post
-            post.tags << tag unless post.tags.include? tag
+            # Add this taxonomy to our post
+            post.taxonomies << taxonomy unless post.taxonomies.include? taxonomy
           end
 
         end

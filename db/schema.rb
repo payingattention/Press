@@ -33,12 +33,12 @@ ActiveRecord::Schema.define(:version => 20120329223146) do
   add_index "posts", ["seo_url"], :name => "index_posts_on_seo_url"
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
-  create_table "posts_tags", :id => false, :force => true do |t|
+  create_table "posts_taxonomies", :id => false, :force => true do |t|
     t.integer "post_id"
-    t.integer "tag_id"
+    t.integer "taxonomy_id"
   end
 
-  create_table "tags", :force => true do |t|
+  create_table "taxonomies", :force => true do |t|
     t.string   "name",                                                          :null => false
     t.string   "seo_url",                                                       :null => false
     t.text     "description"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(:version => 20120329223146) do
     t.string   "last_name",              :limit => 50,                                  :null => false
     t.enum     "gender",                 :limit => [:male, :female],                    :null => false
     t.datetime "date_of_birth"
-    t.boolean  "is_admin",                                           :default => false, :null => false
+    t.boolean  "is_admin",                                           :default => false
     t.string   "email",                                              :default => "",    :null => false
     t.string   "encrypted_password",                                 :default => "",    :null => false
     t.string   "reset_password_token"

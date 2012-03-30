@@ -23,8 +23,20 @@
           <% content = content.gsub(/(#{@query})/i, '<span class="highlight">\1</span>') if @query.present? %>
           <%= simple_format(content) %>
           <div class='readmore'><%= link_to 'Read more...', '/' + post.seo_url + '/' + url_query %></div>
+
+          <div class="navbar">
+            <div class="navbar-inner">
+              <ul class="nav">
+                <li><a href="/"><i class="icon-folder-open"></i><%= post.categories %></a></li>
+
+                <li><a href="/"><i class="icon-tags"></i><%= post.tags %></a></li>
+                
+              </ul>
+            </div>
+          </div>
+
         </div>
-          
+
       <% end %>
 
       <div class="container">

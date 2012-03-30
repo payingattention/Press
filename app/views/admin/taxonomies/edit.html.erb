@@ -1,0 +1,17 @@
+<% @breadcrumbs = [link_to('Taxonomy Editor', {:action => 'index'}), 'Edit Taxonomy'] %>
+
+<div class='row'>
+  <div class='span12'>
+
+    <%= form_for [:admin, @taxonomy], :html => { :class => 'form-horizontal' } do |f| %>
+
+      <%= render :partial => 'form', :locals => {
+              :f => f,
+              :form_legend => "Edit Taxonomy",
+              :submit_label => "Update Taxonomy"
+      } %>
+
+    <% end %>
+
+  </div>
+</div>

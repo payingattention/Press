@@ -3,7 +3,6 @@
 <div class='row'>
   <div class='span12'>
 
-
     <%= form_tag({ :action => 'index' }, { :method => 'get', :class => 'pull-right' }) do %>
       <%= text_field_tag('filter', @filter, { :class => 'search-query span2', :placeholder => 'Search Filter...' })  %>
     <% end %>
@@ -19,15 +18,15 @@
       </tr>
       </thead>
       <tbody>
-      <% @tags.each do |tag| %>
+      <% @taxonomies.each do |taxonomy| %>
         <tr>
-          <td><%= check_box_tag "tags[#{tag.id}]" %></td>
-          <td><%= tag.name %></td>
-          <td><%= tag.description %></td>
-          <td><%= tag.classification.capitalize %></td>
+          <td><%= check_box_tag "taxonomies[#{taxonomy.id}]" %></td>
+          <td><%= taxonomy.name %></td>
+          <td><%= taxonomy.description %></td>
+          <td><%= taxonomy.classification.capitalize %></td>
           <td class='span2 center'>
-            <%= link_to 'Edit', edit_admin_tag_path(tag), :class => 'btn btn-mini' %>
-            <%= link_to 'Destroy', [:admin, tag], confirm: "You've chosen to delete this tag. Are you sure?", method: :delete, :class => 'btn btn-mini btn-danger' %>
+            <%= link_to 'Edit', edit_admin_taxonomy_path(taxonomy), :class => 'btn btn-mini' %>
+            <%= link_to 'Destroy', [:admin, taxonomy], confirm: "You've chosen to delete this taxonomy. Are you sure?", method: :delete, :class => 'btn btn-mini btn-danger' %>
           </td>
         </tr>
       <% end %>
