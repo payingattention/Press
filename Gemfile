@@ -21,13 +21,14 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 
   gem 'twitter-bootstrap-rails'
-  gem 'devise', '>= 2.0.4'
-
-  gem 'enum_column3'
 
 end
 
 gem 'jquery-rails'
+
+gem 'devise', '>= 2.0.4'
+gem 'enum_column3'
+gem 'nokogiri'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
