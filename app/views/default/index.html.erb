@@ -1,5 +1,8 @@
 <% url_query = (@query.present?)?'?query='+@query:'' %>
 <div class='container' role="main" xmlns="http://www.w3.org/1999/html">
+
+  <%= render_breadcrumbs :category => @category, :tag => @tag, :filter => @query %>
+
   <div class='row'>
     <div class='span9'>
 
