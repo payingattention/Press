@@ -6,7 +6,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string    :last_name,           :limit => 50,               :null => false
       t.enum      :gender,              :limit => [:male, :female], :null => false
       t.datetime  :date_of_birth
-      t.boolean   :is_admin,            :default => false
+      t.enum      :role,                :limit => [:owner, :admin, :moderator, :user, :guest], :null => false, :default => :guest
 
       ## Database authenticatable
       t.string    :email,               :null => false, :default => ""

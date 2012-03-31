@@ -48,25 +48,25 @@ ActiveRecord::Schema.define(:version => 20120329223146) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "display_name",           :limit => 50,                                  :null => false
-    t.string   "first_name",             :limit => 50,                                  :null => false
-    t.string   "last_name",              :limit => 50,                                  :null => false
-    t.enum     "gender",                 :limit => [:male, :female],                    :null => false
+    t.string   "display_name",           :limit => 50,                                                              :null => false
+    t.string   "first_name",             :limit => 50,                                                              :null => false
+    t.string   "last_name",              :limit => 50,                                                              :null => false
+    t.enum     "gender",                 :limit => [:male, :female],                                                :null => false
     t.datetime "date_of_birth"
-    t.boolean  "is_admin",                                           :default => false
-    t.string   "email",                                              :default => "",    :null => false
-    t.string   "encrypted_password",                                 :default => "",    :null => false
+    t.enum     "role",                   :limit => [:owner, :admin, :moderator, :user, :guest], :default => :guest, :null => false
+    t.string   "email",                                                                         :default => "",     :null => false
+    t.string   "encrypted_password",                                                            :default => "",     :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                                      :default => 0
+    t.integer  "sign_in_count",                                                                 :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "password_salt"
-    t.datetime "created_at",                                                            :null => false
-    t.datetime "updated_at",                                                            :null => false
+    t.datetime "created_at",                                                                                        :null => false
+    t.datetime "updated_at",                                                                                        :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
