@@ -28,6 +28,8 @@ There are some things that I don't think wordpress did correctly, or at the very
 was taken and would like to do things differently..  Those will be listed below.
 
 
-  * Allow a post or page #show to define it's own layout / theme.
+  * Allow a post or page #show to define it's own layout / theme.  I think WP can do some of this
 
-  * There is no good reason a single taxonomy entry can't be multiple classifications with the same slug.. Fix this.  Wordpress did this wrong.
+  * There is no good reason a single taxonomy entry can't be multiple classifications with the same slug.. Fix this.  WP did this wrong.
+
+  * If someone sets a post password, it should be a real honest secure password system.. not clear text in the db.. WP did this wrong.
