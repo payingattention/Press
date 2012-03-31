@@ -13,7 +13,9 @@
           <% end %>
           <li class='active'><%= current %></li>
           <% if filter.present? %>
-            <li><span class='divider'><%= filter_divider %></span> Filtering by "<span class="highlight"><%= filter %></span>"</li>
+            <li><span class='divider'><%= filter_divider %></span> Filtering by "<span class="highlight"><%= filter %></span>"
+              <a href="<%= url_for :query => nil %>"><i class="icon-remove-sign"></i></a>
+            </li>
           <% end %>
         </ul>
       </div>
