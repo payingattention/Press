@@ -59,6 +59,8 @@ class Admin::ImportWordpressController < ApplicationController
         post.allow_comments = item.xpath('wp:comment_status').text == 'open' ? true : false
         # Get the post id and use it since some folks might like that
         post.id = item.xpath('wp:post_id').text
+        # Get the posts password if there is one
+        post.password ||= item.xpath('wp:post_password').text unless item.xpath('wp:post_password').text == ''
 
         # Save the post itself
         if post.save
