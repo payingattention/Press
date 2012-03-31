@@ -14,6 +14,9 @@
         <tr>
           <th><%= check_box_tag "all-posts" %></th>
           <th>Title</th>
+          <th>Author</th>
+          <th>Categories</th>
+          <th>Tags</th>
           <th>State</th>
           <th>Publish Date</th>
           <th>Actions</th>
@@ -23,9 +26,22 @@
         <% @posts.each do |post| %>
           <tr>
             <td><%= check_box_tag "posts[#{post.id}]" %></td>
-            <td><%= post.title %></td>
+            <td><%= post.title %> <small>(<%= post.id %>)</small></td>
+            <td>
+              <%= post.user.display_name %>
+            </td>
+            <td>
+              <% post.categories.each do |c| %>
+                <a href="<%= url_for :filter => @filter, :page => @pagination_current_page, :category => c.seo_url %>"><%= c.name.capitalize %></a><% if c != post.categories.last %>,<% end %>
+              <% end %>
+            </td>
+            <td>
+              <% post.tags.each do |c| %>
+                <a href="<%= url_for :filter => @filter, :page => @pagination_current_page, :tag => c.seo_url %>"><%= c.name.capitalize %></a><% if c != post.tags.last %>,<% end %>
+              <% end %>
+            </td>
             <td><%= post.state.capitalize %></td>
-            <td class='small'><%= post.go_live %></td>
+            <td class='small'><%= post.go_live.strftime("%B&nbsp;%e,&nbsp;%Y").html_safe %></td>
             <td class='span2 center'>
                 <%= link_to 'Edit', {:action => 'edit', :id => post.id}, :class => 'btn btn-mini' %>
                 <%= link_to 'Destroy', {:action => 'destroy', :id => post.id}, :method => :delete, :confirm => "You've chosen to delete this post, this can't be undone. Are you sure?", :class => 'btn btn-mini btn-danger' %>
@@ -54,7 +70,9 @@
       <% if @pagination_number_of_pages > 1 %>
           <%= form_tag({ :action => 'index' }, { :method => 'get', :class => 'pull-right' }) do %>
             <%= hidden_field_tag('filter', @filter)  %>
-            <div class="btn-group pull-right">
+            <%= hidden_field_tag('tag', @tag)  %>
+            <%= hidden_field_tag('category', @category)  %>
+          <div class="btn-group pull-right">
                 <% @pagination_number_of_pages.times do |i| %>
                     <button name='page' value='<%= i+1 %>' class='btn btn-mini <%= ' active' if i+1 == @pagination_current_page %>'><%= i+1 %></button>
                 <% end %>

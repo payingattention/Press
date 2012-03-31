@@ -6,19 +6,42 @@ class Admin::PostsController < ApplicationController
 
   # LIST -- Shows a list of posts
   def index
-    limit = 10;
-    page = (params[:page].to_i - 1) || 1
+    # Set our limit, this should be dynamic or something.. drop box?
+    limit = 12;
+
+    # if we are talking about a tag, get our posts from there
+    @tag = params[:tag] || ''
+    if @tag.present?
+      tag = Taxonomy.find_by_seo_url @tag
+      @posts = tag.posts
+    end
+
+    # If we are talking about a category get the posts from there
+    @category = params[:category] || ''
+    if @category.present?
+      category = Taxonomy.find_by_seo_url @category
+      @posts = category.posts
+    end
+
+    # Define posts unless it already is
+    @posts = Post.order unless @posts.present?
+    # Set the default sort order
+    @posts = @posts.order('go_live DESC')
+    # Get our filter information if it's set
     @filter = params[:filter] || ''
-
-    @posts = Post.order('go_live DESC')
-    @total_post_count = @posts.count
-    @posts = @posts.where(["title like ?", '%'+@filter+'%'] ) if @filter
-    @filtered_post_count = @posts.count
+    # Filter posts by title if the filter is set
+    @posts = @posts.where(["title like ?", '%'+@filter+'%'] ) if @filter.present?
+    # Get our filtered post count for pagination
+    filtered_post_count = @posts.count
+    # Limit the number to display
     @posts = @posts.limit(limit)
+    # Define our page
+    page = (params[:page].to_i - 1) || 1
+    # Set page offset
     @posts = @posts.offset(limit.to_i * page.to_i) if page > 0
-
+    # Output pagination information
     @pagination_current_page = (page.to_i + 1) > 0 ? (page.to_i + 1) : 1
-    @pagination_number_of_pages = (@filtered_post_count / limit) +1
+    @pagination_number_of_pages = (filtered_post_count / limit) +1
 
     respond_to do |format|
       format.html # index.html.erb
