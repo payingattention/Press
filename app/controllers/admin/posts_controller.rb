@@ -40,8 +40,8 @@ class Admin::PostsController < ApplicationController
     # Set page offset
     @posts = @posts.offset(limit.to_i * page.to_i) if page > 0
     # Output pagination information
-    @pagination_current_page = (page.to_i + 1) > 0 ? (page.to_i + 1) : 1
     @pagination_number_of_pages = (filtered_post_count / limit) +1
+    @pagination_current_page = (page.to_i + 1) > 0 ? (page.to_i + 1) : 1
 
     respond_to do |format|
       format.html # index.html.erb

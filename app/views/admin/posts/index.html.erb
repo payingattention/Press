@@ -6,6 +6,8 @@
 
 
     <%= form_tag({ :action => 'index' }, { :method => 'get', :class => 'pull-right' }) do %>
+      <%= hidden_field_tag('tag', @tag)  %>
+      <%= hidden_field_tag('category', @category)  %>
       <%= text_field_tag('filter', @filter, { :class => 'search-query span2', :placeholder => 'Search Filter...' })  %>
     <% end %>
 
@@ -26,18 +28,18 @@
         <% @posts.each do |post| %>
           <tr>
             <td><%= check_box_tag "posts[#{post.id}]" %></td>
-            <td><%= post.title %> <small>(<%= post.id %>)</small></td>
+            <td><%= post.title.gsub(/(#{@filter})/i, '<span class="highlight">\1</span>').html_safe %> <small>(<%= post.id %>)</small></td>
             <td>
               <%= post.user.display_name %>
             </td>
             <td>
               <% post.categories.each do |c| %>
-                <a href="<%= url_for :filter => @filter, :page => @pagination_current_page, :category => c.seo_url %>"><%= c.name.capitalize %></a><% if c != post.categories.last %>,<% end %>
+                <a href="<%= url_for :filter => @filter, :category => c.seo_url %>"><%= c.name.capitalize %></a><% if c != post.categories.last %>,<% end %>
               <% end %>
             </td>
             <td>
               <% post.tags.each do |c| %>
-                <a href="<%= url_for :filter => @filter, :page => @pagination_current_page, :tag => c.seo_url %>"><%= c.name.capitalize %></a><% if c != post.tags.last %>,<% end %>
+                <a href="<%= url_for :filter => @filter, :tag => c.seo_url %>"><%= c.name.capitalize %></a><% if c != post.tags.last %>,<% end %>
               <% end %>
             </td>
             <td><%= post.state.capitalize %></td>
