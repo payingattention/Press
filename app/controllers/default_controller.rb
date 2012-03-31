@@ -65,7 +65,7 @@ class DefaultController < ApplicationController
     tag = Taxonomy.find_by_seo_url requested_tag
 
     if tag.present?
-      @tag = requested_tag
+      @tag = tag
       @posts = tag.posts
       get_posts
 
