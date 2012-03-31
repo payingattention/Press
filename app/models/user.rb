@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :display_name, :gender, :is_admin
 
   # Ultra simple "not null" validators
-  validates_presence_of :first_name, :last_name, :display_name, :gender, :email
+  validates_presence_of :display_name, :gender, :email
 
   # Users have many posts
   # user.posts references all the posts that users has made

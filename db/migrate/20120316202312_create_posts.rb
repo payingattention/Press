@@ -16,6 +16,7 @@ class CreatePosts < ActiveRecord::Migration
       t.timestamps
     end
     add_index("posts", "user_id")
+    add_index("posts", "post_id")
     add_index("posts", "seo_url")
   end
 end

@@ -26,7 +26,10 @@ class Admin::ImportWordpressController < ApplicationController
     items = parse.xpath('//item')
 
     # @TODO Temp author.. will need to figure this out
-    author = User.all.first.id
+    # Get the authors list from the front of the XML file and create new guest authors or whatever.. have a list of users
+    # The author list will have a author_login, each item will have a dc:creator that matches that author_login
+
+    author = User.all.first
 
     import_count = 0
     if items.count > 0
@@ -49,7 +52,7 @@ class Admin::ImportWordpressController < ApplicationController
             post.state = :published
         end
         # Author -- @TODO Try to parse the user and pick, give "add new" option, or just use admin
-        post.user_id = author
+        post.user = author
         # Parse out the publish date and use it
         publish_date = item.xpath('pubDate').text.split(', ')[1]
         post.go_live = DateTime.parse(publish_date)
@@ -94,6 +97,21 @@ class Admin::ImportWordpressController < ApplicationController
             end
             # Add this taxonomy to our post
             post.taxonomies << taxonomy unless post.taxonomies.include? taxonomy
+          end
+
+          # COMMENTS -- Generate user associations or guest users for posts
+          item.xpath('wp:comment').each do |c|
+            comment = Post.new
+            # @TODO Okay get the real user out of here.. create them guest accounts by email and or link them to real users
+            comment.user = author
+            comment.object_type = :comment
+            comment.content = c.xpath('wp:comment_content').text
+            comment.state = :published
+            comment_publish_date = item.xpath('pubDate').text.split(', ')[1]
+            comment.go_live = DateTime.parse(comment_publish_date)
+            comment.save
+
+            post.posts << comment
           end
 
         end
