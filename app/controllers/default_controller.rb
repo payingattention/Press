@@ -99,11 +99,14 @@ class DefaultController < ApplicationController
     @posts = @posts.where( :password => nil )
     # If a query is set, use it
     @posts = @posts.where(["title like ? or content like ?", '%'+@query+'%', '%'+@query+'%'] ) if @query.present?
+    # Get our filtered post count for pagination
+    filtered_post_count = @posts.count
     # Limit the number of posts to show
     @posts = @posts.limit(limit)
     # Set the offset if we aren't on the first page.
     @posts = @posts.offset(limit.to_i * page.to_i) if page > 0
     # Need this to show a previous/next button
+    @pagination_number_of_pages = (filtered_post_count / limit) +1
     @pagination_current_page = (page.to_i + 1) > 0 ? (page.to_i + 1) : 1
   end
 

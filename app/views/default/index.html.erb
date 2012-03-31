@@ -50,6 +50,7 @@
 
       <% end %>
 
+      <% if @pagination_number_of_pages > 1  %>
       <div class="container">
         <div class='row'>
           <div class='span9'>
@@ -61,11 +62,14 @@
                   <li><%= link_to 'Newer Entries', '/page/' + (@pagination_current_page.to_i - 1).to_s + '/' %></li>
                 <% end %>
               <% end %>
-              <li class='pull-right'><%= link_to 'Older Entries', '/page/' + (@pagination_current_page.to_i + 1).to_s + '/' %></li>
+              <% if @pagination_current_page < @pagination_number_of_pages %>
+                <li class='pull-right'><%= link_to 'Older Entries', '/page/' + (@pagination_current_page.to_i + 1).to_s + '/' %></li>
+              <% end %>
             </ul>
           </div>
         </div>
       </div>
+      <% end %>
 
     </div>
 
