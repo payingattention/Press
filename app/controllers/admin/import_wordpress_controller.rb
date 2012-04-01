@@ -60,8 +60,9 @@ class Admin::ImportWordpressController < ApplicationController
         post.is_sticky = item.xpath('wp:is_sticky').text
         # Comment allowed
         post.allow_comments = item.xpath('wp:comment_status').text == 'open' ? true : false
-        # Get the post id and use it since some folks might like that
-        post.id = item.xpath('wp:post_id').text
+        # Get the post id and use it since some folks might like that.. but don't let us collide.. Assign new if collision
+        post_id = item.xpath('wp:post_id').text
+        post.id = post_id unless Post.find_by_id post_id
         # Get the posts password if there is one
         post.password ||= item.xpath('wp:post_password').text unless item.xpath('wp:post_password').text == ''
 
@@ -101,17 +102,39 @@ class Admin::ImportWordpressController < ApplicationController
 
           # COMMENTS -- Generate user associations or guest users for posts
           item.xpath('wp:comment').each do |c|
-            comment = Post.new
-            # @TODO Okay get the real user out of here.. create them guest accounts by email and or link them to real users
-            comment.user = author
-            comment.object_type = :comment
-            comment.content = c.xpath('wp:comment_content').text
-            comment.state = :published
-            comment_publish_date = item.xpath('pubDate').text.split(', ')[1]
-            comment.go_live = DateTime.parse(comment_publish_date)
-            comment.save
+            # Only use comments that have no comment type ( so real comments, not pingbacks )
+            if c.xpath('wp:comment_type').text == ''
+              comment = Post.new
 
-            post.posts << comment
+              # Do we have anything from this author before? Try loading them
+              comment_author = User.find_by_email c.xpath('wp:comment_author_email').text
+              # If we don't have them, lets generate them a user id as a :guest
+              unless comment_author.present? && comment_author.persisted?
+                comment_author = User.new
+                comment_author.display_name = c.xpath('wp:comment_author').text
+                comment_author.email = c.xpath('wp:comment_author_email').text
+                comment_author.password = '!Q@W#E$R%T^Y&U*I(O)P'
+                comment_author.last_sign_in_ip = c.xpath('wp:comment_author_ip').text
+                comment_author.save
+              end
+
+              # Is this comment id available? (keeping in mind that it might collide with a post already in the system)
+              # try to give it it's WP id, but if you can't then so be it.
+              comment_id = c.xpath('wp:comment_id').text
+              comment.id = comment_id unless Post.find_by_id comment_id
+              comment.user = comment_author
+              comment.object_type = :comment
+              comment.content = c.xpath('wp:comment_content').text
+              comment.state = :published
+              comment_publish_date = item.xpath('pubDate').text.split(', ')[1]
+              comment.go_live = DateTime.parse(comment_publish_date)
+
+              # If we managed to get the author correctly injected, save this comment and assign it to the post
+              if comment_author.present? && comment_author.persisted?
+                comment.save
+                post.posts << comment
+              end
+            end
           end
 
         end
