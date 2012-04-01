@@ -4,6 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string    :display_name,        :limit => 50,               :null => false
       t.string    :first_name,          :limit => 50
       t.string    :last_name,           :limit => 50
+      t.string    :url
       t.enum      :gender,              :limit => [:male, :female, :anonymous], :null => false, :default => :anonymous
       t.datetime  :date_of_birth
       t.enum      :role,                :limit => [:owner, :admin, :moderator, :user, :guest], :null => false, :default => :guest
