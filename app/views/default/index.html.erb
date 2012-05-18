@@ -16,7 +16,7 @@
               <ul class="nav">
                 <li><a href="/"><i class="icon-calendar"></i><%= post.go_live.strftime("%B %e, %Y @ %l:%M%P") %></a></li>
                 <li><a href="/"><i class="icon-user"></i><%= post.user.display_name %></a></li>
-                <li class='pull-right'><a href="/"><i class="icon-comment"></i>Comments</a></li>
+                <li class='pull-right'><a href="<%= url_for '/' + post.seo_url + '/' + url_query %>#comments"><i class="icon-comment"></i>Comments (<%= post.comments.count %>)</a></li>
               </ul>
             </div>
           </div>
