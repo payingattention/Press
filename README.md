@@ -17,7 +17,7 @@ TwitterBootstrap, Devise, CanCan, Nokogiri..etc..
 Intended Features
 -----------------
 
-It only takes a few minutes of playing with Wordpress to realize that it is extremely feature packed..  As such replicating
+It only takes a few minutes of playing with Wordpress to realize that it is extremely feature packed..  As such, replicating
 all of it's features is a very tall order.. But that's the intent.
 
 I'm going to start by getting core functionality in place and actually making a usable product.. this means a lot of the
@@ -28,7 +28,7 @@ There are some things that I don't think wordpress did correctly, or at the very
 was taken and would like to do things differently..  Those will be listed below.
 
 
-  * Allow a post or page #show to define it's own layout / theme.  I think WP can do some of this
+  * Allow a post or page #show to define it's own layout / theme.  I think WP can do some of this.. Not sure..
 
   * There is no good reason a single taxonomy entry can't be multiple classifications with the same slug.. Fix this.  WP did this wrong.
 
@@ -45,3 +45,14 @@ there are going to be differences; Some unintentional, some intentional.  I'll t
   child structure. I really think that the way WP did this was incorrect.  If you have categories with a relationship of A/B/C/D and
   you click on category C in order to see its contents, in Wordpress it shows all the contents of A, B and C.. I disagree with this and
   only show the contents of C as I feel one would expect.
+
+
+@TODO
+-----
+
+As you browse around the site (mostly in the admin area right now) you'll find TODO lists at the bottom of the various pages for things
+that need to be done.
+
+  * Look very hard at github integration..  I think a brilliant idea would be to have posts push to git in MD format or some such
+  other handy dandy format so that it's only a matter of doing a git pull to deploy somewhere else or whatever..   A full git
+  stack so that everything is clean and easy to use..  Not sure how this will work yet.. but I think its a good idea.. will ponder.
