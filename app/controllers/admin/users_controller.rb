@@ -6,7 +6,7 @@ class Admin::UsersController < ApplicationController
 
   # LIST
   def index
-    @users = User.order('created_at ASC')
+    @users = list_users
   end
 
   # NEW
