@@ -1,15 +1,21 @@
 Press::Application.routes.draw do
 
-  devise_for :users
+  # Routes for devise users (login logout register..etc)
+  devise_for :users, :path => '', :path_names => {
+      :sign_in => 'login',
+      :sign_out => 'logout',          # must be method :DELETE
+      :registration => 'register',    # /register POST
+      :sign_up => 'new'               # /register/new
+  }
 
+  # Below we define all of our administrator namespace routes.. These are for site admin and site staff members only
+  resources :admin, :only => [ :index ]
   namespace :admin do
     resources :posts
     resources :users
     resources :taxonomies
     resources :import_wordpress
   end
-  # Admin route that gets us entry to the above namespace
-  match 'admin/' => 'admin#index'
   # Category route similar to wordpress
   match '/category/*category' => 'default#category'
   # Tag route similar to wordpress
