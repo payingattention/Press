@@ -25,15 +25,15 @@ class DefaultController < ApplicationController
   def show
     #load the post or page by seo url or return to index if not found
     @post = Post.find_by_seo_url params[:seo_url]
-    unless @post.present?
+    if @post.present?
+      @query = params[:query] || ''
+
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @post }
+      end
+    else
       redirect_to :action => 'index'
-    end
-
-    @query = params[:query] || ''
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @post }
     end
   end
 
