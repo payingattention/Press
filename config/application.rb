@@ -57,3 +57,7 @@ module Press
     config.assets.version = '1.0'
   end
 end
+
+require 'ext/numeric'
+require 'ext/string'
+require 'ext/array'
