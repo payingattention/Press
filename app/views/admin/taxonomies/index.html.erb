@@ -1,4 +1,4 @@
-<% @breadcrumbs = [link_to('Tags Editor', {:action => 'index'}), 'Tags List'] %>
+<% @breadcrumbs = [link_to('Tag/Category Editor', {:action => 'index'}), 'Tag/Category List'] %>
 
 <div class='row'>
   <div class='span12'>
@@ -12,6 +12,7 @@
       <tr>
         <th><%= check_box_tag "all-posts" %></th>
         <th>Title</th>
+        <th>Slug</th>
         <th>Description</th>
         <th>Type</th>
         <th>Actions</th>
@@ -22,11 +23,12 @@
         <tr>
           <td><%= check_box_tag "taxonomies[#{taxonomy.id}]" %></td>
           <td><%= taxonomy.name %></td>
+          <td><%= taxonomy.seo_url %></td>
           <td><%= taxonomy.description %></td>
           <td><%= taxonomy.classification.capitalize %></td>
           <td class='span2 center'>
             <%= link_to 'Edit', edit_admin_taxonomy_path(taxonomy), :class => 'btn btn-mini' %>
-            <%= link_to 'Destroy', [:admin, taxonomy], confirm: "You've chosen to delete this taxonomy. Are you sure?", method: :delete, :class => 'btn btn-mini btn-danger' %>
+            <%= link_to 'Destroy', admin_taxonomy_path(taxonomy), confirm: "You've chosen to delete this taxonomy. Are you sure?", method: :delete, :class => 'btn btn-mini btn-danger' %>
           </td>
         </tr>
       <% end %>
@@ -35,7 +37,7 @@
 
     <div class="btn-toolbar">
       <div class="btn-group">
-        <%= link_to(new_admin_tag_path, :class => 'btn btn-primary') do %>
+        <%= link_to new_admin_taxonomy_path, :class => 'btn btn-primary' do %>
           <i class='icon-plus icon-white'></i> Add New Tag
         <% end %>
       </div>
@@ -54,3 +56,17 @@
 
   </div>
 </div>
+
+<pre>
+  <strong>@TODO for this page</strong>
+  * Unsuck pagination
+  * Add search blank add-ons..
+  * Add select on what to show; tags, categories
+  * Update breadcrumbs to give full route/controller/action/etc..
+  * Header sorting
+  * Whats the point of checkboxes here?  Move them into the title td or style the td they are in
+  * A single taxonomy should be able to be both a category AND a tag.. or whatever, and be attached to the same slug
+  * Create a system by which you can merge slugs
+</pre>
+
+
