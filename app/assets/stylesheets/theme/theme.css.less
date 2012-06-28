@@ -75,10 +75,12 @@ body {
             .navbar-inner {
                 &.main {
                     height: 30px;
+                    min-height: 30px;
                     border-top: 1px solid #d8d8d8;
                     border-radius: 0 0 4px 4px;
 
                     .pmLinearGradient(0, #f2f2f2, 100%, #dfdfdf, 100%, #dfdfdf);
+                    box-shadow: 0 1px 0px rgba(0,0,0,0.25), 0 1px 0 rgba(0,0,0,0.05) inset;
 
                     padding-left: 5px;
                     padding-right: 5px;
@@ -134,7 +136,7 @@ small {
     background-repeat: repeat-x;
     border-radius: 4px 4px 4px 4px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.25), 0 1px 0 rgba(0,0,0,0.05) inset;
-    
+
     li > a, a.brand {
         padding: 4px 10px 3px;
         color: #999;
@@ -216,7 +218,7 @@ div.content-panel {
         margin-bottom: 0px;
         .navbar-inner {
           .pmLinearGradient(0, #fff, 100%, #fff, 100%, #fff);
-
+          box-shadow: 0 0px 0px rgba(0,0,0,0.25), 0 0px 0 rgba(0,0,0,0.05) inset;
           padding: 0;
             ul {
                 width: 100%;
