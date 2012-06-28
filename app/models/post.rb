@@ -13,6 +13,13 @@ class Post < ActiveRecord::Base
   # Posts can be "posts", "pages", "comments", "messages"..etc.
   has_many :posts
 
+  # Define some scoped helpers
+  scope :ads, where(:object_type => :ad)
+  scope :posts, where(:object_type => :post)
+  scope :pages, where(:object_type => :page)
+  scope :comments, where(:object_type => :comment)
+  scope :messages, where(:object_type => :message)
+
   # Tags ( Taxonomies with a classification of tag )
   # post.tags returns all child taxonomies that are tags
   def tags
