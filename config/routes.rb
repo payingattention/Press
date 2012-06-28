@@ -14,7 +14,7 @@ Press::Application.routes.draw do
     resources :posts
     resources :users
     resources :taxonomies
-    resources :import_wordpress
+    resources :import_wordpress, :only => [ :new, :create ]
   end
 
   # Below I am adding some custom routes to match what wordpress does.
