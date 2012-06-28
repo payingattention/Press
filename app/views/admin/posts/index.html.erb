@@ -1,5 +1,13 @@
 <% @breadcrumbs = [link_to('Posts Editor', {:action => 'index'}), 'Posts List'] %>
 
+<pre>
+  <strong>@TODO</strong>
+  * Unsuck pagination
+  * Add search blank
+  * Add select on what to show, posts, pages, comments..etc.
+  * Update breadcrumbs to give full route/controller/action/etc..
+  * Header sorting
+</pre>
 
 <div class='row'>
   <div class='span12'>
@@ -22,7 +30,7 @@
         <% @posts.each do |post| %>
           <tr>
             <td><%= check_box_tag "posts[#{post.id}]" %></td>
-            <td><%= post.title.gsub(/(#{@filter})/i, '<span class="highlight">\1</span>').html_safe %> <small>(<%= post.id %>)</small></td>
+            <td><%= post.title.to_s.gsub(/(#{@filter})/i, '<span class="highlight">\1</span>').html_safe %> <small>(<%= post.id %>)</small></td>
             <td>
               <%= post.user.display_name %>
             </td>
