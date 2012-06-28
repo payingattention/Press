@@ -1,5 +1,14 @@
 <% @breadcrumbs = [link_to('Users Editor', {:action => 'index'}), 'User List'] %>
 
+<pre>
+  <strong>@TODO</strong>
+  * Pagination
+  * Add search blank
+  * Add option to only show certain roles
+  * Show metrics for each user (number of posts..etc)
+  * "show" for user shows that users posts, comments etc..
+</pre>
+
 <div class='row'>
   <div class='span12'>
 
@@ -8,24 +17,26 @@
       <tr>
         <th>Name</th>
         <th>Email</th>
-        <th>Actions</th>
+        <th>Type</th>
+        <th class='span2 center'>Actions</th>
       </tr>
       </thead>
       <tbody>
       <% @users.each do |user| %>
           <tr>
-            <td><%= link_to user.first_name, {} %></td>
+            <td><%= link_to user.display_name, admin_user_path(user) %></td>
             <td><%= user.email %></td>
-            <td>
-              <%= link_to 'Edit', {:action => 'edit', :id => user.id}, :class => 'btn btn-mini' %>
-              <%= link_to 'Destroy', {:action => 'destroy', :id => user.id}, :method => :delete, :confirm => "You've chosen to delete this user, this can't be undone. Are you sure?", :class => 'btn btn-mini btn-danger' %>
+            <td><%= user.role.to_s.capitalize %></td>
+            <td class='span2 center'>
+              <%= link_to 'Edit', edit_admin_user_path(user), :class => 'btn btn-mini' %>
+              <%= link_to 'Destroy', admin_user_path(user), :method => :delete, :confirm => "You've chosen to delete this user, this can't be undone. Are you sure?", :class => 'btn btn-mini btn-danger' %>
             </td>
           </tr>
       <% end %>
       </tbody>
     </table>
 
-    <%= link_to({:action => 'new'}, :class => 'btn btn-primary') do %>
+    <%= link_to new_admin_user_path, :class => 'btn btn-primary' do %>
         <i class='icon-plus icon-white'></i> Add New User
     <% end %>
 
