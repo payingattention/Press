@@ -1,0 +1,41 @@
+
+<% if primary_pages.present? && primary_pages != [0] %>
+  <%= form_tag({ :action => 'index' }, { :method => 'get', :class => 'pull-right' }) do %>
+    <%= hidden_field_tag('filter', @filter)  %>
+    <div class='pull-right'>
+
+      <% if prev_page.present? %>
+        <div class="btn-group">
+          <button name='page' value='<%= prev_page %>' class='btn btn-mini'>&lt;</button>
+        </div>
+      <% end %>
+
+      <div class="btn-group">
+        <% if first_pages.present? %>
+          <% first_pages.each do |i| %>
+            <button name='page' value='<%= i+1 %>' class='btn btn-mini <%= ' active' if i+1 == current_page %>'><%= i+1 %></button>
+          <% end %>
+          <button class='disabled btn btn-mini' >...</button>
+        <% end %>
+
+        <% primary_pages.each do |i| %>
+          <button name='page' value='<%= i+1 %>' class='btn btn-mini <%= ' active' if i+1 == current_page %>'><%= i+1 %></button>
+        <% end %>
+
+        <% if last_pages.present? %>
+          <button class='disabled btn btn-mini' >...</button>
+          <% last_pages.each do |i| %>
+            <button name='page' value='<%= i+1 %>' class='btn btn-mini <%= ' active' if i+1 == current_page %>'><%= i+1 %></button>
+          <% end %>
+        <% end %>
+      </div>
+
+      <% if next_page.present? %>
+        <div class="btn-group">
+          <button name='page' value='<%= next_page %>' class='btn btn-mini'>&gt;</button>
+        </div>
+      <% end %>
+
+    </div>
+  <% end %>
+<% end %>
