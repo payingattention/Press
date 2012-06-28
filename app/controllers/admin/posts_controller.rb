@@ -13,35 +13,19 @@ class Admin::PostsController < ApplicationController
     @tag = params[:tag] || ''
     if @tag.present?
       tag = Taxonomy.find_by_seo_url @tag
-      @posts = tag.posts
+      @posts = list_models tag.posts, [], 'go_live desc'
     end
 
     # If we are talking about a category get the posts from there
     @category = params[:category] || ''
     if @category.present?
       category = Taxonomy.find_by_seo_url @category
-      @posts = category.posts
+      @posts = list_models category.posts, [], 'go_live desc'
     end
 
-    # Define posts unless it already is
-    @posts = Post.order unless @posts.present?
-    # Set the default sort order
-    @posts = @posts.order('go_live DESC')
-    # Get our filter information if it's set
-    @filter = params[:filter] || ''
-    # Filter posts by title if the filter is set
-    @posts = @posts.where(["title like ?", '%'+@filter+'%'] ) if @filter.present?
-    # Get our filtered post count for pagination
-    filtered_post_count = @posts.count
-    # Limit the number to display
-    @posts = @posts.limit(limit)
-    # Define our page
-    page = (params[:page].to_i - 1) || 1
-    # Set page offset
-    @posts = @posts.offset(limit.to_i * page.to_i) if page > 0
-    # Output pagination information
-    @pagination_number_of_pages = (filtered_post_count / limit) +1
-    @pagination_current_page = (page.to_i + 1) > 0 ? (page.to_i + 1) : 1
+    if !@tag.present? && !@category.present?
+      @posts = list_models Post, [], 'go_live desc'
+    end
 
     respond_to do |format|
       format.html # index.html.erb

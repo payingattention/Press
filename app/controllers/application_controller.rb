@@ -16,6 +16,8 @@ class ApplicationController < ActionController::Base
     models = paginate_models models
   end
 
+  private
+
   def paginate_models models
     # Get our limit
     @limit = params[:limit].to_i || 12

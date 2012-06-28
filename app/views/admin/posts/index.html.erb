@@ -62,18 +62,8 @@
         </ul>
       </div>
 
-      <% if @pagination_number_of_pages > 1 %>
-          <%= form_tag({ :action => 'index' }, { :method => 'get', :class => 'pull-right' }) do %>
-            <%= hidden_field_tag('filter', @filter)  %>
-            <%= hidden_field_tag('tag', @tag)  %>
-            <%= hidden_field_tag('category', @category)  %>
-          <div class="btn-group pull-right">
-                <% @pagination_number_of_pages.times do |i| %>
-                    <button name='page' value='<%= i+1 %>' class='btn btn-mini <%= ' active' if i+1 == @pagination_current_page %>'><%= i+1 %></button>
-                <% end %>
-            </div>
-          <% end %>
-      <% end %>
+      <%= pagination %>
+
     </div>
 
   </div>
@@ -81,7 +71,6 @@
 
 <pre>
   <strong>@TODO for this page</strong>
-  * Unsuck pagination
   * Add search blank
   * Add select on what to show, posts, pages, comments..etc.
   * Update breadcrumbs to give full route/controller/action/etc..
