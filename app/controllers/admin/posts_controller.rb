@@ -24,7 +24,7 @@ class Admin::PostsController < ApplicationController
     end
 
     if !@tag.present? && !@category.present?
-      @posts = list_models Post, [], 'go_live desc'
+      @posts = list_models Post.posts, [], 'go_live desc'
     end
 
     respond_to do |format|
