@@ -16,14 +16,18 @@ Press::Application.routes.draw do
     resources :taxonomies
     resources :import_wordpress
   end
+
+  # Below I am adding some custom routes to match what wordpress does.
+  # I don't know if this is the correct way to add these or not, but they work
+
   # Category route similar to wordpress
-  match '/category/*category' => 'default#category'
+  match '/category/*category' => 'default#category', :as => 'category'
   # Tag route similar to wordpress
-  match '/tag/*tag' => 'default#tag'
+  match '/tag/*tag' => 'default#tag', :as => 'tag'
   # Page route which gets us deeper into the main index page
-  match '/page/*page' => 'default#index'
+  match '/page/*page' => 'default#index', :as => 'page'
   # Default SEO URL (Permalink) route for showing pages and posts
-  match '*seo_url' => 'default#show'
+  match '*seo_url' => 'default#show', :as => 'slug'
   # Default
   root :to => 'default#index'
 
