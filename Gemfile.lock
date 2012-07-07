@@ -82,6 +82,7 @@ GEM
     nokogiri (1.5.5)
     orm_adapter (0.3.0)
     polyglot (0.3.3)
+    possessive (1.0.0)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -142,6 +143,7 @@ DEPENDENCIES
   json
   mysql2
   nokogiri
+  possessive
   rails (= 3.2.3)
   sass-rails (~> 3.2.3)
   therubyracer

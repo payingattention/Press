@@ -36,7 +36,7 @@
               <% end %>
             </td>
             <td><%= post.state.capitalize %></td>
-            <td class='small'><%= post.go_live.strftime("%B&nbsp;%e,&nbsp;%Y").html_safe %></td>
+            <td class='small'><%= post.go_live.strftime("%b&nbsp;%e,&nbsp;%Y").html_safe %></td>
             <td class='span2 center'>
                 <%= link_to 'Edit', {:action => 'edit', :id => post.id}, :class => 'btn btn-mini' %>
                 <%= link_to 'Destroy', {:action => 'destroy', :id => post.id}, :method => :delete, :confirm => "You've chosen to delete this post, this can't be undone. Are you sure?", :class => 'btn btn-mini btn-danger' %>
@@ -76,5 +76,7 @@
   * Update breadcrumbs to give full route/controller/action/etc..
   * Header sorting
   * Whats the point of checkboxes here?  Move them into the title td or style the td they are in
+  * Tool to convert posts to MD
+  * Post github integration
 </pre>
 
