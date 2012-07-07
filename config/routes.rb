@@ -15,6 +15,12 @@ Press::Application.routes.draw do
     resources :users
     resources :taxonomies
     resources :import_wordpress, :only => [ :new, :create ]
+
+    # Site settings :index for showing the form and :create to post it (though not technically correct)
+    resources :settings, :only => [ :index, :create ]
+    namespace :settings do
+      resources :content, :only => [ :index, :create ]
+    end
   end
 
   # Below I am adding some custom routes to match what wordpress does.
