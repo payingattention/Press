@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120329223146) do
+ActiveRecord::Schema.define(:version => 20120707155525) do
 
   create_table "posts", :force => true do |t|
     t.integer  "user_id",                                                                               :null => false
@@ -39,6 +39,20 @@ ActiveRecord::Schema.define(:version => 20120329223146) do
     t.integer "taxonomy_id"
   end
 
+  create_table "settings", :force => true do |t|
+    t.string   "key",                                                                                                                      :null => false
+    t.string   "value"
+    t.enum     "area",        :limit => [:general, :content, :media, :tools, :privacy, :linking, :users, :taxonomy], :default => :general
+    t.string   "label",                                                                                                                    :null => false
+    t.enum     "element",     :limit => [:text, :textarea, :checkbox, :radiobutton],                                 :default => :text,    :null => false
+    t.text     "description"
+    t.text     "values"
+    t.datetime "created_at",                                                                                                               :null => false
+    t.datetime "updated_at",                                                                                                               :null => false
+  end
+
+  add_index "settings", ["key"], :name => "index_settings_on_key", :unique => true
+
   create_table "taxonomies", :force => true do |t|
     t.string   "name",                                                          :null => false
     t.string   "seo_url",                                                       :null => false
@@ -52,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20120329223146) do
     t.string   "display_name",           :limit => 50,                                                                  :null => false
     t.string   "first_name",             :limit => 50
     t.string   "last_name",              :limit => 50
+    t.string   "url"
     t.enum     "gender",                 :limit => [:male, :female, :anonymous],                :default => :anonymous, :null => false
     t.datetime "date_of_birth"
     t.enum     "role",                   :limit => [:owner, :admin, :moderator, :user, :guest], :default => :guest,     :null => false
