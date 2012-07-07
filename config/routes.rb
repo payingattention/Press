@@ -23,6 +23,8 @@ Press::Application.routes.draw do
     end
   end
 
+  resources :install, :only => [ :index, :create ]
+
   # Below I am adding some custom routes to match what wordpress does.
   # I don't know if this is the correct way to add these or not, but they work
 
