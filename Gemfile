@@ -29,3 +29,5 @@ gem 'cancan'
 gem 'enum_column3'
 # Nokogiri to parse xml
 gem 'nokogiri'
+# Give us a possessive method on strings
+gem "possessive"
