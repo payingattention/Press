@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_filter :installed?
+
   def list_users seed_list = nil
     seed_list = User.select('*') unless seed_list.present?
     list_models seed_list, %w(first_name last_name email)
@@ -38,6 +40,13 @@ class ApplicationController < ActionController::Base
     where = [fields.map { |f| "#{f} like ?" }.join(" || ")]
     fields.count.times { |n| where << "%#{filter}%" }
     where
+  end
+
+  #are we installing?  If so redirect to install controller
+  def installed?
+    if Setting.installing?.present?
+      redirect_to install_index_path
+    end
   end
 
 end
