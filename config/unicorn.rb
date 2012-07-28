@@ -1,3 +1,5 @@
+# unicorn_rails -c /ruby/Press/config/unicorn.rb -E production -D
+#
 # Sample verbose configuration file for Unicorn (not Rack)
 #
 # This configuration file documents many features of Unicorn
