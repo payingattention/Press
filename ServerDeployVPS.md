@@ -38,6 +38,7 @@ Initial Server Setup
   * rvm use 1.9.3 --default
   * rvm system
 
+  * gem install bundle
   * gem install rails
   * gem install unicorn
 
