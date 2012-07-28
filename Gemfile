@@ -31,3 +31,5 @@ gem 'enum_column3'
 gem 'nokogiri'
 # Give us a possessive method on strings
 gem "possessive"
+# Unicorn
+gem "unicorn"
