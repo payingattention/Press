@@ -8,13 +8,16 @@ APP_ROOT=/ruby/Press
 
 PID=$APP_ROOT/tmp/pids/unicorn.pid
 
-#CMD="cd $APP_ROOT; bundle exec unicorn -D -c $APP_ROOT/config/unicorn.rb -E production"
+# standard
+# CMD="bundle exec unicorn -D -c $APP_ROOT/config/unicorn.rb -E production"
 
-# "bundle install --binstubs" must be run for this to work
-CMD="$APP_ROOT/bin/unicorn -D -c $APP_ROOT/config/unicorn.rb -E production"
+# binstubs version "bundle install --binstubs" must be run for this to work
+# CMD="$APP_ROOT/bin/unicorn -D -c $APP_ROOT/config/unicorn.rb -E production"
+
+# "rvm wrapper 1.9.3 ruby-1.9.3 unicorn" rvm wrapper version if using rvm and paths are getting lost.
+CMD="/usr/local/rvm/bin/ruby-1.9.3_unicorn -D -c $APP_ROOT/config/unicorn.rb -E production"
 
 AS_USER=root
-
 
 set -u
 
