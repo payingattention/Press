@@ -15,7 +15,7 @@ PID=$APP_ROOT/tmp/pids/unicorn.pid
 # CMD="$APP_ROOT/bin/unicorn -D -c $APP_ROOT/config/unicorn.rb -E production"
 
 # "rvm wrapper 1.9.3 ruby-1.9.3 unicorn" rvm wrapper version if using rvm and paths are getting lost.
-CMD="/usr/local/rvm/bin/ruby-1.9.3_unicorn -D -c $APP_ROOT/config/unicorn.rb -E production"
+CMD="/usr/local/rvm/bin/ruby-1.9.3_unicorn -D -c $APP_ROOT/config/unicorn.rb -E development"
 
 AS_USER=root
 
