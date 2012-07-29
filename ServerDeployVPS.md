@@ -11,28 +11,14 @@ Initial Server Setup
 --------------------
 
   * aptitude update
-  * aptitude install gcc git curl
-  * aptitude install build-essential openssl libreadline6 libreadline6-dev zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison
-  * aptitude install mysql-server mysql-client libmysql-ruby
-  * aptitude install nginx
+  * aptitude install gcc git curl build-essential openssl libreadline6 libreadline6-dev zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison mysql-server mysql-client libmysql-ruby nginx
 
-  * useradd ruby
-  * passwd ruby
-  * visudo {add ruby}
   * mkdir /ruby
-  * usermod -d /ruby ruby
-  * groupadd www
-  * usermod -g www ruby
-  * usermod -s /bin/bash ruby
-  * cp /root/.bashrc /ruby/.bashrc
-  * cp /root/.profile /ruby/.profile
   * cd /ruby
-  * chown ruby:www .*
 
-  * sudo curl -L https://get.rvm.io | bash -s stable --ruby
-  # * sudo curl -L https://get.rvm.io | bash -s stable --rails
+  * sudo curl -L https://get.rvm.io | bash -s stable --ruby --rails
 
-  * source /usr/local/rvm/scripts/rvm {or where ever it says to do it}
+  * source /usr/local/rvm/scripts/rvm
   * rvm user all
   * rvm install 1.9.3
   * rvm use 1.9.3 --default
@@ -42,10 +28,7 @@ Initial Server Setup
   * gem install rails
   * gem install unicorn
 
-
-  * su ruby
   * git clone {repo}
-  * exit
 
 
 
