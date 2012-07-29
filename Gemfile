@@ -33,3 +33,5 @@ gem 'nokogiri'
 gem "possessive"
 # Unicorn
 gem "unicorn"
+# Capistrano
+gem "capistrano"
