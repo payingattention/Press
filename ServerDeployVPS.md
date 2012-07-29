@@ -20,12 +20,30 @@ Initial Server Setup
 
   * source /usr/local/rvm/scripts/rvm
 
+  * git clone {repo}
+
+Mysql Database Setup
+--------------------
+
+  * mysql -u root -p
+  {Enter password you used during install}
+
+  * create database press_production;
+  * grant ALL on press_production.* to www@localhost;
+  * set password for www@localhost = password('www');
+  * flush privileges;
+  * exit
+
+
+
+
   * gem install unicorn
 
-  * git clone {repo}
 
   * cd /etc/nginx
   * ln -s /ruby/Press/config/nginx.conf .
+
+
 
 
 
