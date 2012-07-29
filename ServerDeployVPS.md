@@ -5,7 +5,8 @@ The following is a line by line example of how I am deploying my Media Temple VE
 
 It may or may not be correct in a lot of ways, as I am not a sever admin.   This file is as much for me as for anyone else.
 
-Get a standard $30 Media Temple VE server with Ubuntu 11.04 installed on it and ssh into the server.
+Get a standard $30 Media Temple VE server with Ubuntu 10.04 installed on it and ssh into the server.
+Note: Ubuntu 11 wasn't playing nice for some reason
 
 Initial Server Setup
 --------------------
@@ -34,38 +35,14 @@ Mysql Database Setup
   * flush privileges;
   * exit
 
+More server settings
+------------------
   * cd /etc/nginx/sites-enabled
   * ln -s /ruby/Press/config/nginx.conf Press
 
   * cd /etc/init.d
   * ln -s /ruby/Press/config/unicorn_init.sh Unicorn
+  * chmod +x /ruby/Press/config/unicorn_init.sh
 
-
-
-Set up VIM to not suck
-----------------------
-
-  * vim ~/.vimrc
-  <pre>
-  :set nocompatible
-  :set term=ansi
-  </pre>
-
-
-Config Nginx
-------------
-
-  * vim /etc/init/nginx.conf
-  <pre>
-  description "Nginx HTTP Server"
-  start on filesystem
-  stop on runlevel [!2345]
-  respawn
-  exec /usr/sbin/nginx -g "daemon off;"
-  </pre>
-
-  * vim /etc/nginx/nginx.conf
-  <pre>
-  { use http://unicorn.bogomips.org/examples/nginx.conf }
-  </pre>
+  * sudo /usr/sbin/update-rc.d -f unicorn defaults
 
