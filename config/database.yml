@@ -14,8 +14,8 @@ development:
   reconnect: false
   database: press_development
   pool: 5
-  username: root
-  password:
+  username: root                # change these to whatever it is
+  password:                     # change these to whatever it is
   socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
@@ -37,6 +37,6 @@ production:
   reconnect: false
   database: press_production
   pool: 5
-  username: root
-  password:
-  socket: /tmp/mysql.sock
+  username: root                # change these to whatever it is
+  password:                     # change these to whatever it is
+  socket: /var/run/mysqld/mysqld.sock

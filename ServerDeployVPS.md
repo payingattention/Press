@@ -11,7 +11,7 @@ Initial Server Setup
 --------------------
 
   * aptitude update
-  * aptitude install gcc git curl build-essential openssl libreadline6 libreadline6-dev zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison mysql-server mysql-client libmysql-ruby nginx
+  * aptitude install gcc git curl build-essential openssl libreadline6 libreadline6-dev zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison mysql-server mysql-client libmysql-ruby libmysqlclient-dev nginx nodejs
 
   * mkdir /ruby
   * cd /ruby
@@ -19,16 +19,13 @@ Initial Server Setup
   * sudo curl -L https://get.rvm.io | bash -s stable --ruby --rails
 
   * source /usr/local/rvm/scripts/rvm
-  * rvm user all
-  * rvm install 1.9.3
-  * rvm use 1.9.3 --default
-  * rvm system
 
-  * gem install bundle
-  * gem install rails
   * gem install unicorn
 
   * git clone {repo}
+
+  * cd /etc/nginx
+  * ln -s /ruby/Press/config/nginx.conf .
 
 
 
