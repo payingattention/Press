@@ -12,7 +12,7 @@ CMD="cd $APP_ROOT; bundle exec unicorn -D -c $APP_ROOT/config/unicorn.rb -E prod
 # "bundle install --binstubs" version
 #CMD="$APP_ROOT/bin/unicorn -D -c $APP_ROOT/config/unicorn.rb -E production"
 
-#AS_USER=
+AS_USER=root
 
 
 set -u

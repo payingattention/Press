@@ -37,7 +37,8 @@ Mysql Database Setup
   * cd /etc/nginx/sites-enabled
   * ln -s /ruby/Press/config/nginx.conf Press
 
-
+  * cd /etc/init.d
+  * ln -s /ruby/Press/config/unicorn_init.sh Unicorn
 
 
 
