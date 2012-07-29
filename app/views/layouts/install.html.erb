@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RubyPress Installtion</title>
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+  <![endif]-->
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+</head>
+<body role='admin'>
+
+<div class='navbar navbar-fixed-top'>
+  <div class='navbar-inner'>
+    <div class='container'>
+      <%= link_to "RubyPress Installation", admin_index_path, :class => "brand" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class='container' role="main">
+
+  <!-- @TODO This should be a view helper -->
+  <% if @breadcrumbs.present? || @filter.present? %>
+    <div class='container'>
+      <div class='row'>
+        <div class='span12'>
+          <ul class='breadcrumb'>
+            <% if @breadcrumbs.present? %>
+              <% active = @breadcrumbs.pop %>
+              <% @breadcrumbs.each do |b| %>
+                <li><%= b %> <span class='divider'>/</span></li>
+              <% end %>
+              <li class='active'><%= active %></li>
+            <% end %>
+            <% if @category.present? %>
+              <li>:: Categorized by "<%= @category.capitalize %>" <a href="<%= url_for :filter => @filter, :page => @pagination_current_page %>"><i class="icon-remove-sign"></i></a></li>
+            <% end %>
+            <% if @tag.present? %>
+              <li>:: Tagged as "<%= @tag.capitalize %>" <a href="<%= url_for :filter => @filter, :page => @pagination_current_page %>"><i class="icon-remove-sign"></i></a></li>
+            <% end %>
+            <% if @filter.present? %>
+              <li>:: Filtered by "<span class="highlight"><%= @filter %></span>" <a href="<%= url_for :category => @category, :tag => @tag, :page => @pagination_current_page %>"><i class="icon-remove-sign"></i></a></li>
+            <% end %>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+
+  <!-- @TODO This should be a view helper -->
+  <div class='row'>
+    <div class='span12'>
+      <% if flash[:success] || flash[:notice] %>
+        <div class='alert alert-success'>
+          <a class="close" data-dismiss='alert'>&times;</a>
+          <strong>Success!</strong> <%= flash[:success] %> <%= flash[:notice] %>
+        </div>
+      <% end %>
+
+      <% if flash[:error] %>
+        <div class='alert alert-error'>
+          <a class="close" data-dismiss='alert'>&times;</a>
+          <strong>Error!</strong> <%= flash[:error] %>
+        </div>
+      <% end %>
+
+      <% if flash[:info] %>
+        <div class='alert alert-info'>
+          <a class="close" data-dismiss='alert'>&times;</a>
+          <strong>Information!</strong> <%= flash[:info] %>
+        </div>
+      <% end %>
+
+      <% if flash[:warning] %>
+        <div class='alert'>
+          <a class="close" data-dismiss='alert'>&times;</a>
+          <strong>Warning!</strong> <%= flash[:warning] %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <%= yield %>
+
+</div>
+
+<div class='navbar navbar-fixed-bottom bottombar'>
+  <div class='navbar-inner bottombar-inner'>
+    <div class='container'>
+      <%= link_to "RubyPress", admin_index_path, :class => "brand" %>
+      <div class='nav-collapse'>
+        <ul class='nav'>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
