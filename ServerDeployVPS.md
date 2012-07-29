@@ -34,14 +34,8 @@ Mysql Database Setup
   * flush privileges;
   * exit
 
-
-
-
-  * gem install unicorn
-
-
-  * cd /etc/nginx
-  * ln -s /ruby/Press/config/nginx.conf .
+  * cd /etc/nginx/sites-enabled
+  * ln -s /ruby/Press/config/nginx.conf Press
 
 
 

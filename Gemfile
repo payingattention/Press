@@ -32,6 +32,6 @@ gem 'nokogiri'
 # Give us a possessive method on strings
 gem "possessive"
 # Unicorn
-# gem "unicorn"
+gem "unicorn"
 # Capistrano
 # gem "capistrano"
