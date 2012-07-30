@@ -21,6 +21,13 @@ Press::Application.routes.draw do
     namespace :settings do
       resources :content, :only => [ :index, :create ]
     end
+
+    # Site tools
+    resources :tools, :only => [ :index ]
+    namespace :tools do
+      resources :software_update, :only => [ :index ]
+    end
+
   end
 
   # Installation Routes -- @TODO How do we delete this routing entirely?
@@ -29,6 +36,7 @@ Press::Application.routes.draw do
       post :create_owner, :path => "create_owner"
     end
   end
+
 
   # Below I am adding some custom routes to match what wordpress does.
   # I don't know if this is the correct way to add these or not, but they work
