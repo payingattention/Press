@@ -3,14 +3,11 @@
 <div class='row'>
   <div class='span12'>
 
-    <%= @versionInformation %>
-
-    <% if @localVersionHash != @remoteVersionHash %>
+    <% if @localVersion != @remoteVersion %>
 
       <div class='alert alert-info'>
         <p>It appears there is an update! </p>
-        <p>Local version: <%= @localVersion %></p>
-        <p>Latest version: <strong><%= @remoteVersion %></strong></p>
+        <p>Local & Latest version: <strong><%= @localVersion %></strong></p>
       </div>
 
       <% if @updateLog.present? %>
@@ -24,7 +21,7 @@
       <div class='alert alert-success'>
         <p><strong>It appears everything is up to date!</strong></p>
         <p>Local version: <%= @localVersion %></p>
-        <p>Git Commit Hash: <%= @localVersionHash %></p>
+        <p>Latest version: <%= @remoteVersion %></p>
       </div>
 
     <% end %>
