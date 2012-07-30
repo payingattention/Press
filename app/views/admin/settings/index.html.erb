@@ -3,7 +3,42 @@
 <div class='row'>
   <div class='span12'>
 
+    <table class='table table-striped'>
+      <thead>
+      <tr>
+        <th>Setting Name</th>
+        <th>Value</th>
+        <th class='span2 center'>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @settings.each do |setting| %>
+        <% unless setting.key == 'maintenance' %>
+          <tr>
+            <td><strong><%= setting.label %></strong></td>
+            <td><%= setting.value %></td>
+            <td class='span2 center'>
+              <%= link_to 'Edit', {}, :class => 'btn btn-mini' %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+      </tbody>
+    </table>
 
+    <div class="btn-toolbar">
+
+      <%= pagination %>
+
+    </div>
 
   </div>
+</div>
+
+<div class='alert alert-danger'>
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>@TODO for this page</strong><br /><br />
+  <pre>
+    * Add settings categories/areas
+    * Each setting should have a custom editor based on type, description..etc stored in db</pre>
 </div>

@@ -5,6 +5,7 @@ class Admin::SettingsController < ApplicationController
   layout 'admin'
 
   def index
+    @settings = list_models Setting
   end
 
 end
