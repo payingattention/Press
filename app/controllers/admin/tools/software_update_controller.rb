@@ -12,7 +12,7 @@ class Admin::Tools::SoftwareUpdateController < ApplicationController
     @remoteVersion = "[Not sure the correct way to get this]"
     @updateLog = %x{git log #{@localVersionHash}..HEAD --oneline}
 
-
+    @test = %x{curl https://raw.github.com/palamedes/Press/master/VERSION}
 
   end
 
