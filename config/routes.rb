@@ -24,10 +24,9 @@ Press::Application.routes.draw do
   end
 
   # Installation Routes -- @TODO How do we delete this routing entirely?
-  resources :install, :only => [ :index, :create_owner, :complete ] do
+  resources :install, :only => [ :index, :create_owner ] do
     collection do
       post :create_owner, :path => "create_owner"
-      get :complete,  :path => "complete"
     end
   end
 
