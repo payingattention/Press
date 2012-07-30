@@ -12,7 +12,7 @@ Initial Server Setup
 --------------------
 
   * aptitude update
-  * aptitude install gcc git curl build-essential openssl libreadline6 libreadline6-dev zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison mysql-server mysql-client libmysql-ruby libmysqlclient-dev nginx nodejs
+  * aptitude install gcc git curl libcurl4-gnutls-dev build-essential openssl libreadline6 libreadline6-dev zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison mysql-server mysql-client libmysql-ruby libmysqlclient-dev nginx nodejs
 
   * mkdir /ruby
   * cd /ruby
