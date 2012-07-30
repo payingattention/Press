@@ -44,25 +44,18 @@
           <li><a href="<%= url_for root_path %>"><i class="icon-home"></i></a></li>
           <li class='divider-arrow'></li>
         </ul>
-        
-        <ul class='nav pull-right'>
-          <li class='divider-vertical'></li>
-          <li class='dropdown'><a href="#" class='dropdown-toggle' data-toggle='dropdown'>Temporary <b class="caret"></b></a>
-            <ul class='dropdown-menu'>
-              <li><a href='<%= url_for :controller => 'admin/posts', :action => 'new' %>'>
-                <i class='icon-plus'></i>
-                New Post</a></li>
-              <li class='divider'></li>
-              <li><a href='<%= url_for :controller => 'admin/users', :action => 'new' %>'>
-                <i class='icon-plus'></i>
-                New User</a></li>
-            </ul>
-          </li>
-        </ul>
+
       </div>
     </div>
   </div>
 
+</div>
+
+<div class='container' role="main" xmlns="http://www.w3.org/1999/html">
+  <div class='alert alert-danger'>
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Notice:</strong> This blogging system is nowhere near ready for prime time.  Don't use it yet.
+  </div>
 </div>
 
 <%= yield %>
@@ -70,10 +63,15 @@
 <div class='container' role="main" xmlns="http://www.w3.org/1999/html">
   <div class='alert alert-danger'>
     <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>@TODO for this page</strong><br /><br />
+    <strong>@TODO for this page</strong> -- Lots of these todo lists throughout the site.. click the &times; to the right to hide them.<br /><br />
     <pre>
       * Get Site name to display based on settings
       * Show sub site name blurb based on settings
+      * Redo all of the breadcrumbs site wide per other site, to suck less
+      * Lots of refactoring to be done .. wow..
+      * Sort out how to do push/pull git hub integration with content in MD file format -- get out of mysql entirely?
+      * Create nav system for adding panels designed in admin area
+      * Allow owner to define header links (navigation)
 
       * ...and lots more... </pre>
   </div>
