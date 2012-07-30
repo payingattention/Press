@@ -6,7 +6,6 @@ gem 'rails', '3.2.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
-gem 'json'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -17,8 +16,11 @@ group :assets do
   gem 'therubyracer', :platform => :ruby
   gem 'uglifier', '>= 1.0.3'
 end
+# Twitter bootstrap baby
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
-
+# json
+gem 'json'
+# Not sure if this is needed or not but it was trying to load 0.10.0 which was breaking me
 gem 'raindrops', '~> 0.8.0'
 # jQuery is the win
 gem 'jquery-rails'
@@ -34,5 +36,3 @@ gem 'nokogiri'
 gem "possessive"
 # Unicorn
 gem "unicorn"
-# Capistrano
-# gem "capistrano"

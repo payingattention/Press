@@ -151,6 +151,7 @@ DEPENDENCIES
   nokogiri
   possessive
   rails (= 3.2.3)
+  raindrops (~> 0.8.0)
   sass-rails (~> 3.2.3)
   therubyracer
   twitter-bootstrap-rails!
