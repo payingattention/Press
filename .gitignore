@@ -17,5 +17,11 @@
 # Ignore our database.yml as it's different per server
 /config/database.yml
 
-#Not sure if this is something we want in the repo or not.
+# Not sure if this is something we want in the repo or not.
 /Gemfile.lock
+
+# Remove bin file
+/bin
+
+# Remove Assets that get generated
+/public/assets
