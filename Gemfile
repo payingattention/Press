@@ -19,6 +19,7 @@ group :assets do
 end
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
+gem 'raindrops', '~> 0.8.0'
 # jQuery is the win
 gem 'jquery-rails'
 # Devise for auth goodness
