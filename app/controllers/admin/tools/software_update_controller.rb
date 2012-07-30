@@ -11,6 +11,9 @@ class Admin::Tools::SoftwareUpdateController < ApplicationController
     @localVersion = %x{cat VERSION}
     @remoteVersion = "[Not sure the correct way to get this]"
     @updateLog = %x{git log #{@localVersionHash}..HEAD --oneline}
+
+
+
   end
 
 end
