@@ -1,0 +1,22 @@
+<% @breadcrumbs = [link_to('Site Tools', {:action => 'index'}), 'Software Update'] %>
+
+<div class='row'>
+  <div class='span12'>
+
+    <% if @localVersion != @remoteVersion %>
+
+      <div class='alert alert-info'>
+        It appears there is an update! <br /><br />
+        You're running version: <%= @localVersion %> and the server has <%= @removeVersion =>..
+      </div>
+
+    <% else %>
+
+      <div class='alert'>
+        It appears everything is up to date!
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
