@@ -36,3 +36,5 @@ gem 'nokogiri'
 gem "possessive"
 # Unicorn
 gem "unicorn"
+# Curb (libcurl bindings)
+gem "curb"
