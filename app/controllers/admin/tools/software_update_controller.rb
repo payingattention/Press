@@ -1,9 +1,4 @@
-
-class Admin::Tools::SoftwareUpdateController < ApplicationController
-
-  skip_before_filter :installed?
-
-  layout 'admin'
+class Admin::Tools::SoftwareUpdateController < AdminController
 
   def index
 

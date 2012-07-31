@@ -1,8 +1,4 @@
-class Admin::UsersController < ApplicationController
-
-  before_filter :authenticate_user!
-
-  layout 'admin'
+class Admin::UsersController < AdminController
 
   # LIST
   def index

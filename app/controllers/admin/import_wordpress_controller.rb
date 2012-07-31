@@ -1,9 +1,5 @@
-class Admin::ImportWordpressController < ApplicationController
+class Admin::ImportWordpressController < AdminController
   require 'nokogiri'
-
-  before_filter :authenticate_user!
-
-  layout 'admin'
 
   def new
   end

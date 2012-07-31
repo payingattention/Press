@@ -1,8 +1,4 @@
-class Admin::PostsController < ApplicationController
-
-  before_filter :authenticate_user!
-
-  layout 'admin'
+class Admin::PostsController < AdminController
 
   # LIST -- Shows a list of posts
   def index

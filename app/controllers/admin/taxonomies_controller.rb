@@ -1,8 +1,4 @@
-class Admin::TaxonomiesController < ApplicationController
-
-  before_filter :authenticate_user!
-
-  layout 'admin'
+class Admin::TaxonomiesController < AdminController
 
   # GET /admin/taxonomies
   # GET /admin/taxonomies.json

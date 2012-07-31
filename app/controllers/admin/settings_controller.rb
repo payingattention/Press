@@ -1,8 +1,4 @@
-class Admin::SettingsController < ApplicationController
-
-  before_filter :authenticate_user!
-
-  layout 'admin'
+class Admin::SettingsController < AdminController
 
   def index
     @settings = list_models Setting
