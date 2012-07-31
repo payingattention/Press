@@ -25,4 +25,12 @@ class User < ActiveRecord::Base
     # Displayname, IP, User ID if user, Email, URL
   end
 
+  def fullname
+    first_name + ' ' + last_name
+  end
+
+  def name
+    display_name
+  end
+
 end
