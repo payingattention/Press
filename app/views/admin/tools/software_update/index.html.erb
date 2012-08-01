@@ -11,12 +11,6 @@
         <p>Latest version: <strong><%= @remoteVersion %></strong></p>
       </div>
 
-      <% if @updateLog.present? %>
-        <pre><%= @updateLog %></pre>
-      <% else %>
-        <pre>You're ahead of master (editor?)</pre>
-      <% end %>
-
     <% else %>
 
       <div class='alert alert-success'>
