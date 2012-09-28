@@ -46,6 +46,7 @@ class Admin::PostsController < AdminController
   def create
     # Instance new object
     @post = Post.new params[:post]
+    @post.user_id = current_user
     # Save object
     respond_to do |format|
       if @post.save
