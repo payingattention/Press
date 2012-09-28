@@ -25,7 +25,11 @@ Press::Application.routes.draw do
     # Site tools
     resources :tools, :only => [ :index ]
     namespace :tools do
-      resources :software_update, :only => [ :index ]
+      resources :software_update, :only => [ :index ] do
+        collection do
+          get :upgrade, :path => "upgrade"
+        end
+      end
     end
 
   end
