@@ -6,6 +6,7 @@
 // ----------------------------------------------------------------------------
 myMarkdownSettings = {
     nameSpace:          'markdown', // Useful to prevent multi-instances CSS conflict
+    resizeHandle:       false,
     previewParserPath:  '~/sets/markdown/preview.php',
     onShiftEnter:       {keepDefault:false, openWith:'\n\n'},
     markupSet: [

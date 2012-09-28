@@ -11,6 +11,11 @@
   <script type="text/javascript">
     $(document).ready(function() {
       $(".markitup").markItUp(myMarkdownSettings);
+      $(".markItUpContainer").each(function(i,e) {
+        $(e).children('textarea').each(function(index,obj) {
+          $(obj).css('width', $(e).width() - 63);
+        })
+      });
     });
   </script>
   <!-- END: Markitup text editor -->
