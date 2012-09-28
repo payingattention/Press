@@ -16,7 +16,9 @@
           $(obj).css('width', $(e).width() - 63);
         })
       });
+      AnyTime.picker('anytime', { format: "%M %d, %z @ %h:%i%p" });
     });
+
   </script>
   <!-- END: Markitup text editor -->
   <%= csrf_meta_tags %>

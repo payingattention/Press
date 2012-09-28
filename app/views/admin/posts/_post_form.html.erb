@@ -37,6 +37,23 @@
         ], @post.state), :class => 'span3') %>
       </div>
     </div>
+    <div class='control-group'>
+      <label class='checkbox'>
+        <%= f.check_box :is_sticky %>
+        Is Sticky?
+      </label>
+    </div>
+    <div class='control-group'>
+      <label class='checkbox'>
+        <%= f.check_box :allow_comments %>
+        Allow Comments?
+      </label>
+    </div>
+    <div class='control-group'>
+      <div class='controls'>
+        <%= f.text_field :go_live, :class => 'span3', :id => 'anytime', :placeholder => @post.go_live.strftime("%B %e, %Y @ %I:%M%p"), :value => @post.go_live.strftime("%B %e, %Y @ %I:%M%p") %>
+      </div>
+    </div>
   </div>
 </fieldset>
 
