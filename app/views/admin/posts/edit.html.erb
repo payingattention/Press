@@ -1,9 +1,8 @@
 <% @breadcrumbs = [link_to('Posts Editor', {:action => 'index'}), 'Edit Post'] %>
 
 <div class='row'>
-  <div class='span12'>
 
-    <%= form_for [:admin, @post], :html => { :class => 'form-horizontal' } do |f| %>
+    <%= form_for [:admin, @post], :html => { :class => '' } do |f| %>
 
         <%= render :partial => 'post_form', :locals => {
                 :f => f,
@@ -13,5 +12,4 @@
 
     <% end %>
 
-  </div>
 </div>

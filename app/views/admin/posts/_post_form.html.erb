@@ -1,26 +1,31 @@
 
-  <fieldset>
+<fieldset>
+  <div class='span12'>
     <legend><%= form_legend %></legend>
+  </div>
+
+  <div class='span9'>
     <div class=''><%= f.text_area :content, :size => '50x8', :class => 'input-xlarge markitup' %></div>
 
     <div class='form-actions'>
       <%= submit_tag submit_label, :class => 'btn btn-primary' %>
       <%= link_to "Cancel", {:action => 'index'}, :class => 'btn' %>
     </div>
+  </div>
 
-  </fieldset>
+  <div class='span3'>
+    <div class='control-group'>
+      <div class='controls'><%= f.text_field :title, :class => 'span3', :placeholder => 'Enter title here' %></div>
+    </div>
+    <div class='control-group'>
+      <div class='controls'><%= f.text_field :seo_url, :class => 'span3', :placeholder => "SEO Url" %></div>
+    </div>
+    <hr />
 
-  <%
-#    <ul class="nav nav-tabs">
-#      <li class='active'><a href="#content" data-toggle='tab'>Content</a></li>
-#      <li class='dropdown'><a class='dropdown-toggle' data-toggle='dropdown' href="#">Settings <b class="caret"></b></a>
-#        <ul class='dropdown-menu'>
-#          <li><a href="#settings" data-toggle='tab'>Standard Settings</a></li>
-#          <li><a href="#administration" data-toggle='tab'>Administration Settings</a></li>
-#        </ul>
-#      </li>
-#    </ul>
-#    <div class='tab-content'>
+  </div>
+</fieldset>
+
+<%
 #
 #      <div class='tab-pane active' id='content'>
 #
