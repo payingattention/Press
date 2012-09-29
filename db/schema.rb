@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(:version => 20120707155525) do
     t.integer  "user_id",                                                                               :null => false
     t.integer  "post_id"
     t.text     "content"
-    t.string   "title"
     t.string   "seo_url"
     t.string   "password",       :limit => 40
     t.enum     "object_type",    :limit => [:post, :page, :comment, :message, :ad], :default => :post

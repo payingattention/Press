@@ -17,7 +17,7 @@
     <div class='control-group<%= " error" if @post.errors.has_key?(:seo_url) %>'>
       <div class='controls'><%= f.text_field :seo_url, :class => 'span3', :placeholder => "SEO Url" %></div>
       <% if @post.errors.has_key?(:seo_url) %>
-        <span class='help-inline'>SEO Url <%= @post.errors.get(:seo_url).first %></span>
+        <span class='help-inline'><%= @post.errors.get(:seo_url).first %></span>
       <% end %>
     </div>
     <hr />
