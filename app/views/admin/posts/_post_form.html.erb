@@ -14,14 +14,29 @@
   </div>
 
   <div class='span3'>
+
+    <h6>SEO Url</h6>
     <div class='control-group<%= " error" if @post.errors.has_key?(:seo_url) %>'>
       <div class='controls'><%= f.text_field :seo_url, :class => 'span3', :placeholder => "SEO Url" %></div>
       <% if @post.errors.has_key?(:seo_url) %>
         <span class='help-inline'><%= @post.errors.get(:seo_url).first %></span>
       <% end %>
     </div>
+
+    <h6>Content Type</h6>
+    <div class='control-group'>
+      <div class='control'>
+        <%= select_tag('post[object_type]', options_for_select([
+          ['Post', :post],
+          ['Page', :page],
+          ['Message', :message],
+          ['Ad', :ad]
+        ], @post.object_type), :class => 'span3') %>
+      </div>
+    </div>
+
     <hr />
-    <h3>Publish Options<h3>
+    <h6>Publication Options</h6>
     <div class='control-group'>
       <div class='control'>
         <%= select_tag('post[state]', options_for_select([
