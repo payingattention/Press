@@ -38,3 +38,5 @@ gem "possessive"
 gem "unicorn"
 # Curb (libcurl bindings)
 gem "curb"
+# Redcarpet Markdown to HTML converter
+gem "redcarpet"
