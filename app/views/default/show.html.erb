@@ -1,3 +1,5 @@
+<% md = Redcarpet::Markdown.new(Redcarpet::Render::XHTML, :autolink => true, :space_after_headers => true) %>
+
 <div class='container' role="main">
 
 <%= render_breadcrumbs :post => @post, :filter => @query %>
@@ -6,22 +8,30 @@
     <div class='span9'>
 
       <div class='content-panel'>
-        <% title = @post.title %>
-        <% title = title.gsub(/(#{@query})/i, '<span class="highlight">\1</span>') if @query.present? %>
-        <h3><%= title.html_safe %></h3>
-        <div class="navbar">
-          <div class="navbar-inner">
-            <ul class="nav">
-              <li><a href="/"><i class="icon-calendar"></i><%= @post.go_live.strftime("%B %e, %Y @ %l:%M%P") %></a></li>
-              <li><a href="/"><i class="icon-user"></i><%= @post.user.display_name %></a></li>
-              <li class='pull-right'><a href="\#comments"><i class="icon-comment"></i>Comments (<%= @post.comments.count %>)</a></li>
-            </ul>
-          </div>
-        </div>
 
-        <% content = @post.content.gsub(/<!--more-->/,'') %>
-        <% content = content.gsub(/(#{@query})/i, '<span class="highlight">\1</span>') if @query.present? %>
-        <%= simple_format(content) %>
+        <% header,tease = @post.content.split(/\* \* \*/) %>
+        <% header.gsub!(/\(\)/, "("+url_for('/' + @post.seo_url + '/' + url_query)+")" )%>
+        <% header = md.render header %>
+        <%= header.html_safe %>
+
+        <% if tease.present? %>
+          <div class="navbar upper">
+            <div class="navbar-inner">
+              <ul class="nav">
+                <li><a href="/"><i class="icon-calendar"></i><%= @post.go_live.strftime("%B %e, %Y @ %l:%M%P") %></a></li>
+                <li><a href="/"><i class="icon-user"></i><%= @post.user.display_name %></a></li>
+                <li class='pull-right'><a href="<%= url_for '/' + @post.seo_url + '/' + url_query %>"><i class="icon-file"></i>Link</a></li>
+                <li class='pull-right'><a href="<%= url_for '/' + @post.seo_url + '/' + url_query %>#comments"><i class="icon-comment"></i>Comments (<%= @post.comments.count %>)</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <% tease.gsub!(/- - -/,'') %>
+          <% tease = md.render tease %>
+          <% tease = tease.gsub(/(#{@query})/i, '<span class="highlight">\1</span>') if @query.present? %>
+          <%= tease.html_safe %>
+
+        <% end %>
 
         <div class="navbar">
           <div class="navbar-inner">
