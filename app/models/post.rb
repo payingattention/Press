@@ -16,11 +16,6 @@ class Post < ActiveRecord::Base
   # Add validation
   validates :go_live, :presence => true
 
-  # Active Record Callbacks
-  before_validation(:on => :create) do
-    self.go_live = DateTime.now unless self.go_live.present?
-  end
-
   # Define some scoped helpers
   scope :ads, where(:object_type => :ad)
   scope :posts, where(:object_type => :post)

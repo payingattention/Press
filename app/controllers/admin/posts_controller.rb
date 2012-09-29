@@ -34,8 +34,7 @@ class Admin::PostsController < AdminController
     # Map all users out to a name, id pair for the select box
     @all_users = User.all.map { |a| [a.display_name, a.id] }
     # Instance our post object to set form defaults
-    @post = Post.new
-    @post.go_live = DateTime.now()
+    @post = Post.new :go_live => DateTime.now
 
     respond_to do |format|
       format.html # new.html.erb
