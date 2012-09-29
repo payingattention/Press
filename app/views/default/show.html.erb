@@ -11,8 +11,7 @@
 
         <% header,tease = @post.content.split(/\* \* \*/) %>
         <% header.gsub!(/\(\)/, "("+url_for('/' + @post.seo_url + '/' + url_query)+")" )%>
-        <% header = md.render header %>
-        <%= header.html_safe %>
+        <%= render_markdown header, :query => @query %>
 
         <% if tease.present? %>
           <div class="navbar upper">
@@ -27,9 +26,7 @@
           </div>
 
           <% tease.gsub!(/- - -/,'') %>
-          <% tease = md.render tease %>
-          <% tease = tease.gsub(/(#{@query})/i, '<span class="highlight">\1</span>') if @query.present? %>
-          <%= tease.html_safe %>
+          <%= render_markdown tease, :query => @query %>
 
         <% end %>
 
