@@ -5,39 +5,51 @@
 .markdown .markItUpButton {
     background-image:url(/assets/markitup/icons.png);
 }
-.markdown .markItUpButton1 {
+.markdown .markItUpButton.headline {
     background-position: -560px 0px;
 }
-.markdown .markItUpButton2 {
+.markdown .markItUpButton.aboutbar {
+    background-position: -650px 0px;
+}
+.markdown .markItUpButton.morebar {
+    background-position: -200px 0px;
+}
+.markdown .markItUpButton.sectionhead {
     background-position: -583px 0px;
 }
-.markdown .markItUpButton3 {
+.markdown .markItUpButton.subbold {
     background-position: -607px 0px;
 }
-.markdown .markItUpButton4 {
+.markdown .markItUpButton.admincomment {
+    background-position: -673px 0px;
+}
+.markdown .markItUpButton.bold {
     background-position: 0px 0px;
 }
-.markdown .markItUpButton5 {
+.markdown .markItUpButton.italic {
     background-position: -19px 0px;
 }
-.markdown .markItUpButton6 {
+.markdown .markItUpButton.strikethrough {
+    background-position: -540px 0px;
+}
+.markdown .markItUpButton.bulletedlist{
     background-position: -39px 0px;
 }
-.markdown .markItUpButton7 {
+.markdown .markItUpButton.numericlist {
     background-position: -59px 0px;
 }
-.markdown .markItUpButton8 {
+.markdown .markItUpButton.externalimage {
+    background-position: -179px 0px;
 }
-.markdown .markItUpButton9 {
+.markdown .markItUpButton.link {
+    background-position: -159px 0px;
 }
-.markdown .markItUpButton10 {
+.markdown .markItUpButton.quotes {
+    background-position: -694px 0px;
 }
-.markdown .markItUpButton11 {
+.markdown .markItUpButton.codeblock {
+    background-position: -629px 0px;
 }
-.markdown .markItUpButton13 {
-}
-.markdown .markItUpButton14 {
-}
-.markdown .preview a {
-	background-image:url(/assets/markitup/preview.png);
+.markdown .markItUpButton.preview {
+    background-position: -715px 0px;
 }
