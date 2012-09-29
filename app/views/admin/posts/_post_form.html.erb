@@ -14,12 +14,6 @@
   </div>
 
   <div class='span3'>
-    <div class='control-group<%= " error" if @post.errors.has_key?(:title) %>'>
-      <div class='controls'><%= f.text_field :title, :class => 'span3', :placeholder => 'Enter title here' %></div>
-      <% if @post.errors.has_key?(:title) %>
-        <span class='help-inline'>Title <%= @post.errors.get(:title).first %></span>
-      <% end %>
-    </div>
     <div class='control-group<%= " error" if @post.errors.has_key?(:seo_url) %>'>
       <div class='controls'><%= f.text_field :seo_url, :class => 'span3', :placeholder => "SEO Url" %></div>
       <% if @post.errors.has_key?(:seo_url) %>

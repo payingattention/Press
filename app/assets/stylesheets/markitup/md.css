@@ -2,53 +2,42 @@
 // markItUp!
 // By Jay Salvat - http://markitup.jaysalvat.com/
 // ------------------------------------------------------------------*/
-.markdown .markItUpButton1 a {
-	background-image:url(/assets/markitup/h1.png); 
+.markdown .markItUpButton {
+    background-image:url(/assets/markitup/icons.png);
 }
-.markdown .markItUpButton2 a {
-	background-image:url(/assets/markitup/h2.png); 
+.markdown .markItUpButton1 {
+    background-position: -560px 0px;
 }
-.markdown .markItUpButton3 a {
-	background-image:url(/assets/markitup/h3.png); 
+.markdown .markItUpButton2 {
+    background-position: -583px 0px;
 }
-.markdown .markItUpButton4 a {
-	background-image:url(/assets/markitup/h4.png); 
+.markdown .markItUpButton3 {
+    background-position: -607px 0px;
 }
-.markdown .markItUpButton5 a {
-	background-image:url(/assets/markitup/h5.png); 
+.markdown .markItUpButton4 {
+    background-position: 0px 0px;
 }
-.markdown .markItUpButton6 a {
-	background-image:url(/assets/markitup/h6.png); 
+.markdown .markItUpButton5 {
+    background-position: -19px 0px;
 }
-
-.markdown .markItUpButton7 a {
-	background-image:url(/assets/markitup/bold.png);
+.markdown .markItUpButton6 {
+    background-position: -39px 0px;
 }
-.markdown .markItUpButton8 a {
-	background-image:url(/assets/markitup/italic.png);
+.markdown .markItUpButton7 {
+    background-position: -59px 0px;
 }
-
-.markdown .markItUpButton9 a {
-	background-image:url(/assets/markitup/list-bullet.png);
+.markdown .markItUpButton8 {
 }
-.markdown .markItUpButton10 a {
-	background-image:url(/assets/markitup/list-numeric.png);
+.markdown .markItUpButton9 {
 }
-
-.markdown .markItUpButton11 a {
-	background-image:url(/assets/markitup/picture.png); 
+.markdown .markItUpButton10 {
 }
-.markdown .markItUpButton12 a {
-	background-image:url(/assets/markitup/link.png);
+.markdown .markItUpButton11 {
 }
-
-.markdown .markItUpButton13 a	{
-	background-image:url(/assets/markitup/quotes.png);
+.markdown .markItUpButton13 {
 }
-.markdown .markItUpButton14 a	{
-	background-image:url(/assets/markitup/code.png);
+.markdown .markItUpButton14 {
 }
-
 .markdown .preview a {
 	background-image:url(/assets/markitup/preview.png);
 }

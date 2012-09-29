@@ -4,7 +4,6 @@ class CreatePosts < ActiveRecord::Migration
       t.references :user, :null => false      # User who posted
       t.references :post                      # Parent post if not a post
       t.text      "content"                   # Text blob
-      t.string    "title"                     # Title if needed
       t.string    "seo_url"                   # Perma link to this object
       t.string    "password", :limit => 40    # PW if set
       t.enum      "object_type", :limit => [:post, :page, :comment, :message, :ad], :default => :post # Type of object, post, page, comment, message

@@ -41,7 +41,4 @@ class Post < ActiveRecord::Base
     posts.all :conditions => { :object_type => :comment }
   end
 
-  # Parse Content goes through the newly created object and pulls out the title, seo etc and sets
-  # the object before validation happens and before we save.
-
 end

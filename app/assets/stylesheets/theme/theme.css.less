@@ -169,7 +169,6 @@ div.content-panel {
     overflow: auto;
 
     h3 {
-        border-bottom: 1px solid #efefef;
         a {
             color: #000;
         }
@@ -180,6 +179,10 @@ div.content-panel {
         &:hover {
             color: #ad3cdd;
         }
+    }
+
+    p:last-of-type {
+        margin-bottom: 0;
     }
 
     .alignright {
@@ -208,6 +211,9 @@ div.content-panel {
     // Changes to the navbar inside a content block
     // To do the date, user, comment stuff.
     div.navbar {
+        &.upper {
+          border-top: 1px solid #efefef;
+        }
         overflow: hidden;
         margin-bottom: 0px;
         .navbar-inner {
