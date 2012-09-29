@@ -1,3 +1,5 @@
+require 'markdown_helper'
+
 module ApplicationHelper
 
   # breadcrumbs!
@@ -32,22 +34,6 @@ module ApplicationHelper
   # Append to the URL the query string if it exists
   def url_query
     (@query.present?)?'?query='+@query:''
-  end
-
-  # Render markdown to html
-  def render_markdown content, options = { }
-    options[:xhtml]                  ||= true
-    options[:query]                  ||= nil
-    options[:autolink]               ||= true
-    options[:space_after_headers]    ||= true
-    options[:no_intra_emphasis]      ||= true
-
-    renderer = options[:xhtml] ? Redcarpet::Render::XHTML : Redcarpet::Render::HTML
-
-    content.gsub!(/(#{options[:query]})/i, '<span class="highlight">\1</span>') if options[:query].present?
-
-    md = Redcarpet::Markdown.new renderer, options
-    md.render(content).html_safe
   end
 
   # Pagination!
