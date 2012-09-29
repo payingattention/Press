@@ -15,6 +15,8 @@ class Post < ActiveRecord::Base
 
   # Add validation
   validates :go_live, :presence => true
+  validates :seo_url, :presence => { :message => "SEO Url can't be blank for Posts, if this isn't a post change it below" }, :if => :is_a_post?
+  validates :seo_url, :uniqueness => { :message => "It appears the SEO Url that you entered is already in use by another post" }, :if => :is_a_post?
 
   # Define some scoped helpers
   scope :ads, where(:object_type => :ad)
@@ -39,6 +41,11 @@ class Post < ActiveRecord::Base
   # post.comments returns all child posts that are comments
   def comments
     posts.all :conditions => { :object_type => :comment }
+  end
+
+  # Is this a post?
+  def is_a_post?
+    self.object_type == :post
   end
 
 end
