@@ -11,6 +11,7 @@ myMarkdownSettings = {
     onShiftEnter:       {keepDefault:false, openWith:'\n\n'},
     markupSet: [
         {name:'Title Headline', key:"1", openWith:'### ', placeHolder:'Your title here...' },
+        {name:'Title Subbar', openWith:'* * *\n' },
         {name:'Section Heading', key:"2", openWith:'#### ', placeHolder:'Your section heading here...' },
 //        {name:'Strong Heading', key:"3", openWith:'##### ', placeHolder:'Your strong heading here...' },
         {name:'Grey Comment', key:"4", openWith:'###### ', placeHolder:'Your grey comment here...' },

@@ -11,27 +11,34 @@
 
         <div class='content-panel'>
 
-          <% header,tease = post.content.split(/\* \* \*/) %>
+          <% header,*tease = post.content.split(/\*\s\*\s\*/) %>
           <% header.gsub!(/\(\)/, "("+url_for('/' + post.seo_url + '/' + url_query)+")" )%>
-          <%= render_markdown header, :query => @query %>
+
+          <% tease = tease.join %>
+          <% if tease.present? %>
+            <%= render_markdown header, :query => @query %>
+            <div class="navbar upper">
+              <div class="navbar-inner">
+                <ul class="nav">
+                  <li><a href="/"><i class="icon-calendar"></i><%= post.go_live.strftime("%B %e, %Y @ %l:%M%P") %></a></li>
+                  <li><a href="/"><i class="icon-user"></i><%= post.user.display_name %></a></li>
+                  <li class='pull-right'><a href="<%= url_for '/' + post.seo_url + '/' + url_query %>"><i class="icon-file"></i>Link</a></li>
+                  <li class='pull-right'><a href="<%= url_for '/' + post.seo_url + '/' + url_query %>#comments"><i class="icon-comment"></i>Comments (<%= post.comments.count %>)</a></li>
+                </ul>
+              </div>
+            </div>
+            <% tease,*body = tease.split(/-\s-\s-/) %>
+            <% body = body.join %>
+          <% else %>
+            <% tease,*body = header.split(/-\s-\s-/) %>
+            <% body = body.join %>
+          <% end %>
 
           <% if tease.present? %>
-          <div class="navbar upper">
-            <div class="navbar-inner">
-              <ul class="nav">
-                <li><a href="/"><i class="icon-calendar"></i><%= post.go_live.strftime("%B %e, %Y @ %l:%M%P") %></a></li>
-                <li><a href="/"><i class="icon-user"></i><%= post.user.display_name %></a></li>
-                <li class='pull-right'><a href="<%= url_for '/' + post.seo_url + '/' + url_query %>"><i class="icon-file"></i>Link</a></li>
-                <li class='pull-right'><a href="<%= url_for '/' + post.seo_url + '/' + url_query %>#comments"><i class="icon-comment"></i>Comments (<%= post.comments.count %>)</a></li>
-              </ul>
-            </div>
-          </div>
-
-            <% tease,* = tease.split(/- - -/) %>
             <%= render_markdown tease, :query => @query %>
-
-            <div class='readmore'><%= link_to 'Read more...', '/' + post.seo_url + '/' + url_query %></div>
-
+            <% if body.present? %>
+              <div class='readmore'><%= link_to 'Read more...', '/' + post.seo_url + '/' + url_query %></div>
+            <% end %>
           <% end %>
 
           <div class="navbar">

@@ -9,10 +9,11 @@
 
       <div class='content-panel'>
 
-        <% header,tease = @post.content.split(/\* \* \*/) %>
+        <% header,*tease = @post.content.split(/\*\s\*\s\*/) %>
         <% header.gsub!(/\(\)/, "("+url_for('/' + @post.seo_url + '/' + url_query)+")" )%>
         <%= render_markdown header, :query => @query %>
 
+        <% tease = tease.join %>
         <% if tease.present? %>
           <div class="navbar upper">
             <div class="navbar-inner">
