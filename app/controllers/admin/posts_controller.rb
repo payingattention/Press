@@ -1,34 +1,5 @@
 class Admin::PostsController < AdminController
 
-  # LIST -- Shows a list of posts
-  def index
-    # Set our limit, this should be dynamic or something.. drop box?
-    limit = 12;
-
-    # if we are talking about a tag, get our posts from there
-    @tag = params[:tag] || ''
-    if @tag.present?
-      tag = Taxonomy.find_by_seo_url @tag
-      @posts = list_models tag.posts, [], 'go_live desc'
-    end
-
-    # If we are talking about a category get the posts from there
-    @category = params[:category] || ''
-    if @category.present?
-      category = Taxonomy.find_by_seo_url @category
-      @posts = list_models category.posts, [], 'go_live desc'
-    end
-
-    if !@tag.present? && !@category.present?
-      @posts = list_models Post.posts, [], 'go_live desc'
-    end
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @posts }
-    end
-  end
-
   # NEW -- New post form method
   def new
     # Map all users out to a name, id pair for the select box
@@ -62,12 +33,13 @@ class Admin::PostsController < AdminController
 
   # EDIT
   def edit
+
     # Map all users out to a name, id pair for the select box
     @all_users = User.all.map { |a| [a.display_name, a.id] }
     # Instance the post
     @post = Post.find_by_id params[:id]
     unless @post
-      redirect_to :action => 'index'
+      redirect_to admin_content_index :posts
     end
   end
 
@@ -75,7 +47,7 @@ class Admin::PostsController < AdminController
   def update
     @post = Post.find_by_id params[:id]
     unless @post
-      redirect_to :action => 'index'
+      redirect_to admin_content_index :posts
     end
 
     respond_to do |format|
