@@ -32,4 +32,17 @@ class Admin::ContentController < AdminController
     end
   end
 
+  # EDIT -- Figure out which content type we are talking about and edit that one using it's restful path.
+  # Note this could be done entirely in the routes file but I just incase I needed more I did it here.
+  def edit
+    case params[:type]
+      when "post"
+        redirect_to edit_admin_post_path params[:id]
+      when "page"
+        redirect_to edit_admin_page_path params[:id]
+      else
+        redirect_to admin_content_index_path :type
+    end
+  end
+
 end

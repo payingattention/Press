@@ -12,7 +12,9 @@ Press::Application.routes.draw do
   resources :admin, :only => [ :index ]
   namespace :admin do
     resources :content, :path => ":type", :constraints => { :type => /posts|pages|comments|messages|ads/ }, :only => [ :index ]
+    resources :content, :path => ":type", :constraints => { :type => /post|page|comment|message|ad/ }, :only => [ :edit ]
     resources :posts, :except => [ :index, :show ]
+    resources :pages, :except => [ :index, :show ]
     resources :users
     resources :taxonomies
     resources :import_wordpress, :only => [ :new, :create ]

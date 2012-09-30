@@ -37,6 +37,7 @@ class Admin::PostsController < AdminController
     @all_users = User.all.map { |a| [a.display_name, a.id] }
     # Instance the post
     @post = Post.find_by_id params[:id]
+puts "WE GOT HERE YAY US!"
     unless @post
       redirect_to admin_content_index :posts
     end
