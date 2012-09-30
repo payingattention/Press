@@ -11,7 +11,8 @@ Press::Application.routes.draw do
   # Below we define all of our administrator namespace routes.. These are for site admin and site staff members only
   resources :admin, :only => [ :index ]
   namespace :admin do
-    resources :posts
+    resources :content, :path => ":type", :constraints => { :type => /posts|pages|comments|messages|ads/ }, :only => [ :index ]
+    resources :posts, :except => [ :index, :show ]
     resources :users
     resources :taxonomies
     resources :import_wordpress, :only => [ :new, :create ]
