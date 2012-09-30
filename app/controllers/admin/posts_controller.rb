@@ -1,6 +1,6 @@
 class Admin::PostsController < AdminController
 
-  # NEW -- New post form method
+  # NEW
   def new
     # Map all users out to a name, id pair for the select box
     @all_users = User.all.map { |a| [a.display_name, a.id] }
@@ -13,7 +13,7 @@ class Admin::PostsController < AdminController
     end
   end
 
-  # CREATE -- Does the work of saving new post or back to new
+  # CREATE
   def create
     # Instance new object
     @post = Post.new params[:post]
@@ -22,7 +22,7 @@ class Admin::PostsController < AdminController
     respond_to do |format|
       if @post.save
         flash[:success] = 'Post Created.'
-        format.html { redirect_to [:admin, @post], notice: 'Post was successfully created.' }
+        format.html { redirect_to admin_content_index_path(:posts), notice: 'Post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
       else
         format.html { render action: "new" }
@@ -33,7 +33,6 @@ class Admin::PostsController < AdminController
 
   # EDIT
   def edit
-
     # Map all users out to a name, id pair for the select box
     @all_users = User.all.map { |a| [a.display_name, a.id] }
     # Instance the post
@@ -47,13 +46,13 @@ class Admin::PostsController < AdminController
   def update
     @post = Post.find_by_id params[:id]
     unless @post
-      redirect_to admin_content_index :posts
+      redirect_to admin_content_index_path :posts
     end
 
     respond_to do |format|
       if @post.update_attributes(params[:post])
         flash[:success] = 'Post Edited.'
-        format.html { redirect_to admin_posts_url, notice: 'Post was successfully updated.' }
+        format.html { redirect_to admin_content_index_path(:posts), notice: 'Post was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -71,7 +70,7 @@ class Admin::PostsController < AdminController
 
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to admin_posts_url }
+      format.html { redirect_to admin_content_index_path :posts }
       format.json { head :no_content }
     end
   end
