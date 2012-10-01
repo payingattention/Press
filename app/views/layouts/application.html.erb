@@ -14,8 +14,10 @@
 
 <div class='container' role="header">
   <div class='row'>
-    <div class='span8 header-image'>
-      <%= Setting.getValue(:header_title).html_safe %>
+    <div class='span8'>
+      <span class='header-title'>
+        <%= Setting.getValue(:header_title).html_safe %>
+      </span>
     </div>
     <div class='span4'>
 
