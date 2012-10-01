@@ -42,11 +42,16 @@ module MarkdownHelper
     # insert HTML `<br>` tags inside on paragraphs where the origin markdown document had newlines (by default,
     # markdown ignores these newlines).
     options[:hard_wrap]           ||= false
+    # like a database, limit the number of lines returned
+    options[:limit]               ||= 0
 
     renderer = options[:xhtml] ? Redcarpet::Render::XHTML : Redcarpet::Render::HTML
     renderer = renderer.new options
 
     content.gsub!(/(#{options[:query]})/i, '<span class="highlight">\1</span>') if options[:query].present?
+
+    # Only use the content based on the limit
+    content = content.split("\r\n")[0..(options[:limit]-1)].join if options[:limit] != 0
 
     md = Redcarpet::Markdown.new renderer, options
     md.render(content).html_safe
