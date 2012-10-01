@@ -36,7 +36,7 @@ Mysql Database Setup
   * exit
 
 More server settings
-------------------
+--------------------
   * cd /etc/nginx/sites-enabled
   * ln -s /ruby/Press/config/nginx.conf Press
 
@@ -46,3 +46,10 @@ More server settings
 
   * sudo /usr/sbin/update-rc.d -f unicorn defaults
 
+Bouncing the server
+-------------------
+  * cd /ruby/Press/config
+  * ./unicorn_init.sh stop
+  * bundle exec rake assets:precompile
+  * ./unicorn_init.sh start
+  * /etc/init.d/nginx restart
