@@ -98,7 +98,7 @@ class DefaultController < ApplicationController
     # Make sure they don't have a password.. those are "private"
     @posts = @posts.where( :password => nil )
     # If a query is set, use it
-    @posts = @posts.where(["title like ? or content like ?", '%'+@query+'%', '%'+@query+'%'] ) if @query.present?
+    @posts = @posts.where(["content like ?", '%'+@query+'%'] ) if @query.present?
     # Get our filtered post count for pagination
     filtered_post_count = @posts.count
     # Limit the number of posts to show
