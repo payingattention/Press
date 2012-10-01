@@ -21,8 +21,12 @@
                 <li><a href="/"><i class="icon-calendar"></i><%= @post.go_live.strftime("%B %e, %Y @ %l:%M%P") %></a></li>
                 <li><a href="/"><i class="icon-user"></i><%= @post.user.display_name %></a></li>
                 <li class='pull-right'><a href="<%= url_for '/' + @post.seo_url + '/' + url_query %>"><i class="icon-file"></i>Link</a></li>
+
+                <% if current_user == @post.user %>
+                  <li class='pull-right'><a href="<%= url_for edit_admin_content_path @post.object_type, @post %>"><i class="icon-pencil"></i>Edit</a></li>
+                <% end %>
                 <% if @post.allow_comments %>
-                <li class='pull-right'><a href="<%= url_for '/' + @post.seo_url + '/' + url_query %>#comments"><i class="icon-comment"></i>Comments (<%= @post.comments.count %>)</a></li>
+                  <li class='pull-right'><a href="<%= url_for '/' + @post.seo_url + '/' + url_query %>#comments"><i class="icon-comment"></i>Comments (<%= @post.comments.count %>)</a></li>
                 <% end %>
               </ul>
             </div>

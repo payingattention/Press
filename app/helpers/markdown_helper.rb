@@ -55,8 +55,8 @@ module MarkdownHelper
     md = Redcarpet::Markdown.new renderer, options
     # Hit it!
     output = md.render(content)
-    # okay now add the highlight filter for the query
-    output.gsub!(/(#{options[:query]})/i, '<span class="highlight">\1</span>') if options[:query].present?
+    # okay now add the highlight filter for the query .. not ={query}
+    output.gsub!(/[^=](#{options[:query]})/i, '<span class="highlight">\1</span>') if options[:query].present?
 
     output.html_safe
   end
