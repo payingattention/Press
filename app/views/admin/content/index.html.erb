@@ -1,4 +1,5 @@
-<% @breadcrumbs = [link_to('Content Editor', admin_content_index_path), 'Content List'] %>
+<% @breadcrumbs = [link_to('Content Editor', admin_content_index_path), 'Post List'] if params[:type] == "posts" %>
+<% @breadcrumbs = [link_to('Content Editor', admin_content_index_path), 'Page List'] if params[:type] == "pages" %>
 
 <div class='row'>
   <div class='span12'>
@@ -8,7 +9,7 @@
       <thead>
       <tr>
         <th><%= check_box_tag "all-content" %></th>
-        <th>Author</th>
+        <th>1st Line / Author</th>
         <th>Categories</th>
         <th>Tags</th>
         <th>State</th>
@@ -20,7 +21,10 @@
       <% @content.each do |content| %>
         <tr>
           <td><%= check_box_tag "content[#{content.id}]" %></td>
-          <td><%= content.user.display_name %></td>
+          <td>
+            <%= render_markdown content.content.gsub(/\(\)/, "("+url_for('/' + content.seo_url + '/' + url_query)+")" ), { :limit => 1 } %>
+            by <%= content.user.display_name %>
+          </td>
           <td>
             <% content.categories.each do |c| %>
               <a href="<%= url_for :filter => @filter, :category => c.seo_url %>"><%= c.name.capitalize %></a><% if c != content.categories.last %>,<% end %>
