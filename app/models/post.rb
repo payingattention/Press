@@ -44,11 +44,17 @@ class Post < ActiveRecord::Base
     posts.all :conditions => { :object_type => :comment }
   end
 
+  # Belongs to any taxonomy type with id?
+  def has_taxonomy? taxonomy_id
+    taxonomies.all(:conditions => { :id => taxonomy_id }).present?
+  end
+
   # Is this a post?
   def is_a_post?
     self.object_type == :post
   end
 
+  # is this a page?
   def is_a_page?
     self.object_type == :page
   end
