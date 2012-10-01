@@ -23,18 +23,6 @@
       <% end %>
     </div>
 
-    <h6>Content Type</h6>
-    <div class='control-group'>
-      <div class='control'>
-        <%= select_tag('post[object_type]', options_for_select([
-          ['Post', :post],
-          ['Page', :page],
-          ['Message', :message],
-          ['Ad', :ad]
-        ], @post.object_type), :class => 'span3') %>
-      </div>
-    </div>
-
     <hr />
     <h6>Publication Options</h6>
     <div class='control-group'>
