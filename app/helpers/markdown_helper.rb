@@ -45,16 +45,20 @@ module MarkdownHelper
     # like a database, limit the number of lines returned
     options[:limit]               ||= 0
 
+    # What kind of renderer are we using?
     renderer = options[:xhtml] ? Redcarpet::Render::XHTML : Redcarpet::Render::HTML
+    # Instance the renderer using the options above
     renderer = renderer.new options
-
-    content.gsub!(/(#{options[:query]})/i, '<span class="highlight">\1</span>') if options[:query].present?
-
     # Only use the content based on the limit
     content = content.split("\r\n")[0..(options[:limit]-1)].join if options[:limit] != 0
-
+    # Instance Redcarpet with the options it knwos above from above
     md = Redcarpet::Markdown.new renderer, options
-    md.render(content).html_safe
+    # Hit it!
+    output = md.render(content)
+    # okay now add the highlight filter for the query
+    output.gsub!(/(#{options[:query]})/i, '<span class="highlight">\1</span>') if options[:query].present?
+
+    output.html_safe
   end
 
 end
