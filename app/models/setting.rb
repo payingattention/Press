@@ -9,4 +9,9 @@ class Setting < ActiveRecord::Base
   # Are we currently installing? (Meaning is it not installed yet)
   scope :installing?, where(:key => :maintenance,:value => "-1")
 
+  # Adding static method to get value by key
+  def self.getValue key
+    where(:key => key).first.value
+  end
+
 end
