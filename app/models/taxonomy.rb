@@ -6,4 +6,8 @@ class Taxonomy < ActiveRecord::Base
   # back to the things they contain.
   has_and_belongs_to_many :posts
 
+  # Define some scoped helpers
+  scope :tags, where(:classification => :tag)
+  scope :categories, where(:classification => :category)
+
 end
