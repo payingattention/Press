@@ -21,7 +21,9 @@
                 <li><a href="/"><i class="icon-calendar"></i><%= @post.go_live.strftime("%B %e, %Y @ %l:%M%P") %></a></li>
                 <li><a href="/"><i class="icon-user"></i><%= @post.user.display_name %></a></li>
                 <li class='pull-right'><a href="<%= url_for '/' + @post.seo_url + '/' + url_query %>"><i class="icon-file"></i>Link</a></li>
+                <% if @post.allow_comments %>
                 <li class='pull-right'><a href="<%= url_for '/' + @post.seo_url + '/' + url_query %>#comments"><i class="icon-comment"></i>Comments (<%= @post.comments.count %>)</a></li>
+                <% end %>
               </ul>
             </div>
           </div>
@@ -51,22 +53,22 @@
           </div>
         </div>
 
-        <div class="navbar">
-          <div class="navbar-inner">
-            <ul class="nav nav-tabs">
-              <li class="pull-right"><a href="#">Comments</a></li>
-            </ul>
+        <% if (@post.allow_comments == false && @post.comments.count != 0) || @post.allow_comments %>
+          <div class="navbar">
+            <div class="navbar-inner">
+              <ul class="nav nav-tabs">
+                <li class="pull-right"><a href="#">Comments</a></li>
+              </ul>
+            </div>
           </div>
-        </div>
 
-        
-        <% @post.comments.each do |comment| %>
-        
-        <%=  comment.content %>
+          <% @post.comments.each do |comment| %>
+
+            <%=  comment.content %>
+
+          <% end %>
         
         <% end %>
-        
-        
       </div>
 
     </div>
