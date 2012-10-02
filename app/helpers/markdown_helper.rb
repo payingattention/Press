@@ -62,7 +62,7 @@ module MarkdownHelper
       output.split(/(<.*?>)/).each do |part|
         next unless part.present?
         final_output << part if part[0] == '<'
-        final_output << part.gsub(/(#{options[:query]})/i, '<span class="highlight">\1</span>') unless part[0] == '<'
+        final_output << part.gsub(/(#{options[:query]})/i, '<mark>\1</mark>') unless part[0] == '<'
       end
       output = final_output
     end
