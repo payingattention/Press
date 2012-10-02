@@ -23,40 +23,38 @@
       <% end %>
     </div>
 
-    <hr />
     <h6>Publication Options</h6>
     <div class='control-group'>
       <div class='control'>
-        <%= select_tag('page[state]', options_for_select([
+        <%= select_tag('post[state]', options_for_select([
           ['Draft', :draft],
           ['Published', :published],
           ['Frozen', :frozen]
         ], @page.state), :class => 'span3') %>
       </div>
+      <div class='control'>
+        <label class='checkbox'>
+          <%= f.check_box :is_sticky %>
+          Is Sticky?
+        </label>
+        <label class='checkbox'>
+          <%= f.check_box :allow_comments %>
+          Allow Comments?
+        </label>
+      </div>
     </div>
-    <div class='control-group'>
-      <label class='checkbox'>
-        <%= f.check_box :is_sticky %>
-        Is Sticky?
-      </label>
-    </div>
-    <div class='control-group'>
-      <label class='checkbox'>
-        <%= f.check_box :allow_comments %>
-        Allow Comments?
-      </label>
-    </div>
+
+    <h6>Go Live Date/Time</h6>
     <div class='control-group'>
       <div class='controls'>
         <%= f.text_field :go_live, :class => 'span3', :id => 'anytime', :placeholder => @page.go_live.strftime("%B %e, %Y @ %I:%M%p"), :value => @page.go_live.strftime("%B %e, %Y @ %I:%M%p") %>
       </div>
     </div>
 
-    <hr />
     <h6>Categories</h6>
     <div class='control-group'>
       <% @categories.each do |category| %>
-        <label class='checkbox'><%= check_box_tag "taxonomies[]", "#{category.id}", @post.has_taxonomy?(category.id) %><%= category.name %></label>
+        <label class='checkbox'><%= check_box_tag "taxonomies[]", "#{category.id}", @page.has_taxonomy?(category.id) %><%= category.name %></label>
       <% end %>
     </div>
 
