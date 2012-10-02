@@ -30,6 +30,7 @@ class Post < ActiveRecord::Base
   scope :comments, where(:object_type => :comment)
   scope :messages, where(:object_type => :message)
 
+  # Generate a unique token and make sure its unique by testing for it
   def generate_token
     begin
       token = SecureRandom.urlsafe_base64

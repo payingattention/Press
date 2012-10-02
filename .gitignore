@@ -29,3 +29,6 @@
 
 # Remove Assets that get generated
 /public/assets
+
+# ignore any saved content as it's not part of this repo
+/content
