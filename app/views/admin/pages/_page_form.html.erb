@@ -53,7 +53,7 @@
 
     <h6>Categories</h6>
     <div class='control-group'>
-      <% @categories.each do |category| %>
+      <% Taxonomy.categories.each do |category| %>
         <label class='checkbox'><%= check_box_tag "taxonomies[]", "#{category.id}", @page.has_taxonomy?(category.id) %><%= category.name %></label>
       <% end %>
     </div>

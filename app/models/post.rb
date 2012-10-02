@@ -29,11 +29,11 @@ class Post < ActiveRecord::Base
   after_commit :backup
 
   # Define some scoped helpers
-  scope :ads, where(:type => :ad)
-  scope :posts, where(:type => :post)
-  scope :pages, where(:type => :page)
-  scope :comments, where(:type => :comment)
-  scope :messages, where(:type => :message)
+  scope :ads, where(:kind => :ad)
+  scope :posts, where(:kind => :post)
+  scope :pages, where(:kind => :page)
+  scope :comments, where(:kind => :comment)
+  scope :messages, where(:kind => :message)
 
   # Generate a unique token and make sure its unique by testing for it
   def generate_token
@@ -59,25 +59,25 @@ class Post < ActiveRecord::Base
     taxonomies.all :conditions => { :classification => :category }
   end
 
-  # Comments ( Posts with an object type of comment )
+  # Comments ( Posts with an object kind of comment )
   # post.comments returns all child posts that are comments
   def comments
-    posts.all :conditions => { :type => :comment }
+    posts.all :conditions => { :kind => :comment }
   end
 
-  # Belongs to any taxonomy type with id?
+  # Belongs to any taxonomy kind with id?
   def has_taxonomy? taxonomy_id
     taxonomies.all(:conditions => { :id => taxonomy_id }).present?
   end
 
   # Is this a post?
   def is_a_post?
-    self.type == :post
+    self.kind == :post
   end
 
   # is this a page?
   def is_a_page?
-    self.type == :page
+    self.kind == :page
   end
 
 

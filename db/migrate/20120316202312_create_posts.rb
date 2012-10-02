@@ -7,7 +7,7 @@ class CreatePosts < ActiveRecord::Migration
       t.text      "content"                   # Text blob
       t.string    "seo_url"                   # Perma link to this object
       t.string    "password", :limit => 40    # PW if set
-      t.enum      "type", :limit => [:post, :page, :comment, :message, :ad], :default => :post # Type of object
+      t.enum      "kind", :limit => [:post, :page, :comment, :message, :ad], :default => :post # Type of object
       t.enum      "style", :limit => [:standard, :notice, :success, :error], :default => :standard
       t.enum      "state", :limit => [:draft, :published, :frozen], :default => :draft # published, draft, whatever
       t.boolean   "allow_comments", :default => true # are comments on this thing allowed?

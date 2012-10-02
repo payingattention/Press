@@ -119,7 +119,7 @@ class Admin::ImportWordpressController < AdminController
               comment_id = c.xpath('wp:comment_id').text
               comment.id = comment_id unless Post.find_by_id comment_id
               comment.user = comment_author
-              comment.type = :comment
+              comment.kind = :comment
               comment.content = c.xpath('wp:comment_content').text
               comment.state = :published
               comment_publish_date = item.xpath('pubDate').text.split(', ')[1]
