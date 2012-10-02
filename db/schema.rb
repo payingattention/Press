@@ -14,26 +14,30 @@
 ActiveRecord::Schema.define(:version => 20120707155525) do
 
   create_table "posts", :force => true do |t|
-    t.integer  "user_id",                                                                                  :null => false
+    t.integer  "user_id",                                                                                                                   :null => false
     t.integer  "post_id"
-    t.string   "token",                                                                                    :null => false
+    t.string   "token",                                                                                                                     :null => false
     t.text     "content"
     t.string   "seo_url"
     t.string   "password",       :limit => 40
-    t.enum     "type",           :limit => [:post, :page, :comment, :message, :ad], :default => :post
-    t.enum     "style",          :limit => [:standard, :notice, :success, :error],  :default => :standard
-    t.enum     "state",          :limit => [:draft, :published, :frozen],           :default => :draft
-    t.boolean  "allow_comments",                                                    :default => true
-    t.boolean  "is_sticky",                                                         :default => false
-    t.boolean  "is_closable",                                                       :default => false
-    t.datetime "go_live",                                                                                  :null => false
+    t.enum     "kind",           :limit => [:post, :page, :comment, :message, :ad],                                  :default => :post
+    t.enum     "style",          :limit => [:standard, :featured, :notice, :success, :error, :warning, :borderless], :default => :standard
+    t.enum     "state",          :limit => [:draft, :published, :frozen],                                            :default => :draft
+    t.boolean  "allow_comments",                                                                                     :default => true
+    t.boolean  "is_sticky",                                                                                          :default => false
+    t.boolean  "is_closable",                                                                                        :default => false
+    t.boolean  "is_indexable",                                                                                       :default => true
+    t.boolean  "is_searchable",                                                                                      :default => true
+    t.boolean  "is_frontable",                                                                                       :default => true
+    t.datetime "go_live",                                                                                                                   :null => false
     t.datetime "go_dead"
-    t.datetime "created_at",                                                                               :null => false
-    t.datetime "updated_at",                                                                               :null => false
+    t.datetime "created_at",                                                                                                                :null => false
+    t.datetime "updated_at",                                                                                                                :null => false
   end
 
   add_index "posts", ["post_id"], :name => "index_posts_on_post_id"
   add_index "posts", ["seo_url"], :name => "index_posts_on_seo_url"
+  add_index "posts", ["token"], :name => "index_posts_on_token"
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
   create_table "posts_taxonomies", :id => false, :force => true do |t|
