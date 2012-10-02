@@ -6,8 +6,6 @@ class Admin::PostsController < AdminController
     @all_users = User.all.map { |a| [a.display_name, a.id] }
     # Instance our post object to set form defaults
     @post = Post.new :kind => :post, :go_live => DateTime.now
-    # Send along all categories for us to choose from
-    @categories = Taxonomy.categories
 
     respond_to do |format|
       format.html # new.html.erb
@@ -39,8 +37,6 @@ class Admin::PostsController < AdminController
     @all_users = User.all.map { |a| [a.display_name, a.id] }
     # Instance the post
     @post = Post.find_by_id params[:id]
-    # Send along all categories for us to choose from
-    @categories = Taxonomy.categories
 
     unless @post
       redirect_to admin_content_index :posts
