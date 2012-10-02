@@ -3,6 +3,7 @@ class CreatePosts < ActiveRecord::Migration
     create_table :posts do |t|
       t.references :user, :null => false      # User who posted
       t.references :post                      # Parent post if not a post
+      t.string    "uuid", :null => false      # A uuid for internal reference
       t.text      "content"                   # Text blob
       t.string    "seo_url"                   # Perma link to this object
       t.string    "password", :limit => 40    # PW if set
