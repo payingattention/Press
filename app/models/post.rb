@@ -26,6 +26,7 @@ class Post < ActiveRecord::Base
   validates :seo_url, :presence => { :message => "SEO Url can't be blank for Pages" }, :if => :is_a_page?
   validates :seo_url, :uniqueness => { :message => "It appears the SEO Url that you entered is already in use by another post or page" }, :if => :is_a_post? || :is_a_page?
 
+  # After we have commit and saved, fire off the backup command
   after_commit :backup
 
   # Define some scoped helpers
@@ -43,8 +44,10 @@ class Post < ActiveRecord::Base
     self.token = token
   end
 
+  # Create a hard backup of this file on the file system (outside of the database)
+  # that can be indexed and saved using github or some such repository
   def backup
-    puts self.to_json
+#    puts self.to_json
   end
 
   # Tags ( Taxonomies with a classification of tag )
