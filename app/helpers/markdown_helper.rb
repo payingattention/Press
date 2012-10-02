@@ -51,12 +51,21 @@ module MarkdownHelper
     renderer = renderer.new options
     # Only use the content based on the limit
     content = content.split("\r\n")[0..(options[:limit]-1)].join if options[:limit] != 0
-    # Instance Redcarpet with the options it knwos above from above
+    # Instance Redcarpet with the options it knows above from above
     md = Redcarpet::Markdown.new renderer, options
     # Hit it!
     output = md.render(content)
-    # okay now add the highlight filter for the query .. not ={query}
-    output.gsub!(/[^=](#{options[:query]})/i, '<span class="highlight">\1</span>') if options[:query].present?
+
+    # okay now add the highlight filter for the query -- this is a little harsh but it prevents html breakage
+    if options[:query].present?
+      final_output = ""
+      output.split(/(<.*?>)/).each do |part|
+        next unless part.present?
+        final_output << part if part[0] == '<'
+        final_output << part.gsub(/(#{options[:query]})/i, '<span class="highlight">\1</span>') unless part[0] == '<'
+      end
+      output = final_output
+    end
 
     output.html_safe
   end
