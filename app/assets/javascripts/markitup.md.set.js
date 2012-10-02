@@ -7,7 +7,6 @@
 myMarkdownSettings = {
     nameSpace:          'markdown', // Useful to prevent multi-instances CSS conflict
     resizeHandle:       false,
-    previewParserPath:  '~/sets/markdown/preview.php',
     onShiftEnter:       {keepDefault:false, openWith:'\n\n'},
     markupSet: [
         {name:'Title Headline', key:"1", openWith:'### ', placeHolder:'Your title here...', className:"headline" },
@@ -31,9 +30,7 @@ myMarkdownSettings = {
         {name:'Link', key:"L", openWith:'[', closeWith:']([![Url:!:http://]!] "[![Title]!]")', placeHolder:'Your text to link here...', className:"link" },
         {separator:'---------------'},    
         {name:'Quotes', openWith:'> ', className:"quotes" },
-        {name:'Code Block / Code', openWith:'(!(\t|!|`)!)', closeWith:'(!(`)!)', className:"codeblock" },
-        {separator:'---------------'},
-        {name:'Preview', call:'preview', className:"preview"}
+        {name:'Code Block / Code', openWith:'(!(\t|!|`)!)', closeWith:'(!(`)!)', className:"codeblock" }
     ]
 }
 
