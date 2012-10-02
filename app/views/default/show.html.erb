@@ -40,6 +40,8 @@
           <div class="navbar-inner">
             <ul class="nav">
 
+              <li class='pull-right'><a href="<%= url_for '/' + @post.seo_url + '.md/' %>"><small>[M&dArr;]</small></a></li>
+
               <% @post.categories.each do |c| %>
                 <li><a href="/category/<%= c.seo_url %>"><% if c == @post.categories.first %><i class="icon-folder-open"></i><% end %>
                   <%= c.name.capitalize %></a>
