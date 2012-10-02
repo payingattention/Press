@@ -14,6 +14,7 @@
       $(".markItUpContainer").each(function(i,e) {
         $(e).children('textarea').each(function(index,obj) {
           $(obj).css('width', $(e).width() - 63);
+          $(obj).css('max-width', $(e).width() - 63);
         })
       });
       AnyTime.picker('anytime', { format: "%M %d, %z @ %h:%i%p" });
