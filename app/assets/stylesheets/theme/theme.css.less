@@ -42,6 +42,9 @@ body {
             span i {
               opacity: 0.4;
             }
+            input {
+              width: 160px;
+            }
           }
         }
 
@@ -148,6 +151,7 @@ span.highlight {
 }
 
 div.content-panel {
+    color: #000;
     border: 1px solid #fff;
     background: #fff url(/assets/panel-background.png) repeat-x;
     border-radius: 4px 4px 4px 4px;
@@ -155,6 +159,10 @@ div.content-panel {
     padding: 5px 10px;
     margin-bottom: 10px;
     overflow: auto;
+
+    &.alert .close {
+      right: -5px;
+    }
 
     h3 {
         a {
