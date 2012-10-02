@@ -9,7 +9,10 @@
 
       <% @posts.each do |post| %>
 
-        <div class='content-panel'>
+        <div class='content-panel <%= "alert" if post.is_closable? %>'>
+          <% if post.is_closable? %>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <% end %>
 
           <% header,*tease = post.content.split(/\*\s\*\s\*/) %>
           <% header.gsub!(/\(\)/, "("+url_for('/' + post.seo_url + '/' + url_query)+")" )%>
