@@ -1,5 +1,8 @@
 class Post < ActiveRecord::Base
 
+  # Mass assignable fields
+  attr_accessible :content, :password, :type, :go_live, :is_sticky, :allow_comments, :seo_url, :state, :style, :is_closable, :go_dead
+
   # Posts ( pages, comments, messages, ads etc.. ) must belong to a user
   belongs_to :user
 
@@ -23,12 +26,14 @@ class Post < ActiveRecord::Base
   validates :seo_url, :presence => { :message => "SEO Url can't be blank for Pages" }, :if => :is_a_page?
   validates :seo_url, :uniqueness => { :message => "It appears the SEO Url that you entered is already in use by another post or page" }, :if => :is_a_post? || :is_a_page?
 
+  after_commit :backup
+
   # Define some scoped helpers
-  scope :ads, where(:object_type => :ad)
-  scope :posts, where(:object_type => :post)
-  scope :pages, where(:object_type => :page)
-  scope :comments, where(:object_type => :comment)
-  scope :messages, where(:object_type => :message)
+  scope :ads, where(:type => :ad)
+  scope :posts, where(:type => :post)
+  scope :pages, where(:type => :page)
+  scope :comments, where(:type => :comment)
+  scope :messages, where(:type => :message)
 
   # Generate a unique token and make sure its unique by testing for it
   def generate_token
@@ -36,6 +41,10 @@ class Post < ActiveRecord::Base
       token = SecureRandom.urlsafe_base64
     end while Post.where(:token => token).exists?
     self.token = token
+  end
+
+  def backup
+    puts self.to_json
   end
 
   # Tags ( Taxonomies with a classification of tag )
@@ -53,7 +62,7 @@ class Post < ActiveRecord::Base
   # Comments ( Posts with an object type of comment )
   # post.comments returns all child posts that are comments
   def comments
-    posts.all :conditions => { :object_type => :comment }
+    posts.all :conditions => { :type => :comment }
   end
 
   # Belongs to any taxonomy type with id?
@@ -63,12 +72,14 @@ class Post < ActiveRecord::Base
 
   # Is this a post?
   def is_a_post?
-    self.object_type == :post
+    self.type == :post
   end
 
   # is this a page?
   def is_a_page?
-    self.object_type == :page
+    self.type == :page
   end
+
+
 
 end

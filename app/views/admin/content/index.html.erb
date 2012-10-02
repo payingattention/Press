@@ -38,7 +38,7 @@
           <td><%= content.state.capitalize %></td>
           <td class='small'><%= content.go_live.strftime("%b&nbsp;%e,&nbsp;%Y").html_safe %></td>
           <td class='span2 center'>
-            <%= link_to 'Edit', edit_admin_content_path(content.object_type, content), :class => 'btn btn-mini' %>
+            <%= link_to 'Edit', edit_admin_content_path(content.type, content), :class => 'btn btn-mini' %>
             <%= link_to 'Destroy', admin_post_path(content), :method => :delete, :confirm => "You've chosen to delete this content, this can't be undone. Are you sure?", :class => 'btn btn-mini btn-danger' %>
           </td>
         </tr>

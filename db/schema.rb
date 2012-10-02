@@ -14,21 +14,22 @@
 ActiveRecord::Schema.define(:version => 20120707155525) do
 
   create_table "posts", :force => true do |t|
-    t.integer  "user_id",                                                                                                          :null => false
+    t.integer  "user_id",                                                                                  :null => false
     t.integer  "post_id"
-    t.string   "token",                                                                                                            :null => false
+    t.string   "token",                                                                                    :null => false
     t.text     "content"
     t.string   "seo_url"
     t.string   "password",       :limit => 40
-    t.enum     "object_type",    :limit => [:post, :page, :comment, :message, :ad, :notice, :error, :success], :default => :post
-    t.enum     "state",          :limit => [:draft, :published, :frozen],                                      :default => :draft
-    t.boolean  "allow_comments",                                                                               :default => true
-    t.boolean  "is_sticky",                                                                                    :default => false
-    t.boolean  "is_closable",                                                                                  :default => false
-    t.datetime "go_live",                                                                                                          :null => false
+    t.enum     "type",           :limit => [:post, :page, :comment, :message, :ad], :default => :post
+    t.enum     "style",          :limit => [:standard, :notice, :success, :error],  :default => :standard
+    t.enum     "state",          :limit => [:draft, :published, :frozen],           :default => :draft
+    t.boolean  "allow_comments",                                                    :default => true
+    t.boolean  "is_sticky",                                                         :default => false
+    t.boolean  "is_closable",                                                       :default => false
+    t.datetime "go_live",                                                                                  :null => false
     t.datetime "go_dead"
-    t.datetime "created_at",                                                                                                       :null => false
-    t.datetime "updated_at",                                                                                                       :null => false
+    t.datetime "created_at",                                                                               :null => false
+    t.datetime "updated_at",                                                                               :null => false
   end
 
   add_index "posts", ["post_id"], :name => "index_posts_on_post_id"

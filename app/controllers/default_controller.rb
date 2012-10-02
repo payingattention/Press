@@ -95,7 +95,7 @@ class DefaultController < ApplicationController
     @posts = @posts.where( :state => :published )
     # Make sure we are talking about posts or messages
     t = Post.arel_table
-    @posts = @posts.where( t[:object_type].matches(:post).or(t[:object_type].matches(:message)))
+    @posts = @posts.where( t[:type].matches(:post).or(t[:object_type].matches(:message)))
     # Make sure they don't have a password.. those are "private"
     @posts = @posts.where( :password => nil )
     # If a query is set, use it
