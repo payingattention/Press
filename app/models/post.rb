@@ -13,7 +13,11 @@ class Post < ActiveRecord::Base
   # Posts (content) can be "posts", "pages", "comments", "messages", "ads"..etc.
   has_many :posts
 
+  # Before we create our post, generate a unique token id for it that can be used for reference if needed
+  before_validation :generate_token, :on => :create
+
   # Add validation
+  validates :token,   :presence => true
   validates :go_live, :presence => true
   validates :seo_url, :presence => { :message => "SEO Url can't be blank for Posts" }, :if => :is_a_post?
   validates :seo_url, :presence => { :message => "SEO Url can't be blank for Pages" }, :if => :is_a_page?
@@ -25,6 +29,13 @@ class Post < ActiveRecord::Base
   scope :pages, where(:object_type => :page)
   scope :comments, where(:object_type => :comment)
   scope :messages, where(:object_type => :message)
+
+  def generate_token
+    begin
+      token = SecureRandom.urlsafe_base64
+    end while Post.where(:token => token).exists?
+    self.token = token
+  end
 
   # Tags ( Taxonomies with a classification of tag )
   # post.tags returns all child taxonomies that are tags

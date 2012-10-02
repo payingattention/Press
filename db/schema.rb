@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(:version => 20120707155525) do
   create_table "posts", :force => true do |t|
     t.integer  "user_id",                                                                                                          :null => false
     t.integer  "post_id"
-    t.string   "uuid",                                                                                                             :null => false
+    t.string   "token",                                                                                                            :null => false
     t.text     "content"
     t.string   "seo_url"
     t.string   "password",       :limit => 40
