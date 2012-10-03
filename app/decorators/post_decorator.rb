@@ -73,17 +73,27 @@ class PostDecorator < Draper::Base
     end
   end
 
-  # Render our the taxonomies (THIS FAILS)
+  # Render our the taxonomies based on the type
   def render_taxonomies type
     tax_list = send(type)
-    tax_list.each do |tax|
-      render_taxonomy tax
-    end
-  end
-
-  # Render a specific taxonomy using the partial
-  def render_taxonomy tax
-    h.render :partial => 'content/taxonomy', :locals => { :t => tax }
+    render_list = tax_list.map_with_index do |tax, index|
+      h.content_tag :li do
+        if index == 0
+          h.link_to "/#{tax.classification}/#{tax.seo_url}" do
+            case type
+              when :categories
+                "<i class='icon-folder-open'></i> #{tax.name.capitalize}".html_safe
+              when :tags
+                "<i class='icon-tags'></i> #{tax.name.capitalize}".html_safe
+              else
+                tax.name.capitalize
+            end
+          end
+        else
+          h.link_to tax.name.capitalize, "/#{tax.classification}/#{tax.seo_url}"
+        end
+      end
+    end.join.html_safe
   end
 
   # Render Comments
