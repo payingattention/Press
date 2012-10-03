@@ -5,4 +5,14 @@ class Array
     nil
   end
 
+  # I'm shocked this isn't in the core language.
+  def map_with_index &block
+    index = 0
+    map do |element|
+      result = yield element, index
+      index += 1
+      result
+    end
+  end
+
 end

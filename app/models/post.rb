@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
 
   # Mass assignable fields
-  attr_accessible :content, :password, :kind, :go_live, :is_sticky, :allow_comments, :seo_url, :state, :style, :is_closable, :go_dead
+  attr_accessible :content, :seo_url, :password, :kind, :style, :state, :allow_comments, :is_sticky, :is_closable, :is_indexable, :is_searchable, :is_frontable, :go_live, :go_dead
 
   # Posts ( pages, comments, messages, ads etc.. ) must belong to a user
   belongs_to :user
@@ -35,6 +35,11 @@ class Post < ActiveRecord::Base
   scope :pages, where(:kind => :page)
   scope :comments, where(:kind => :comment)
   scope :messages, where(:kind => :message)
+
+  # Storage for the "parts" of a post
+  @_header = nil
+  @_body = nil
+  @_tease = nil
 
   # Generate a unique token and make sure its unique by testing for it
   def generate_token
@@ -83,6 +88,36 @@ class Post < ActiveRecord::Base
     self.kind == :page
   end
 
+  # Return the body of the content
+  def body
+    parse unless @_body.present?
+    @_body
+  end
 
+  # Return the header of the content
+  def header query = nil
+    parse unless @_header.present?
+    @_header
+  end
+
+  # Return the tease of the content
+  def tease
+    parse unless @_tease.present?
+    @_tease
+  end
+
+  private
+
+  # Parse out the header, tease and body of the content
+  def parse
+    @_header, @_body = content.split(/-\s-\s-/,2)
+    @_header, @_tease = @_header.split(/\*\s\*\s\*/,2)
+    @_tease = '' unless @_tease.present?
+  end
+
+  # Normalize carriage returns into something we actually want
+  #def normalize text
+  #  text.gsub("\r\n","\n").gsub("\r","\n").gsub(/\n{2,}/,"\n\n")
+  #end
 
 end

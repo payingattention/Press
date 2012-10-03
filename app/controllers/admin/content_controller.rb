@@ -3,7 +3,7 @@ class Admin::ContentController < AdminController
   # LIST -- Shows a list of the content type [posts,pages,comments,messages,ads,etc...]
   def index
     # Set our limit, this should be dynamic or something.. drop box?
-    limit = 12;
+    limit = 12
 
     # if we are talking about a tag, get our posts from there
     #@tag = params[:tag] || ''
@@ -21,8 +21,10 @@ class Admin::ContentController < AdminController
 
     #if !@tag.present? && !@category.present?
 
-    @content = list_models Post.posts, [], 'go_live desc' if params[:type] == 'posts'
-    @content = list_models Post.pages, [], 'go_live desc' if params[:type] == 'pages'
+    #@content = list_models Post.posts, [], 'go_live desc' if params[:type] == 'posts'
+    #@content = list_models Post.pages, [], 'go_live desc' if params[:type] == 'pages'
+
+    @content = PostDecorator.decorate(list_models Post.send(params[:type]), [], 'go_live desc')
 
     #end
 

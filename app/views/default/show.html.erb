@@ -7,74 +7,7 @@
   <div class='row'>
     <div class='span9'>
 
-      <div class='content-panel'>
-
-        <% header,*tease = @post.content.split(/\*\s\*\s\*/) %>
-        <% header.gsub!(/\(\)/, "("+url_for('/' + @post.seo_url + '/' + url_query)+")" )%>
-        <%= render_markdown header, :query => @query %>
-
-        <% tease = tease.join %>
-        <% if tease.present? %>
-          <div class="navbar upper">
-            <div class="navbar-inner">
-              <ul class="nav">
-                <li><a href="/"><i class="icon-calendar"></i><%= @post.go_live.strftime("%B %e, %Y @ %l:%M%P") %></a></li>
-                <li><a href="/"><i class="icon-user"></i><%= @post.user.display_name %></a></li>
-
-                <% if current_user == @post.user %>
-                  <li class='pull-right'><a href="<%= url_for edit_admin_content_path @post.kind, @post %>"><i class="icon-pencil"></i>Edit</a></li>
-                <% end %>
-                <% if @post.allow_comments %>
-                  <li class='pull-right'><a href="<%= url_for '/' + @post.seo_url + '/' + url_query %>#comments"><i class="icon-comment"></i>Comments (<%= @post.comments.count %>)</a></li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-
-          <% tease.gsub!(/- - -/,'') %>
-          <%= render_markdown tease, :query => @query %>
-
-        <% end %>
-
-        <div class="navbar">
-          <div class="navbar-inner">
-            <ul class="nav">
-
-              <li class='pull-right'><a href="<%= url_for '/' + @post.seo_url + '.md/' %>"><small>[M&dArr;]</small></a></li>
-
-              <% @post.categories.each do |c| %>
-                <li><a href="/category/<%= c.seo_url %>"><% if c == @post.categories.first %><i class="icon-folder-open"></i><% end %>
-                  <%= c.name.capitalize %></a>
-                </li>
-              <% end %>
-
-              <% @post.tags.each do |t| %>
-                <li><a href="/tag/<%= t.seo_url %>"><% if t == @post.tags.first %><i class="icon-tags"></i><% end %>
-                  <%= t.name.capitalize %></a>
-                </li>
-              <% end %>
-
-            </ul>
-          </div>
-        </div>
-
-        <% if (@post.allow_comments == false && @post.comments.count != 0) || @post.allow_comments %>
-          <div class="navbar">
-            <div class="navbar-inner">
-              <ul class="nav nav-tabs">
-                <li class="pull-right"><a href="#">Comments</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <% @post.comments.each do |comment| %>
-
-            <%=  comment.content %>
-
-          <% end %>
-        
-        <% end %>
-      </div>
+      <%= @post.render %>
 
     </div>
 

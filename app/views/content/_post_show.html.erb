@@ -1,0 +1,28 @@
+<%= post.content_panel do %>
+  <%= render_markdown post.header(@query), { :query => @query } %>
+
+  <%= post.nav_bar :class => 'upper' do %>
+    <li><a href="/"><i class="icon-calendar"></i><%= post.go_live.strftime("%B %e, %Y @ %l:%M%P") %></a></li>
+    <li><a href="/"><i class="icon-user"></i><%= post.user.display_name %></a></li>
+    <%= post.edit_link %>
+    <%= post.comments_link %>
+  <% end %>
+
+  <%= render_markdown post.tease, { :query => @query } %>
+  <%= render_markdown post.body, { :query => @query } %>
+
+  <%= post.nav_bar do %>
+    <%= post.render_taxonomies :categories %>
+    <%= post.render_taxonomies :tags %>
+  <% end %>
+
+  <% if post.allow_comments || post.comments.count > 0 %>
+    <%= post.nav_bar :class => 'lower' do %>
+      <%= post.nav_item do %>
+        <a name="comments">Comments</a>
+      <% end %>
+    <% end %>
+    <%= post.render_comments %>
+  <% end %>
+
+<% end %>
