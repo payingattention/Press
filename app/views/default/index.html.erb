@@ -1,5 +1,3 @@
-<% md = Redcarpet::Markdown.new(Redcarpet::Render::XHTML, :autolink => true, :space_after_headers => true) %>
-
 <div class='container' role="main" xmlns="http://www.w3.org/1999/html">
 
   <%= render_breadcrumbs :category => @category, :tag => @tag, :filter => @query %>
@@ -9,67 +7,7 @@
 
       <% @posts.each do |post| %>
 
-        <div class='content-panel <%= "alert" if post.is_closable? %>'>
-          <% if post.is_closable? %>
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <% end %>
-
-          <% header,*tease = post.content.split(/\*\s\*\s\*/) %>
-          <% header.gsub!(/\(\)/, "("+url_for('/' + post.seo_url + '/' + url_query)+")" )%>
-
-          <% tease = tease.join %>
-          <% if tease.present? %>
-            <%= render_markdown header, :query => @query %>
-            <div class="navbar upper">
-              <div class="navbar-inner">
-                <ul class="nav">
-                  <li><a href="/"><i class="icon-calendar"></i><%= post.go_live.strftime("%B %e, %Y @ %l:%M%P") %></a></li>
-                  <li><a href="/"><i class="icon-user"></i><%= post.user.display_name %></a></li>
-
-                  <% if current_user == post.user %>
-                    <li class='pull-right'><a href="<%= url_for edit_admin_content_path post.kind, post %>"><i class="icon-pencil"></i>Edit</a></li>
-                  <% end %>
-                  <% if post.allow_comments %>
-                  <li class='pull-right'><a href="<%= url_for '/' + post.seo_url + '/' + url_query %>#comments"><i class="icon-comment"></i>Comments (<%= post.comments.count %>)</a></li>
-                  <% end %>
-                </ul>
-              </div>
-            </div>
-            <% tease,*body = tease.split(/-\s-\s-/) %>
-            <% body = body.join %>
-          <% else %>
-            <% tease,*body = header.split(/-\s-\s-/) %>
-            <% body = body.join %>
-          <% end %>
-
-          <% if tease.present? %>
-            <%= render_markdown tease, :query => @query %>
-            <% if body.present? %>
-              <div class='readmore'><%= link_to 'Read more...', '/' + post.seo_url + '/' + url_query %></div>
-            <% end %>
-          <% end %>
-
-          <div class="navbar">
-            <div class="navbar-inner">
-              <ul class="nav">
-
-                <% post.categories.each do |c| %>
-                  <li><a href="/category/<%= c.seo_url %>"><% if c == post.categories.first %><i class="icon-folder-open"></i><% end %>
-                    <%= c.name.capitalize %></a>
-                  </li>
-                <% end %>
-
-                <% post.tags.each do |t| %>
-                  <li><a href="/tag/<%= t.seo_url %>"><% if t == post.tags.first %><i class="icon-tags"></i><% end %>
-                    <%= t.name.capitalize %></a>
-                  </li>
-                <% end %>
-
-              </ul>
-            </div>
-          </div>
-
-        </div>
+        <%= post.render(:tease => true) %>
 
       <% end %>
 
@@ -92,6 +30,7 @@
           </div>
         </div>
       </div>
+
       <% end %>
 
     </div>
