@@ -30,10 +30,10 @@ class PostDecorator < Draper::Base
   end
 
   # Render out the read more link if the body is present
-  def read_more_link
+  def read_more_link query = nil
     if body.present?
       h.content_tag :div, :class => 'readmore' do
-        h.link_to 'Read more...', full_url
+        h.link_to 'Read more...', full_url(query)
       end
     end
   end

@@ -1,6 +1,6 @@
 <%= post.content_panel do %>
   <%= post.close_button %>
-  <%= render_markdown post.header(@query), { :query => @query } %>
+  <%= render_markdown post.header(url_query), { :query => @query } %>
 
   <%= post.nav_bar :class => 'upper' do %>
     <li><a href="/"><i class="icon-calendar"></i><%= post.go_live.strftime("%B %e, %Y @ %l:%M%P") %></a></li>
@@ -10,7 +10,7 @@
   <% end %>
 
   <%= render_markdown post.tease, { :query => @query } %>
-  <%= post.read_more_link %>
+  <%= post.read_more_link(url_query) %>
 
   <%= post.nav_bar do %>
     <%= post.render_taxonomies :categories %>
