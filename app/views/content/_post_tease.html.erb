@@ -1,4 +1,5 @@
 <%= post.content_panel do %>
+  <%= post.close_button %>
   <%= render_markdown post.header(@query), { :query => @query } %>
 
   <%= post.nav_bar :class => 'upper' do %>
