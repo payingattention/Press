@@ -44,7 +44,7 @@ class DefaultController < ApplicationController
     category = Taxonomy.find_by_seo_url requested_category
 
     if category.present?
-      @posts = PostDecorator.decorate(get_posts category.posts Post.order)
+      @posts = PostDecorator.decorate(get_posts category.posts, { :state => :published, :is_indexable => true, :is_sticky => false, :password => nil })
 
       respond_to do |format|
         format.html { render :template => 'default/index' }
@@ -63,7 +63,7 @@ class DefaultController < ApplicationController
     tag = Taxonomy.find_by_seo_url requested_tag
 
     if tag.present?
-      @posts = PostDecorator.decorate(get_posts tag.posts Post.order)
+      @posts = PostDecorator.decorate(get_posts tag.posts, { :state => :published, :is_indexable => true, :is_sticky => false, :password => nil })
 
       respond_to do |format|
         format.html { render :template => 'default/index' }
@@ -78,7 +78,7 @@ class DefaultController < ApplicationController
   private
 
   # Paginate and process our requested posts page.. Used by Index, Category and Tag
-  def get_posts posts
+  def get_posts posts = Posts.order, where = {:state => :published, :is_frontable => true, :is_sticky => false, :password => nil}
     # We'll need this
     t = Post.arel_table
     # Our page number
@@ -86,8 +86,11 @@ class DefaultController < ApplicationController
     # Our query if there is one set
     @query = params[:query] || ''
 
+    stickies_where = { :state => :published, :is_sticky => true }
+    stickies_where[:is_frontable] = true if where[:is_frontable]
+    stickies_where[:is_indexable] = true if where[:is_indexable]
     # Get all the published, frontable sticky posts first
-    stickies = Post.order('go_live DESC').where( :state => :published, :is_frontable => true, :is_sticky => true )
+    stickies = Post.order('go_live DESC').where( stickies_where )
     # Make sure they are messages or posts
     stickies = stickies.where( t[:kind].matches(:post).or(t[:kind].matches(:message)) )
 
@@ -96,7 +99,7 @@ class DefaultController < ApplicationController
     limit = (stickies.count > limit) ? 1 : limit - stickies.count
 
     # Get the latest published, frontable, not sticky and with no password posts by go_live
-    posts = posts.order('go_live DESC').where( :state => :published, :is_frontable => true, :is_sticky => false, :password => nil )
+    posts = posts.order('go_live DESC').where( where )
     # Make sure we are talking about posts or messages
     posts = posts.where( t[:kind].matches(:post).or(t[:kind].matches(:message)))
     # If a query is set, use it to filter the output
