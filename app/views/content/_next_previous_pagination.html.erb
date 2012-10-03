@@ -1,0 +1,14 @@
+<% if number_of_pages > 1 %>
+  <ul class='breadcrumb'>
+    <% if current_page > 1 %>
+      <% if current_page.to_i - 1 == 1 %>
+        <li><%= link_to 'Newer Entries', '/' %></li>
+      <% else %>
+        <li><%= link_to 'Newer Entries', "/page/#{(current_page.to_i - 1)}/" %></li>
+      <% end %>
+    <% end %>
+    <% if current_page < number_of_pages %>
+      <li class='pull-right'><%= link_to 'Older Entries', "/page/#{(current_page.to_i + 1)}/" %></li>
+    <% end %>
+  </ul>
+<% end %>
