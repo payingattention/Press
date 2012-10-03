@@ -9,9 +9,8 @@ class DefaultController < ApplicationController
     if post.present?
       redirect_to :action => 'show', :seo_url => post.seo_url
     else
-      # Most likely this is the way it will always go.. show me the list
-      @posts = Post.order
-      get_posts
+      # Okay get me ma'posts
+      @posts = PostDecorator.decorate(get_posts Post.order)
 
       respond_to do |format|
         format.html # index.html.erb
@@ -24,7 +23,7 @@ class DefaultController < ApplicationController
   # Show a post or page, based on the SEO Url
   def show
     #load the post or page by seo url or return to index if not found
-    @post = Post.find_by_seo_url params[:seo_url]
+    @post = PostDecorator.find_by_seo_url params[:seo_url]
     if @post.present?
       @query = params[:query] || ''
 
@@ -82,33 +81,35 @@ class DefaultController < ApplicationController
 
   private
   # Paginate and process our requested posts page.. Used by Index, Category and Tag
-  def get_posts
+  def get_posts posts
     # Get the 6 latest -- TODO this should be configurable
-    limit = 6;
+    limit = 6
     # Our page number
     page = (params[:page].to_i - 1) || 1
     # Our query if there is one set
     @query = params[:query] || ''
     # Get the latest posts by go_live
-    @posts = @posts.order('go_live DESC')
+    posts = posts.order('go_live DESC')
     # Make sure we are only getting those that are published
-    @posts = @posts.where( :state => :published )
+    posts = posts.where( :state => :published )
     # Make sure we are talking about posts or messages
     t = Post.arel_table
-    @posts = @posts.where( t[:kind].matches(:post).or(t[:kind].matches(:message)))
+    posts = posts.where( t[:kind].matches(:post).or(t[:kind].matches(:message)))
     # Make sure they don't have a password.. those are "private"
-    @posts = @posts.where( :password => nil )
+    posts = posts.where( :password => nil )
     # If a query is set, use it
-    @posts = @posts.where(["content like ?", '%'+@query+'%'] ) if @query.present?
+    posts = posts.where(["content like ?", '%'+@query+'%'] ) if @query.present?
     # Get our filtered post count for pagination
-    filtered_post_count = @posts.count
+    filtered_post_count = posts.count
     # Limit the number of posts to show
-    @posts = @posts.limit(limit)
+    posts = posts.limit(limit)
     # Set the offset if we aren't on the first page.
-    @posts = @posts.offset(limit.to_i * page.to_i) if page > 0
+    posts = posts.offset(limit.to_i * page.to_i) if page > 0
     # Need this to show a previous/next button
     @pagination_number_of_pages = (filtered_post_count / limit) +1
     @pagination_current_page = (page.to_i + 1) > 0 ? (page.to_i + 1) : 1
+    # Return our posts
+    posts
   end
 
 end
