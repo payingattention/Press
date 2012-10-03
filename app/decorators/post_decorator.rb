@@ -16,11 +16,17 @@ class PostDecorator < Draper::Base
   end
 
   # Render the content panel based on the type of content this is
-  def content_panel options = { :tease => false }
-    # Class == content-panel and alert if is_closable etc
-    h.content_tag :div, :class => 'content-panel' do
+  def content_panel options = { :tease => false, :class => '' }
+    options[:class] << style.to_s
+    options[:class] << ' alert' if is_closable
+    h.content_tag :div, :class => "content-panel #{options[:class]}" do
       yield
     end
+  end
+
+  # Our close button
+  def close_button
+    "<button class='close' data-dismiss='alert'>&times;</button>".html_safe if is_closable
   end
 
   # Render out the read more link if the body is present
@@ -98,7 +104,7 @@ class PostDecorator < Draper::Base
 
   # Render Comments
   def render_comments
-    render_list = comments.map_with_index do |comment, index|
+    comments.map_with_index do |comment, index|
 #      h.render :partials => 'content/comment', :locals => { :comment => comment }
     end.join.html_safe
   end
