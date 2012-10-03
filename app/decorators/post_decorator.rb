@@ -7,8 +7,8 @@ class PostDecorator < Draper::Base
   end
 
   # Render the show or tease partial depending on whats being called
-  def render opts = { :tease => false }
-    unless opts[:tease]
+  def render options = { :tease => false }
+    unless options[:tease]
       h.render :partial => "content/#{kind}_show", :locals => { :"#{kind}" => self }
     else
       h.render :partial => "content/#{kind}_tease", :locals => { :"#{kind}" => self }
@@ -16,7 +16,7 @@ class PostDecorator < Draper::Base
   end
 
   # Render the content panel based on the type of content this is
-  def content_panel opts = { :tease => false }
+  def content_panel options = { :tease => false }
     # Class == content-panel and alert if is_closable etc
     h.content_tag :div, :class => 'content-panel' do
       yield
@@ -63,8 +63,8 @@ class PostDecorator < Draper::Base
   end
 
   # Nav bar!
-  def nav_bar
-    h.content_tag :div, :class => 'navbar' do
+  def nav_bar options = { :class => '' }
+    h.content_tag :div, :class => "navbar #{options[:class]}" do
       h.content_tag :div, :class => 'navbar-inner' do
         h.content_tag :ul, :class => 'nav' do
           yield
@@ -98,9 +98,9 @@ class PostDecorator < Draper::Base
 
   # Render Comments
   def render_comments
-    comments.each do |comment|
-      h.render :partials => 'content/comment', :locals => { :comment => comment }
-    end
+    render_list = comments.map_with_index do |comment, index|
+#      h.render :partials => 'content/comment', :locals => { :comment => comment }
+    end.join.html_safe
   end
 
 end
