@@ -1,0 +1,6 @@
+<%= message.content_panel do %>
+  <%= message.close_button %>
+  <%= render_markdown message.header(@query), { :query => @query } %>
+  <%= render_markdown message.tease, { :query => @query } %>
+  <%= message.read_more_link %>
+<% end %>
