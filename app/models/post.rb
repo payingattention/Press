@@ -36,6 +36,11 @@ class Post < ActiveRecord::Base
   scope :comments, where(:kind => :comment)
   scope :messages, where(:kind => :message)
 
+  # Storage for the "parts" of a post
+  @_header = nil
+  @_body = nil
+  @_tease = nil
+
   # Generate a unique token and make sure its unique by testing for it
   def generate_token
     begin
@@ -83,6 +88,35 @@ class Post < ActiveRecord::Base
     self.kind == :page
   end
 
+  # Return the body of the content
+  def body
+    parse unless @_body.present?
+    @_body
+  end
 
+  # Return the header of the content
+  def header query = nil
+    parse unless @_header.present?
+    @_header
+  end
+
+  # Return the tease of the content
+  def tease
+    parse unless @_tease.present?
+    @_tease
+  end
+
+  private
+
+  # Parse out the header, tease and body of the content
+  def parse
+    @_header, @_body = content.split(/-\s-\s-/,2)
+    @_header, @_tease = @_header.split(/\*\s\*\s\*/,2)
+  end
+
+  # Normalize carriage returns into something we actually want
+  #def normalize text
+  #  text.gsub("\r\n","\n").gsub("\r","\n").gsub(/\n{2,}/,"\n\n")
+  #end
 
 end
