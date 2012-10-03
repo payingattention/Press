@@ -22,7 +22,7 @@
         <tr>
           <td><%= check_box_tag "content[#{content.id}]" %></td>
           <td>
-            <%= render_markdown content.content.gsub(/\(\)/, "("+url_for('/' + content.seo_url + '/' + url_query)+")" ), { :limit => 1 } %>
+            <%= render_markdown PostDecorator.decorate(content).header(''), { :limit => 2 } %>
             by <%= content.user.display_name %>
           </td>
           <td>
