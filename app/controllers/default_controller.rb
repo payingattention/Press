@@ -44,9 +44,7 @@ class DefaultController < ApplicationController
     category = Taxonomy.find_by_seo_url requested_category
 
     if category.present?
-      @category = category
-      @posts = category.posts
-      get_posts
+      @posts = PostDecorator.decorate(get_posts category.posts Post.order)
 
       respond_to do |format|
         format.html { render :template => 'default/index' }
@@ -65,9 +63,7 @@ class DefaultController < ApplicationController
     tag = Taxonomy.find_by_seo_url requested_tag
 
     if tag.present?
-      @tag = tag
-      @posts = tag.posts
-      get_posts
+      @posts = PostDecorator.decorate(get_posts tag.posts Post.order)
 
       respond_to do |format|
         format.html { render :template => 'default/index' }
