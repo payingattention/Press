@@ -107,9 +107,9 @@ class DefaultController < ApplicationController
     posts = posts.offset(limit.to_i * page.to_i) if page > 0
 
     # Get our filtered post count for pagination
-    filtered_post_count = stickies.count + posts.count
+    @filtered_post_count = stickies.count + posts.count
     # Need this to show a previous/next button
-    @pagination_number_of_pages = (filtered_post_count / limit)
+    @pagination_number_of_pages = (@filtered_post_count > limit) ? (@filtered_post_count / limit) + 1 : 1
     @pagination_current_page = (page.to_i + 1) > 0 ? (page.to_i + 1) : 1
 
     # Return our posts

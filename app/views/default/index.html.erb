@@ -11,7 +11,8 @@
 
       <%= render :partial => 'content/next_previous_pagination', :locals => {
         number_of_pages:  @pagination_number_of_pages,
-        current_page:     @pagination_current_page
+        current_page:     @pagination_current_page,
+        filtered_count:   @filtered_post_count
       } %>
 
     </div>
