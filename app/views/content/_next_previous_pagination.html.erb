@@ -1,4 +1,4 @@
-<% if number_of_pages > 0 %>
+<% if number_of_pages > 0 || current_page > 0 %>
   <ul class='breadcrumb'>
     <% if current_page > 1 %>
       <% if current_page.to_i - 1 == 1 %>

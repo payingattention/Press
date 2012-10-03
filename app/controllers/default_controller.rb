@@ -76,39 +76,44 @@ class DefaultController < ApplicationController
   end
 
   private
+
   # Paginate and process our requested posts page.. Used by Index, Category and Tag
   def get_posts posts
-    # Get the 6 latest -- TODO this should be configurable
-    limit = 6
+    # We'll need this
+    t = Post.arel_table
     # Our page number
     page = (params[:page].to_i - 1) || 1
     # Our query if there is one set
     @query = params[:query] || ''
-    # Get the latest posts by go_live
-    posts = posts.order('go_live DESC')
-    # Make sure we are only getting those that are published
-    posts = posts.where( :state => :published )
-    # Make sure they are front page worthy
-    posts = posts.where( :is_frontable => true )
+
+    # Get all the published, frontable sticky posts first
+    stickies = Post.order('go_live DESC').where( :state => :published, :is_frontable => true, :is_sticky => true )
+    # Make sure they are messages or posts
+    stickies = stickies.where( t[:kind].matches(:post).or(t[:kind].matches(:message)) )
+
+    # Get the 6 latest -- TODO this should be configurable
+    limit = 6
+    limit = (stickies.count > limit) ? 1 : limit - stickies.count
+
+    # Get the latest published, frontable, not sticky and with no password posts by go_live
+    posts = posts.order('go_live DESC').where( :state => :published, :is_frontable => true, :is_sticky => false, :password => nil )
     # Make sure we are talking about posts or messages
-    t = Post.arel_table
     posts = posts.where( t[:kind].matches(:post).or(t[:kind].matches(:message)))
-    # Make sure they don't have a password.. those are "private"
-    posts = posts.where( :password => nil )
-    # If a query is set, use it
+    # If a query is set, use it to filter the output
     posts = posts.where(["content like ?", '%'+@query+'%'] ) if @query.present?
-    # Get our filtered post count for pagination
-    filtered_post_count = posts.count
     # Limit the number of posts to show
     posts = posts.limit(limit)
     # Set the offset if we aren't on the first page.
     posts = posts.offset(limit.to_i * page.to_i) if page > 0
+
+    # Get our filtered post count for pagination
+    filtered_post_count = stickies.count + posts.count
     # Need this to show a previous/next button
     @pagination_number_of_pages = (filtered_post_count / limit)
     @pagination_current_page = (page.to_i + 1) > 0 ? (page.to_i + 1) : 1
 
     # Return our posts
-    posts
+    stickies + posts
   end
 
 end
