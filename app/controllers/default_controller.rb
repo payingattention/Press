@@ -88,6 +88,8 @@ class DefaultController < ApplicationController
     posts = posts.order('go_live DESC')
     # Make sure we are only getting those that are published
     posts = posts.where( :state => :published )
+    # Make sure they are front page worthy
+    posts = posts.where( :is_frontable => true )
     # Make sure we are talking about posts or messages
     t = Post.arel_table
     posts = posts.where( t[:kind].matches(:post).or(t[:kind].matches(:message)))
@@ -102,8 +104,9 @@ class DefaultController < ApplicationController
     # Set the offset if we aren't on the first page.
     posts = posts.offset(limit.to_i * page.to_i) if page > 0
     # Need this to show a previous/next button
-    @pagination_number_of_pages = (filtered_post_count / limit) +1
+    @pagination_number_of_pages = (filtered_post_count / limit)
     @pagination_current_page = (page.to_i + 1) > 0 ? (page.to_i + 1) : 1
+
     # Return our posts
     posts
   end
