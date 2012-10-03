@@ -6,6 +6,7 @@ class PostDecorator < Draper::Base
     model.header.gsub '()', "(%s)" % h.url_for("/#{model.seo_url}/#{query}")
   end
 
+  # Render the show or tease partial depending on whats being called
   def render opts = { :tease => false }
     unless opts[:tease]
       h.render :partial => "content/#{kind}_show", :locals => { :"#{kind}" => self }
@@ -14,6 +15,15 @@ class PostDecorator < Draper::Base
     end
   end
 
+  # Render the content panel based on the type of content this is
+  def content_panel opts = { :tease => false }
+    # Class == content-panel and alert if is_closable etc
+    h.content_tag :div, :class => 'content-panel' do
+      yield
+    end
+  end
+
+  # Render out the read more link if the body is present
   def read_more_link
     if body.present?
       h.content_tag :div, :class => 'readmore' do
@@ -22,10 +32,12 @@ class PostDecorator < Draper::Base
     end
   end
 
+  # Get our full url
   def full_url query = nil
     "/#{seo_url}/#{query}"
   end
 
+  # Give us an edit link if we are the editor
   def edit_link
     if h.current_user == user
       nav_item do
@@ -34,6 +46,7 @@ class PostDecorator < Draper::Base
     end
   end
 
+  # Give us a comment link, if we allow comments
   def comments_link
     if allow_comments
       nav_item do
@@ -42,12 +55,14 @@ class PostDecorator < Draper::Base
     end
   end
 
+  # Nav item internal helper
   def nav_item
     h.content_tag :li, :class => 'pull-right' do
       yield
     end
   end
 
+  # Nav bar!
   def nav_bar
     h.content_tag :div, :class => 'navbar' do
       h.content_tag :div, :class => 'navbar-inner' do
@@ -58,13 +73,7 @@ class PostDecorator < Draper::Base
     end
   end
 
-  def content_panel
-    # Class == content-panel and alert if is_closable etc
-    h.content_tag :div, :class => 'content-panel' do
-      yield
-    end
-  end
-
+  # Render our the taxonomies (THIS FAILS)
   def render_taxonomies type
     tax_list = send(type)
     tax_list.each do |tax|
@@ -72,13 +81,15 @@ class PostDecorator < Draper::Base
     end
   end
 
+  # Render a specific taxonomy using the partial
   def render_taxonomy tax
     h.render :partial => 'content/taxonomy', :locals => { :t => tax }
   end
 
+  # Render Comments
   def render_comments
     comments.each do |comment|
-      h.render :partials => 'posts/comment', :locals => { :comment => comment }
+      h.render :partials => 'content/comment', :locals => { :comment => comment }
     end
   end
 
