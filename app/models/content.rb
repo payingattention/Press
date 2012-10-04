@@ -33,6 +33,7 @@ class Content < ActiveRecord::Base
   scope :ads, where(:kind => :ad)
   scope :posts, where(:kind => :post)
   scope :pages, where(:kind => :page)
+  scope :blocks, where(:kind => :block)
   scope :comments, where(:kind => :comment)
   scope :messages, where(:kind => :message)
 
