@@ -16,9 +16,11 @@ class UserDecorator < Draper::Base
   end
 
   def admin_link
-    h.content_tag :li do
-      h.link_to h.admin_index_path do
-        h.content_tag(:i, '', :class => 'icon-wrench') + " Site Administration"
+    if model.role == :admin || model.role == :owner
+      h.content_tag :li do
+        h.link_to h.admin_index_path do
+          h.content_tag(:i, '', :class => 'icon-wrench') + " Site Administration"
+        end
       end
     end
   end
