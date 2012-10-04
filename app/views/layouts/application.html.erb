@@ -33,9 +33,13 @@
             </div>
           </div>
         </fieldset>
-
       <% end %>
 
+    </div>
+  </div>
+  <div class='row'>
+    <div class='pull-right user-panel'>
+      <%= (user_signed_in?) ? @user.panel : "Login" %>
     </div>
   </div>
 
