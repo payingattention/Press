@@ -19,7 +19,7 @@ class CreateSettings < ActiveRecord::Migration
 
     settings = [
         {'key' => 'maintenance', 'value' => '-1', 'area' => :general, 'label' => 'Maintenance Mode', 'element' => :checkbox, 'description' => 'Put the site in a maintenance mode', 'values' => ''},
-        {'key' => 'title', 'value' => 'Site Title', 'area' => :general, 'label' => 'Site Title', 'element' => :text, 'description' => '', 'values' => ''},
+        {'key' => 'title', 'value' => 'RandomStringOfWords', 'area' => :general, 'label' => 'Site Title', 'element' => :text, 'description' => '', 'values' => ''},
         {'key' => 'tagline', 'value' => 'Thanks for visiting my blog!', 'area' => :general, 'label' => 'Tagline', 'element' => :text, 'description' => '', 'values' => ''},
         {'key' => 'url', 'value' => 'http://randomstringofwords.com', 'area' => :general, 'label' => 'Site Address (URL)', 'element' => :text, 'description' => '', 'values' => ''},
         {'key' => 'email', 'value' => '', 'area' => :general, 'label' => 'Admin Email Address', 'element' => :text, 'description' => 'This address is used as the from address for notification emails and general site contact.', 'values' => ''},
