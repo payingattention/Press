@@ -7,7 +7,7 @@ class CreateContents < ActiveRecord::Migration
       t.text      "text"                             # Text blob
       t.string    "seo_url"                          # Perma link to this object
       t.string    "password", :limit => 40           # PW if set
-      t.enum      "kind", :limit => [:post, :page, :comment, :message, :ad], :default => :post # Type of object
+      t.enum      "kind", :limit => [:post, :page, :comment, :message, :ad, :block], :default => :post # Type of object
       t.enum      "format", :limit => [:markdown, :html, :csv, :json, :text], :default => :markdown
       t.enum      "style", :limit => [:standard, :featured, :notice, :success, :error, :warning, :borderless], :default => :standard
       t.enum      "state", :limit => [:draft, :published, :frozen], :default => :draft # published, draft, whatever
