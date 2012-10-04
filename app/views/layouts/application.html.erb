@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>RubyPress</title>
+  <title><%= Setting.getValue(:title) %></title>
   <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
   <![endif]-->
@@ -50,6 +50,7 @@
           <li><a href="<%= url_for root_path %>"><i class="icon-home"></i></a></li>
           <li class='divider-arrow'></li>
         </ul>
+
 
       </div>
     </div>
