@@ -1,7 +1,7 @@
 class Content < ActiveRecord::Base
 
   # Mass assignable fields
-  attr_accessible :content, :seo_url, :password, :kind, :format, :style, :state, :allow_comments, :is_sticky, :is_closable, :is_indexable, :is_searchable, :is_frontable, :go_live, :go_dead
+  attr_accessible :text, :seo_url, :password, :kind, :format, :style, :state, :allow_comments, :is_sticky, :is_closable, :is_indexable, :is_searchable, :is_frontable, :go_live, :go_dead
 
   # Contents ( posts, pages, comments, messages, ads etc.. ) must belong to a user
   belongs_to :user
@@ -110,7 +110,7 @@ class Content < ActiveRecord::Base
 
   # Parse out the header, tease and body of the content
   def parse
-    @_header, @_body = content.split(/-\s-\s-/,2)
+    @_header, @_body = text.split(/-\s-\s-/,2)
     @_header, @_tease = @_header.split(/\*\s\*\s\*/,2)
     @_tease = '' unless @_tease.present?
     @_body = '' unless @_body.present?
