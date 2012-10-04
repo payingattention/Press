@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
 
   # Mass assignable fields
-  attr_accessible :content, :seo_url, :password, :kind, :style, :state, :allow_comments, :is_sticky, :is_closable, :is_indexable, :is_searchable, :is_frontable, :go_live, :go_dead
+  attr_accessible :content, :seo_url, :password, :kind, :format, :style, :state, :allow_comments, :is_sticky, :is_closable, :is_indexable, :is_searchable, :is_frontable, :go_live, :go_dead
 
   # Posts ( pages, comments, messages, ads etc.. ) must belong to a user
   belongs_to :user
