@@ -9,9 +9,9 @@ class ContentDecorator < Draper::Base
   # Render the show or tease partial depending on whats being called
   def render options = { :tease => false }
     unless options[:tease]
-      h.render :partial => "content/#{kind}_show", :locals => { :"#{kind}" => self }
+      h.render :partial => "default/#{kind}_show", :locals => { :"#{kind}" => self }
     else
-      h.render :partial => "content/#{kind}_tease", :locals => { :"#{kind}" => self }
+      h.render :partial => "default/#{kind}_tease", :locals => { :"#{kind}" => self }
     end
   end
 
@@ -105,7 +105,7 @@ class ContentDecorator < Draper::Base
   # Render Comments
   def render_comments
     comments.map_with_index do |comment, index|
-#      h.render :partials => 'content/comment', :locals => { :comment => comment }
+#      h.render :partials => 'default/comment', :locals => { :comment => comment }
     end.join.html_safe
   end
 

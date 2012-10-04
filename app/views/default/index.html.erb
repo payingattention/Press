@@ -9,7 +9,7 @@
         <%= content.render :tease => true %>
       <% end %>
 
-      <%= render :partial => 'content/next_previous_pagination', :locals => {
+      <%= render :partial => 'default/next_previous_pagination', :locals => {
         number_of_pages:  @pagination_number_of_pages,
         current_page:     @pagination_current_page
       } %>
