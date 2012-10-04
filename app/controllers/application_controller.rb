@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :installed?
+  before_filter :userDecoratorToView
 
   def list_users seed_list = nil
     seed_list = User.select('*') unless seed_list.present?
@@ -49,4 +50,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def userDecoratorToView
+    @user = UserDecorator.decorate(current_user)
+  end
 end
