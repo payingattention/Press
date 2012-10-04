@@ -11,10 +11,16 @@ Press::Application.routes.draw do
   # Below we define all of our administrator namespace routes.. These are for site admin and site staff members only
   resources :admin, :only => [ :index ]
   namespace :admin do
-    resources :content, :path => ":type", :constraints => { :type => /posts|pages|comments|messages|ads/ }, :only => [ :index ]
-    resources :content, :path => ":type", :constraints => { :type => /post|page|comment|message|ad/ }, :only => [ :edit ]
-    resources :posts, :except => [ :index, :show ]
-    resources :pages, :except => [ :index, :show ]
+    resources :content,  :path => ":type", :constraints => { :type => /posts|pages|comments|messages|ads|blocks/ }, :only => [ :index ]
+    resources :content,   :path => ":type", :constraints => { :type => /post|page|comment|message|ad|block/ }, :only => [ :edit ]
+    # The following are crud for content types
+    resources :posts,     :except => [ :index, :show ]
+    resources :pages,     :except => [ :index, :show ]
+    resources :comments,  :except => [ :index, :show ]
+    resources :messages,  :except => [ :index, :show ]
+    resources :ads,       :except => [ :index, :show ]
+    resources :blocks,    :except => [ :index, :show ]
+
     resources :users
     resources :taxonomies
     resources :import_wordpress, :only => [ :new, :create ]
@@ -37,13 +43,12 @@ Press::Application.routes.draw do
 
   end
 
-  # Installation Routes -- @TODO How do we delete this routing entirely?
+  # Installation Routes -- @TODO How do we delete this routing entirely after site is installed?
   resources :install, :only => [ :index, :create_owner ] do
     collection do
       post :create_owner, :path => "create_owner"
     end
   end
-
 
   # Below I am adding some custom routes to match what wordpress does.
   # I don't know if this is the correct way to add these or not, but they work
@@ -52,7 +57,7 @@ Press::Application.routes.draw do
   match '/category/*category' => 'default#category', :as => 'category'
   # Tag route similar to wordpress
   match '/tag/*tag' => 'default#tag', :as => 'tag'
-  # Page route which gets us deeper into the main index page
+  # Page route which gets us pages deeper into the main index page list, not related to content :pages
   match '/page/*page' => 'default#index', :as => 'page'
   # Default SEO URL (Permalink) route for showing pages and posts
   match '*seo_url' => 'default#show', :as => 'slug'
