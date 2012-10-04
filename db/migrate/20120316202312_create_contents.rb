@@ -1,8 +1,8 @@
-class CreatePosts < ActiveRecord::Migration
+class CreateContents < ActiveRecord::Migration
   def change
-    create_table :posts do |t|
+    create_table :contents do |t|
       t.references :user, :null => false      # User who posted
-      t.references :post                      # Parent post if not a post
+      t.references :content                      # Parent post if not a post
       t.string    "token", :null => false     # A web safe uuid token for internal reference
       t.text      "content"                   # Text blob
       t.string    "seo_url"                   # Perma link to this object
@@ -21,9 +21,9 @@ class CreatePosts < ActiveRecord::Migration
       t.datetime  "go_dead"                   # Go dead date
       t.timestamps
     end
-    add_index("posts", "user_id")
-    add_index("posts", "post_id")
-    add_index("posts", "seo_url")
-    add_index("posts", "token")
+    add_index("contents", "user_id")
+    add_index("contents", "content_id")
+    add_index("contents", "seo_url")
+    add_index("contents", "token")
   end
 end

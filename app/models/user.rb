@@ -11,8 +11,8 @@ class User < ActiveRecord::Base
   validates_presence_of :display_name, :gender, :email
 
   # Users have many posts
-  # user.posts references all the posts that users has made
-  has_many :posts
+  # user.contents references all the posts that users has made
+  has_many :contents
 
   scope :owner, where(:role => :owner)
   scope :admin, where(:role => :admin)

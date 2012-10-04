@@ -1,5 +1,5 @@
-class PostDecorator < Draper::Base
-  decorates :post
+class ContentDecorator < Draper::Base
+  decorates :content
 
   # Render the header based on the model header and replace () with the url for now
   def header query = nil

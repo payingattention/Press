@@ -2,14 +2,14 @@
 
 <div class='row'>
 
-    <%= form_for [:admin, @post], :html => { :class => '' } do |f| %>
+  <%= form_for @content, :url => admin_posts_path(@content), :html => { :class => '' } do |f| %>
 
-        <%= render :partial => 'post_form', :locals => {
+    <%= render :partial => 'post_form', :locals => {
             :f => f,
             :form_legend => "Create new post",
             :submit_label => "Create Post"
-        } %>
-    
-    <% end %>
+    } %>
+
+  <% end %>
 
 </div>

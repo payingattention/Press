@@ -2,7 +2,7 @@
 
 <div class='row'>
 
-  <%= form_for [:admin, @page], :html => { :class => '' } do |f| %>
+  <%= form_for @content, :url => admin_pages_path(@content), :html => { :class => '' } do |f| %>
 
     <%= render :partial => 'page_form', :locals => {
             :f => f,

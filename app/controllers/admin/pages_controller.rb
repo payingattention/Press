@@ -4,29 +4,28 @@ class Admin::PagesController < AdminController
   def new
     # Map all users out to a name, id pair for the select box
     @all_users = User.all.map { |a| [a.display_name, a.id] }
-    # Instance our post object to set form defaults
-    @page = Post.new :kind => :page, :go_live => DateTime.now
+    # Instance our content object to set form defaults
+    @content = Content.new :kind => :page, :go_live => DateTime.now
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @page }
+      format.json { render json: @content }
     end
   end
 
   # CREATE
   def create
     # Instance new object
-    @page = Post.new params[:post]
-    @page.user_id = current_user
+    @content = Content.new params[:content]
+    @content.user_id = current_user
     # Save object
     respond_to do |format|
-      if @page.save
-        flash[:success] = 'Post Created.'
-        format.html { redirect_to admin_content_index_path(:pages), notice: 'Post was successfully created.' }
-        format.json { render json: @page, status: :created, location: @page }
+      if @content.save
+        format.html { redirect_to admin_content_index_path(:pages), notice: 'Page was successfully created.' }
+        format.json { render json: @content, status: :created, location: @content }
       else
         format.html { render action: "new" }
-        format.json { render json: @page.errors, status: :unprocessable_entity }
+        format.json { render json: @content.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -35,47 +34,47 @@ class Admin::PagesController < AdminController
   def edit
     # Map all users out to a name, id pair for the select box
     @all_users = User.all.map { |a| [a.display_name, a.id] }
-    # Instance the post
-    @page = Post.find_by_id params[:id]
+    # Instance the content
+    @content = Content.find_by_id params[:id]
 
-    unless @page
+    unless @content
       redirect_to admin_content_index :pages
     end
   end
 
   # UPDATE
   def update
-    @page = Post.find_by_id params[:id]
-    unless @page
+    @content = Content.find_by_id params[:id]
+    unless @content
       redirect_to admin_content_index_path :pages
     end
 
     respond_to do |format|
-      if @page.update_attributes(params[:post])
+      if @content.update_attributes(params[:content])
 
-        @page.taxonomies.clear
+        @content.taxonomies.clear
         params[:taxonomies].each do |tax|
           taxonomy = Taxonomy.find_by_id tax
-          @page.taxonomies << taxonomy if taxonomy.present?
+          @content.taxonomies << taxonomy if taxonomy.present?
         end if params[:taxonomies].present?
 
-        format.html { redirect_to admin_content_index_path(:pages), notice: 'Post was successfully updated.' }
+        format.html { redirect_to admin_content_index_path(:pages), notice: 'Page was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @page.errors, status: :unprocessable_entity }
+        format.json { render json: @content.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # DESTROY
   def destroy
-    @page = Post.find_by_id params[:id]
-    unless @page
+    @content = Content.find_by_id params[:id]
+    unless @content
       redirect_to :action => 'index'
     end
 
-    @page.destroy
+    @content.destroy
     respond_to do |format|
       format.html { redirect_to admin_content_index_path :pages }
       format.json { head :no_content }

@@ -5,16 +5,16 @@ class DefaultController < ApplicationController
   # Show the front page!
   def index
     # Catch old legacy wordpress routing ?p=####
-    post = Post.find_by_id params[:p]
-    if post.present?
-      redirect_to :action => 'show', :seo_url => post.seo_url
+    content = Content.find_by_id params[:p]
+    if content.present?
+      redirect_to :action => 'show', :seo_url => content.seo_url
     else
-      # Okay get me ma'posts
-      @posts = PostDecorator.decorate(get_posts Post.order)
+      # Okay get me ma'content
+      @contents = ContentDecorator.decorate(get_contents Content.order)
 
       respond_to do |format|
         format.html # index.html.erb
-        format.json { render json: @posts }
+        format.json { render json: @contents }
       end
     end
 
@@ -23,13 +23,13 @@ class DefaultController < ApplicationController
   # Show a post or page, based on the SEO Url
   def show
     #load the post or page by seo url or return to index if not found
-    @post = PostDecorator.find_by_seo_url params[:seo_url]
-    if @post.present?
+    @content = ContentDecorator.find_by_seo_url params[:seo_url]
+    if @content.present?
       @query = params[:query] || ''
 
       respond_to do |format|
         format.html # show.html.erb
-        format.json { render json: @post }
+        format.json { render json: @content }
         format.md { render :template => 'default/show' }
       end
     else
@@ -44,11 +44,11 @@ class DefaultController < ApplicationController
     category = Taxonomy.find_by_seo_url requested_category
 
     if category.present?
-      @posts = PostDecorator.decorate(get_posts category.posts, { :state => :published, :is_indexable => true, :is_sticky => false, :password => nil })
+      @contents = ContentDecorator.decorate(get_contents category.contents, { :state => :published, :is_indexable => true, :is_sticky => false, :password => nil })
 
       respond_to do |format|
         format.html { render :template => 'default/index' }
-        format.json { render json: @posts }
+        format.json { render json: @contents }
       end
     else
       # No such category found, redirect to root index
@@ -63,11 +63,11 @@ class DefaultController < ApplicationController
     tag = Taxonomy.find_by_seo_url requested_tag
 
     if tag.present?
-      @posts = PostDecorator.decorate(get_posts tag.posts, { :state => :published, :is_indexable => true, :is_sticky => false, :password => nil })
+      @contents = ContentDecorator.decorate(get_contentss tag.contents, { :state => :published, :is_indexable => true, :is_sticky => false, :password => nil })
 
       respond_to do |format|
         format.html { render :template => 'default/index' }
-        format.json { render json: @posts }
+        format.json { render json: @contents }
       end
     else
       # No such category found, redirect to root index
@@ -77,10 +77,10 @@ class DefaultController < ApplicationController
 
   private
 
-  # Paginate and process our requested posts page.. Used by Index, Category and Tag
-  def get_posts posts = Posts.order, where = {:state => :published, :is_frontable => true, :is_sticky => false, :password => nil}
+  # Paginate and process our requested contents.. Used by Index, Category and Tag
+  def get_contents contents = Content.order, where = {:state => :published, :is_frontable => true, :is_sticky => false, :password => nil}
     # We'll need this
-    t = Post.arel_table
+    t = Content.arel_table
     # Our page number
     page = (params[:page].to_i - 1) || 1
     # Our query if there is one set
@@ -90,7 +90,7 @@ class DefaultController < ApplicationController
     stickies_where[:is_frontable] = true if where[:is_frontable]
     stickies_where[:is_indexable] = true if where[:is_indexable]
     # Get all the published, frontable sticky posts first
-    stickies = Post.order('go_live DESC').where( stickies_where )
+    stickies = Content.order('go_live DESC').where( stickies_where )
     # Make sure they are messages or posts
     stickies = stickies.where( t[:kind].matches(:post).or(t[:kind].matches(:message)) )
 
@@ -99,24 +99,24 @@ class DefaultController < ApplicationController
     limit = (stickies.count > limit) ? 1 : limit - stickies.count
 
     # Get the latest published, frontable, not sticky and with no password posts by go_live
-    posts = posts.order('go_live DESC').where( where )
+    contents = contents.order('go_live DESC').where( where )
     # Make sure we are talking about posts or messages
-    posts = posts.where( t[:kind].matches(:post).or(t[:kind].matches(:message)))
+    contents = contents.where( t[:kind].matches(:post).or(t[:kind].matches(:message)))
     # If a query is set, use it to filter the output
-    posts = posts.where(["content like ?", '%'+@query+'%'] ) if @query.present?
-    # Limit the number of posts to show
-    posts = posts.limit(limit)
+    contents = contents.where(["content like ?", '%'+@query+'%'] ) if @query.present?
+    # Limit the number of content to show
+    contents = contents.limit(limit)
     # Set the offset if we aren't on the first page.
-    posts = posts.offset(limit.to_i * page.to_i) if page > 0
+    contents = contents.offset(limit.to_i * page.to_i) if page > 0
 
-    # Get our filtered post count for pagination
-    @filtered_post_count = stickies.count + posts.count
+    # Get our filtered content count for pagination
+    filtered_content_count = stickies.count + contents.count
     # Need this to show a previous/next button
-    @pagination_number_of_pages = (@filtered_post_count > limit) ? (@filtered_post_count / limit) + 1 : 1
+    @pagination_number_of_pages = (filtered_content_count > limit) ? (filtered_content_count / limit) + 1 : 1
     @pagination_current_page = (page.to_i + 1) > 0 ? (page.to_i + 1) : 1
 
-    # Return our posts
-    stickies + posts
+    # Return our content
+    stickies + contents
   end
 
 end

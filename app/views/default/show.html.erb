@@ -1,13 +1,11 @@
-<% md = Redcarpet::Markdown.new(Redcarpet::Render::XHTML, :autolink => true, :space_after_headers => true) %>
-
 <div class='container' role="main">
 
-<%= render_breadcrumbs :post => @post, :filter => @query %>
+<%= render_breadcrumbs :post => @content, :filter => @query %>
 
   <div class='row'>
     <div class='span9'>
 
-      <%= @post.render %>
+      <%= @content.render %>
 
     </div>
 

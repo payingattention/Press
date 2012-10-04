@@ -13,14 +13,15 @@
 
 ActiveRecord::Schema.define(:version => 20120707155525) do
 
-  create_table "posts", :force => true do |t|
+  create_table "contents", :force => true do |t|
     t.integer  "user_id",                                                                                                                   :null => false
-    t.integer  "post_id"
+    t.integer  "content_id"
     t.string   "token",                                                                                                                     :null => false
     t.text     "content"
     t.string   "seo_url"
     t.string   "password",       :limit => 40
     t.enum     "kind",           :limit => [:post, :page, :comment, :message, :ad],                                  :default => :post
+    t.enum     "format",         :limit => [:markdown, :html, :csv, :json, :text],                                   :default => :markdown
     t.enum     "style",          :limit => [:standard, :featured, :notice, :success, :error, :warning, :borderless], :default => :standard
     t.enum     "state",          :limit => [:draft, :published, :frozen],                                            :default => :draft
     t.boolean  "allow_comments",                                                                                     :default => true
@@ -35,13 +36,13 @@ ActiveRecord::Schema.define(:version => 20120707155525) do
     t.datetime "updated_at",                                                                                                                :null => false
   end
 
-  add_index "posts", ["post_id"], :name => "index_posts_on_post_id"
-  add_index "posts", ["seo_url"], :name => "index_posts_on_seo_url"
-  add_index "posts", ["token"], :name => "index_posts_on_token"
-  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
+  add_index "contents", ["content_id"], :name => "index_contents_on_content_id"
+  add_index "contents", ["seo_url"], :name => "index_contents_on_seo_url"
+  add_index "contents", ["token"], :name => "index_contents_on_token"
+  add_index "contents", ["user_id"], :name => "index_contents_on_user_id"
 
-  create_table "posts_taxonomies", :id => false, :force => true do |t|
-    t.integer "post_id"
+  create_table "contents_taxonomies", :id => false, :force => true do |t|
+    t.integer "content_id"
     t.integer "taxonomy_id"
   end
 

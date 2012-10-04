@@ -22,7 +22,7 @@
         <tr>
           <td><%= check_box_tag "content[#{content.id}]" %></td>
           <td class='span5'>
-            <%= render_markdown PostDecorator.decorate(content).header(''), { :limit => 1 } %>
+            <%= render_markdown ContentDecorator.decorate(content).header(''), { :limit => 1 } %>
             by <%= content.user.display_name %>
           </td>
           <td>

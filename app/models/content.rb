@@ -1,22 +1,22 @@
-class Post < ActiveRecord::Base
+class Content < ActiveRecord::Base
 
   # Mass assignable fields
   attr_accessible :content, :seo_url, :password, :kind, :format, :style, :state, :allow_comments, :is_sticky, :is_closable, :is_indexable, :is_searchable, :is_frontable, :go_live, :go_dead
 
-  # Posts ( pages, comments, messages, ads etc.. ) must belong to a user
+  # Contents ( posts, pages, comments, messages, ads etc.. ) must belong to a user
   belongs_to :user
 
   # A Taxonomy is a keyword (letter, number, word, paragraph, icon..whatever) that is designed to provide some sort
   # of identifier that itself has a classification in order to better organize things.
-  # Posts can have many different identifiers such as Tags, and Categories.  More over those taxonomies also reference
+  # Contents can have many different identifiers such as Tags, and Categories.  More over those taxonomies also reference
   # back to the things they contain.
   has_and_belongs_to_many :taxonomies
 
-  # A post may contain other posts, as a "post" is just a container for some form of blob text with associated data.
-  # Posts (content) can be "posts", "pages", "comments", "messages", "ads"..etc.
-  has_many :posts
+  # A content may contain other contents, as a "content" is just a container for some form of blob text with associated data.
+  # Contents (content) can be "posts", "pages", "comments", "messages", "ads"..etc.
+  has_many :contents
 
-  # Before we create our post, generate a unique token id for it that can be used for reference if needed
+  # Before we create our content, generate a unique token id for it that can be used for reference if needed
   before_validation :generate_token, :on => :create
 
   # Add validation
@@ -36,7 +36,7 @@ class Post < ActiveRecord::Base
   scope :comments, where(:kind => :comment)
   scope :messages, where(:kind => :message)
 
-  # Storage for the "parts" of a post
+  # Storage for the "parts" of a content
   @_header = nil
   @_body = nil
   @_tease = nil
@@ -45,7 +45,7 @@ class Post < ActiveRecord::Base
   def generate_token
     begin
       token = SecureRandom.urlsafe_base64
-    end while Post.where(:token => token).exists?
+    end while Content.where(:token => token).exists?
     self.token = token
   end
 
@@ -56,21 +56,21 @@ class Post < ActiveRecord::Base
   end
 
   # Tags ( Taxonomies with a classification of tag )
-  # post.tags returns all child taxonomies that are tags
+  # content.tags returns all child taxonomies that are tags
   def tags
     taxonomies.all :conditions => { :classification => :tag }
   end
 
   # Categories ( Taxonomies with a classification of category )
-  # post.categories returns all child taxonomies that are categories
+  # content.categories returns all child taxonomies that are categories
   def categories
     taxonomies.all :conditions => { :classification => :category }
   end
 
-  # Comments ( Posts with an object kind of comment )
-  # post.comments returns all child posts that are comments
+  # Comments ( Contents with an object kind of comment )
+  # content.comments returns all child contents that are comments
   def comments
-    posts.all :conditions => { :kind => :comment }
+    contents.all :conditions => { :kind => :comment }
   end
 
   # Belongs to any taxonomy kind with id?
@@ -113,6 +113,7 @@ class Post < ActiveRecord::Base
     @_header, @_body = content.split(/-\s-\s-/,2)
     @_header, @_tease = @_header.split(/\*\s\*\s\*/,2)
     @_tease = '' unless @_tease.present?
+    @_body = '' unless @_body.present?
   end
 
   # Normalize carriage returns into something we actually want

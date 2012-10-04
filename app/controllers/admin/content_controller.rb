@@ -21,16 +21,14 @@ class Admin::ContentController < AdminController
 
     #if !@tag.present? && !@category.present?
 
-    #@content = list_models Post.posts, [], 'go_live desc' if params[:type] == 'posts'
-    #@content = list_models Post.pages, [], 'go_live desc' if params[:type] == 'pages'
 
-    @content = PostDecorator.decorate(list_models Post.send(params[:type]), [], 'go_live desc')
+    @content = ContentDecorator.decorate(list_models Content.send(params[:type]), [], 'go_live desc')
 
     #end
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @posts }
+      format.json { render json: @content }
     end
   end
 
