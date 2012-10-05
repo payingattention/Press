@@ -24,6 +24,7 @@ gem 'json'
 gem 'raindrops', '~> 0.8.0'
 # jQuery is the win
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 # Devise for auth goodness
 gem 'devise'
 # Cancan for permission goodness
