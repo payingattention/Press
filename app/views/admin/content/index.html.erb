@@ -17,7 +17,7 @@
       </tr>
       </thead>
       <tbody>
-      <% @content.each do |content| %>
+      <% @contents.each do |content| %>
         <tr>
           <td><%= check_box_tag "content[#{content.id}]" %></td>
           <td class='span5'>
