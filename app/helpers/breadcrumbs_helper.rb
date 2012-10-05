@@ -6,6 +6,12 @@ module BreadcrumbsHelper
     options = { } if options.nil?
     namespace = controller.class.to_s.split("::").first.downcase + "_index_path"
 
+    # Namespace filters
+    case namespace
+      when "admincontroller_index_path"
+        namespace = "admin_index_path"
+    end
+
     homeTitle = "Home"
     controllerTitle = controller.controller_name.capitalize
     actionTitle = controller.action_name.capitalize
@@ -13,12 +19,14 @@ module BreadcrumbsHelper
     # Action Name Filters
     case actionTitle
       when 'Index'
-        actionTitle = "Manage"
+        actionTitle = "Manage " + controllerTitle
+      else
+        actionTitle = actionTitle + ' ' + controllerTitle.singularize
     end
 
     options[:home]            ||= { :name => homeTitle, :link => user_signed_in? ? eval(namespace) : root_path }
     options[:controller]      ||= { :name => controllerTitle, :link => { :action => :index } }
-    options[:action]          ||= { :name => actionTitle + " " + controllerTitle, :link => { :action => controller.action_name }}
+    options[:action]          ||= { :name => actionTitle, :link => { :action => controller.action_name }}
     options[:entity]          ||= nil
     options[:filter]          ||= nil
     options[:span_size]       ||= 'span12'
@@ -30,8 +38,8 @@ module BreadcrumbsHelper
 
     breadcrumbs = []
     # breadcrumbs << link_to( options[:home][:name], options[:home][:link] )
-    breadcrumbs << link_to( "Site Administration", admin_index_path ) if controller.class.to_s.split("::").first == "Admin"
-    breadcrumbs << link_to( options[:controller][:name], options[:controller][:link] )
+    breadcrumbs << link_to( "Site Administration", admin_index_path ) if controller.class.to_s.split("::").first == "Admin" || controller.class.to_s == "AdminController"
+    breadcrumbs << link_to( options[:controller][:name], options[:controller][:link] ) unless controller.class.to_s == "AdminController"
     breadcrumbs << link_to( options[:action][:name], options[:action][:link] )
 
     options[:entity] = link_to( options[:entity][:name], options[:entity][:link] ) if options[:entity].present?

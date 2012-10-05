@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120707155525) do
+ActiveRecord::Schema.define(:version => 20121005151718) do
 
   create_table "contents", :force => true do |t|
     t.integer  "user_id",                                                                                                                   :null => false
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20120707155525) do
     t.text     "text"
     t.string   "seo_url"
     t.string   "password",       :limit => 40
-    t.enum     "kind",           :limit => [:post, :page, :comment, :message, :ad],                                  :default => :post
+    t.enum     "kind",           :limit => [:post, :page, :comment, :message, :ad, :block],                          :default => :post
     t.enum     "format",         :limit => [:markdown, :html, :csv, :json, :text],                                   :default => :markdown
     t.enum     "style",          :limit => [:standard, :featured, :notice, :success, :error, :warning, :borderless], :default => :standard
     t.enum     "state",          :limit => [:draft, :published, :frozen],                                            :default => :draft
@@ -44,6 +44,13 @@ ActiveRecord::Schema.define(:version => 20120707155525) do
   create_table "contents_taxonomies", :id => false, :force => true do |t|
     t.integer "content_id"
     t.integer "taxonomy_id"
+  end
+
+  create_table "layouts", :force => true do |t|
+    t.string   "title",                          :null => false
+    t.boolean  "is_deletable", :default => true, :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "settings", :force => true do |t|
@@ -94,5 +101,14 @@ ActiveRecord::Schema.define(:version => 20120707155525) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "widgets", :force => true do |t|
+    t.string   "title",       :null => false
+    t.string   "token",       :null => false
+    t.text     "description", :null => false
+    t.text     "code",        :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
 end

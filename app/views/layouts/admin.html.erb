@@ -101,36 +101,6 @@
 <div class='container' role="main">
 
   <!-- @TODO This should be a view helper -->
-  <% if @breadcrumbs.present? || @filter.present? %>
-    <div class='container'>
-      <div class='row'>
-        <div class='span12'>
-          <ul class='breadcrumb'>
-            <% if @breadcrumbs.present? %>
-              <% active = @breadcrumbs.pop %>
-              <% @breadcrumbs.each do |b| %>
-                <li><%= b %> <span class='divider'>/</span></li>
-              <% end %>
-              <li class='active'><%= active %></li>
-            <% end %>
-            <% if @category.present? %>
-              <li>:: Categorized by "<%= @category.capitalize %>" <a href="<%= url_for :filter => @filter, :page => @pagination_current_page %>"><i class="icon-remove-sign"></i></a></li>
-            <% end %>
-            <% if @tag.present? %>
-              <li>:: Tagged as "<%= @tag.capitalize %>" <a href="<%= url_for :filter => @filter, :page => @pagination_current_page %>"><i class="icon-remove-sign"></i></a></li>
-            <% end %>
-            <% if @filter.present? %>
-              <li>:: Filtered by "<span class="highlight"><%= @filter %></span>" <a href="<%= url_for :category => @category, :tag => @tag, :page => @pagination_current_page %>"><i class="icon-remove-sign"></i></a></li>
-            <% end %>
-            
-          </ul>
-        </div>
-      </div>
-    </div>
-  <% end %>
-
-
-  <!-- @TODO This should be a view helper -->
   <div class='row'>
     <div class='span12'>
       <% if flash[:success] || flash[:notice] %>
