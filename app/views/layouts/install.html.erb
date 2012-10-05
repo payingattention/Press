@@ -17,7 +17,9 @@
           $(obj).css('max-width', $(e).width() - 63);
         })
       });
-      AnyTime.picker('anytime', { format: "%M %d, %z @ %h:%i%p" });
+      if ($("#anytime").length > 0) {
+        AnyTime.picker('anytime', { format: "%M %d, %z @ %h:%i%p" });
+      }
     });
   </script>
   <!-- END: Markitup text editor -->
