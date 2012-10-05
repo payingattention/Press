@@ -1,0 +1,34 @@
+<% current = breadcrumbs.pop %>
+<% if breadcrumbs.present? || filter.present? %>
+  <% if render_container %>
+    <div class='container'>
+  <% end %>
+  <div class='row'>
+    <div class='<%= span_size %>'>
+
+      <ul class='breadcrumb'>
+        <% if breadcrumbs.present? %>
+          <% breadcrumbs.each do |b| %>
+            <li><%= b %> <span class='divider'><%= divider %></span></li>
+          <% end %>
+        <% end %>
+        <li class='active'><%= current %></li>
+        <% if entity.present? %>
+          <li class='active'><span class='divider'><%= entity_divider %></span><%= entity %></li>
+        <% end %>
+        <% if filter.present? %>
+          <li><span class='divider'><%= filter_divider %></span> Filtering by "<span class="highlight"><%= filter %></span>"
+            <a href="<%= url_for :query => nil %>"><i class="icon-remove-sign"></i></a>
+          </li>
+        <% end %>
+
+        <% if right_items.present? %>
+          <% right_items.reverse_each do |item| %>
+            <li class='pull-right'><%= item.html_safe %></li>
+          <% end %>
+        <% end %>
+      </ul>
+
+    </div>
+  </div>
+<% end %>
