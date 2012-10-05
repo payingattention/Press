@@ -24,6 +24,7 @@ Press::Application.routes.draw do
     resources :users
     resources :taxonomies
     resources :layouts
+    resources :widgets
     resources :import_wordpress, :only => [ :new, :create ]
 
     # Site settings :index for showing the form and :create to post it (though not technically correct)
