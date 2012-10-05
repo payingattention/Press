@@ -38,7 +38,7 @@ class Admin::PostsController < AdminController
     @content = Content.find_by_id params[:id]
 
     unless @content
-      redirect_to admin_content_index :posts
+      redirect_to admin_content_index_path :posts
     end
   end
 
