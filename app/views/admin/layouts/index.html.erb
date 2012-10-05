@@ -3,6 +3,42 @@
 <div class='row'>
   <div class='span12'>
 
+    <table class='table table-striped selectable'>
+      <thead>
+      <tr>
+        <th><%= check_box_tag "all-layout" %></th>
+        <th>Layout Title</th>
+        <th>Description</th>
+        <th class='span2 center'>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @layouts.each do |layout| %>
+        <tr>
+          <td><%= check_box_tag "layout[#{layout.id}]" %></td>
+          <td class='span5'><%= layout.title %></td>
+          <td><%= layout.description %></td>
+          <td class='span2 center'>
+            <%= link_to 'Edit', edit_admin_layout_path(layout), :class => 'btn btn-mini' %>
+            <% if layout.is_deletable %>
+              <%= link_to 'Destroy', admin_post_path(layout), :method => :delete, :confirm => "You've chosen to delete this layout, this can't be undone. Are you sure?", :class => 'btn btn-mini btn-danger' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <div class="btn-toolbar">
+      <div class="btn-group">
+        <%= link_to(new_admin_layout_path, :class => 'btn btn-primary') do %>
+          <i class='icon-plus icon-white'></i> Add New Layout
+        <% end %>
+      </div>
+
+      <%= pagination %>
+
+    </div>
 
   </div>
 </div>
