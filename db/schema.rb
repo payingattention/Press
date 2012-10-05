@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121005151718) do
+ActiveRecord::Schema.define(:version => 20121005201539) do
 
   create_table "contents", :force => true do |t|
     t.integer  "user_id",                                                                                                                   :null => false
@@ -48,9 +48,16 @@ ActiveRecord::Schema.define(:version => 20121005151718) do
 
   create_table "layouts", :force => true do |t|
     t.string   "title",                          :null => false
+    t.text     "description",                    :null => false
     t.boolean  "is_deletable", :default => true, :null => false
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
+  end
+
+  create_table "layouts_widgets", :id => false, :force => true do |t|
+    t.integer "widget_id"
+    t.integer "layout_id"
+    t.integer "sequence"
   end
 
   create_table "settings", :force => true do |t|
