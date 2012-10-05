@@ -142,14 +142,44 @@ body {
         }
     }
 
+  table {
+    &.selectable {
+      thead tr th:first-of-type,
+      tbody tr td:first-of-type {
+        width: 15px;
+        padding-right: 0px;
+      }
+    }
+    h3 {
+      font-size: 16px;
+      line-height: 18px;
+    }
+  }
+
+  .bottombar .bottombar-inner {
+    .pmLinearGradient(0, #ddd, 100%, #eee, 100%, #eee);
+    min-height: 30px;
+    background-repeat: repeat-x;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25), 0 1px 0 rgba(0,0,0,0.05) inset;
+
+    li > a, a.brand {
+      padding: 4px 10px 3px;
+      color: #AAA;
+      &:hover {
+        color: #000;
+      }
+      line-height: 22px;
+    }
+    a.brand {
+      float: right;
+    }
+  }
+
 }
 
 small {
     font-size: 75%;
-}
-
-.container[role='main'] {
-    //padding-bottom: 60px;
 }
 
 span.highlight {
