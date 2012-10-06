@@ -21,6 +21,16 @@
     text-align: center !important;
 }
 
+.upper {
+  border-top: 1px solid #efefef;
+  margin-bottom: 10px;
+}
+
+.lower {
+  border-bottom: 1px solid #efefef;
+  margin-top: 10px;
+}
+
 body {
     font-size: 12px;
     font-family: Verdana;
@@ -196,6 +206,10 @@ span.highlight {
   i {
     .pmOpacity;
   }
+
+  .btn {
+    margin-left: 5px;
+  }
 }
 
 div.content-panel {
@@ -275,10 +289,6 @@ div.content-panel {
     // Changes to the navbar inside a content block
     // To do the date, user, comment stuff.
     div.navbar {
-        &.upper {
-          border-top: 1px solid #efefef;
-          margin-bottom: 10px;
-        }
         overflow: hidden;
         margin-bottom: 0px;
         .navbar-inner {
@@ -312,4 +322,37 @@ div.content-panel {
             }
         }
     }
+}
+
+.layout-canvas {
+  text-align: center;
+  border-color: #b7b8b9;
+  div.well {
+    margin-bottom: 5px;
+  }
+  div.dropzone {
+    background: url(/assets/grid-background.png);
+    margin-bottom: 0;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #999;
+  }
+  &.dropping div.dropzone {
+    border-color: blue !important;
+  }
+}
+
+.widget-admin-button {
+  cursor: pointer;
+  padding: 2px;
+  margin-bottom: 5px;
+  text-align: center;
+  border-color: #b7b8b9;
+  &:hover {
+    border-color: blue;
+  }
+  &.ui-draggable-dragging {
+    background-color: #dfdfdf;
+  }
 }

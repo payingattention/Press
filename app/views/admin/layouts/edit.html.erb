@@ -1,0 +1,27 @@
+<%= form_for @layout, :url => admin_layout_path(@layout), :html => { :class => '' } do |f| %>
+  <%= breadcrumbs :entity => { :name => @layout.title }, :right_items => [
+    submit_tag("Save", :class => 'btn btn-primary btn-mini'),
+    link_to("Cancel", admin_layouts_path, :class => 'btn btn-mini'),
+  ] %>
+
+<div class='row'>
+
+  <div class='span10'>
+    <h6 class='lower'>Layout Editor</h6>
+
+    <div id='layout-canvas' class='well well-small layout-canvas droppable'>
+      <div class='well dropzone'>Drag and Drop Widget Here</div>
+    </div>
+  </div>
+
+  <div id='layout-palette' class='span2'>
+    <h6 class='lower'>Widgets</h6>
+
+    <% @widgets.each do |widget| %>
+      <%= widget.render_admin_button %>
+    <% end %>
+  </div>
+
+</div>
+
+<% end %>

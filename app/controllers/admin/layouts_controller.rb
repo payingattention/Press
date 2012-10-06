@@ -15,6 +15,7 @@ class Admin::LayoutsController < AdminController
   def edit
     # Instance the content
     @layout = Layout.find_by_id params[:id]
+    @widgets = WidgetDecorator.decorate Widget.all
 
     unless @layout
       redirect_to admin_layouts_path
