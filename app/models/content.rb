@@ -1,7 +1,7 @@
 class Content < ActiveRecord::Base
 
   # Mass assignable fields
-  attr_accessible :text, :seo_url, :password, :kind, :format, :style, :state, :allow_comments, :is_sticky, :is_closable, :is_indexable, :is_searchable, :is_frontable, :go_live, :go_dead
+  attr_accessible :layout_id, :text, :seo_url, :password, :kind, :format, :style, :state, :allow_comments, :is_sticky, :is_closable, :is_indexable, :is_searchable, :is_frontable, :go_live, :go_dead
 
   # Contents ( posts, pages, comments, messages, ads etc.. ) must belong to a user
   belongs_to :user
@@ -15,6 +15,9 @@ class Content < ActiveRecord::Base
   # A content may contain other contents, as a "content" is just a container for some form of blob text with associated data.
   # Contents (content) can be "posts", "pages", "comments", "messages", "ads"..etc.
   has_many :contents
+
+  # A piece of content belongs to a single layout that will be used to determine how to show that content.
+  belongs_to :layout
 
   # Before we create our content, generate a unique token id for it that can be used for reference if needed
   before_validation :generate_token, :on => :create

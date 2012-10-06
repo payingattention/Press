@@ -3,6 +3,7 @@ class CreateContents < ActiveRecord::Migration
     create_table :contents do |t|
       t.references :user, :null => false             # User who posted
       t.references :content                          # Parent post if not a post
+      t.references :layout                           # The layout used to display this item (used by pages and posts..etc)
       t.string    "token", :null => false            # A web safe uuid token for internal reference
       t.text      "text"                             # Text blob
       t.string    "seo_url"                          # Perma link to this object

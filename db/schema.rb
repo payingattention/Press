@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20121005201539) do
   create_table "contents", :force => true do |t|
     t.integer  "user_id",                                                                                                                   :null => false
     t.integer  "content_id"
+    t.integer  "layout_id",                                                                                                                 :null => false
     t.string   "token",                                                                                                                     :null => false
     t.text     "text"
     t.string   "seo_url"
@@ -42,8 +43,8 @@ ActiveRecord::Schema.define(:version => 20121005201539) do
   add_index "contents", ["user_id"], :name => "index_contents_on_user_id"
 
   create_table "contents_taxonomies", :id => false, :force => true do |t|
-    t.integer "content_id"
-    t.integer "taxonomy_id"
+    t.integer "content_id",  :null => false
+    t.integer "taxonomy_id", :null => false
   end
 
   create_table "layouts", :force => true do |t|
@@ -55,9 +56,9 @@ ActiveRecord::Schema.define(:version => 20121005201539) do
   end
 
   create_table "layouts_widgets", :id => false, :force => true do |t|
-    t.integer "widget_id"
-    t.integer "layout_id"
-    t.integer "sequence"
+    t.integer "widget_id", :null => false
+    t.integer "layout_id", :null => false
+    t.integer "sequence",  :null => false
   end
 
   create_table "settings", :force => true do |t|
@@ -110,12 +111,18 @@ ActiveRecord::Schema.define(:version => 20121005201539) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "widgets", :force => true do |t|
-    t.string   "title",       :null => false
-    t.string   "token",       :null => false
-    t.text     "description", :null => false
-    t.text     "code",        :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "widget_id"
+    t.string   "title",                           :null => false
+    t.string   "token",                           :null => false
+    t.text     "description",                     :null => false
+    t.text     "code",                            :null => false
+    t.boolean  "is_droppable", :default => false, :null => false
+    t.boolean  "is_deletable", :default => true,  :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
+
+  add_index "widgets", ["token"], :name => "index_widgets_on_token"
+  add_index "widgets", ["widget_id"], :name => "index_widgets_on_widget_id"
 
 end

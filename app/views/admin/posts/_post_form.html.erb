@@ -56,6 +56,13 @@
       </div>
     </div>
 
+    <h6>Layout</h6>
+    <div class='control-group'>
+      <div class='control'>
+        <%= f.select :layout_id, [["Default Layout...",nil]] + Layout.all.map {|l| [l.title.capitalize, l.id]}  %>
+      </div>
+    </div>
+
     <h6>Go Live Date/Time</h6>
     <div class='control-group'>
       <div class='controls'>
