@@ -328,6 +328,7 @@ div.content-panel {
   text-align: center;
   border-color: #b7b8b9;
   div.well {
+    padding: 10px;
     margin-bottom: 5px;
   }
   div.dropzone {
@@ -338,9 +339,10 @@ div.content-panel {
     font-size: 0.9em;
     color: #999;
   }
-  &.dropping div.dropzone {
-    border-color: blue !important;
-  }
+}
+
+.dropping > div.dropzone {
+  border-color: blue !important;
 }
 
 .widget-admin-button {

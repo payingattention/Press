@@ -18,10 +18,8 @@ $(document).ready(function() {
     }
 });
 
-
-
 function cloneWidget( dropzone, widget ) {
-    $(widget).clone()
+    var newWidget = $(widget).clone()
         .removeClass('well-small widget-admin-button')
         .insertBefore($(dropzone).children('.dropzone').first())
         .droppable({
@@ -31,4 +29,5 @@ function cloneWidget( dropzone, widget ) {
                 cloneWidget ( ui.draggable );
             }
         });
+    $("<div class='well dropzone'>Dropzone</div>").appendTo($(newWidget));
 }
