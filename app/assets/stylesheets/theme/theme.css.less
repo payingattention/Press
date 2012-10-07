@@ -1,3 +1,8 @@
+.pmRounded (@size: 3px) {
+  border-radius: @size;
+  -moz-border-radius: @size;
+  -webkit-border-radius: @size;
+}
 
 .pmOpacity (@level: 0.5) {
     @levelFloat: @level * 100;
@@ -17,6 +22,14 @@
     filter: e(%("progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=%d,endColorstr=%d)", @color1, @color3));
 }
 
+.floatleft {
+  float: left;
+}
+
+.floatright {
+  float: right;
+}
+
 .center {
     text-align: center !important;
 }
@@ -29,6 +42,10 @@
 .lower {
   border-bottom: 1px solid #efefef;
   margin-top: 10px;
+}
+
+img.lightbox {
+  padding: 5px;
 }
 
 body {
@@ -274,16 +291,20 @@ div.content-panel {
         margin: 5px 0;
     }
 
+    div.inline-image {
+      float:right;
+      &:nth-of-type(2n+1) {
+        float:left;
+      }
+    }
+
     div.caption {
+        .pmRounded();
         background-color: #f5f6f7;
         margin: 0px 5px;
         padding: 5px;
         border: 1px solid #dadada;
-
-        div.caption-text {
-            padding-top: 10px;
-            text-align: center;
-        }
+        text-align: center;
     }
 
     // Changes to the navbar inside a content block
