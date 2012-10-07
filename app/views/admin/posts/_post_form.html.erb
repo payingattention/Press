@@ -59,7 +59,7 @@
     <h6>Layout</h6>
     <div class='control-group'>
       <div class='control'>
-        <%= f.select :layout_id, [["Default Layout...",nil]] + Layout.all.map {|l| [l.title.capitalize, l.id]}  %>
+        <%= f.select :layout_id, Layout.all.collect {|l| [l.title.capitalize, l.id]}, { :include_blank => "Default layout..." }, { :class => "span3" } %>
       </div>
     </div>
 
