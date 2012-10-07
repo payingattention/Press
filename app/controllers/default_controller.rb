@@ -103,7 +103,7 @@ class DefaultController < ApplicationController
     # Make sure we are talking about posts or messages
     contents = contents.where( t[:kind].matches(:post).or(t[:kind].matches(:message)))
     # If a query is set, use it to filter the output
-    contents = contents.where(["content like ?", '%'+@query+'%'] ) if @query.present?
+    contents = contents.where(["text like ?", '%'+@query+'%'] ) if @query.present?
     # Limit the number of content to show
     contents = contents.limit(limit)
     # Set the offset if we aren't on the first page.
