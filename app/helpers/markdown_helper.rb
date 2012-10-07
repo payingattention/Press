@@ -2,8 +2,6 @@ module MarkdownHelper
 
   # Render markdown to html
   def render_markdown content, options = { }
-    # Which rendere are we going to use, XHTML or HTML?
-    options[:xhtml]               ||= true
     # Is there a query we need to highlight?
     options[:query]               ||= nil
     # parse links even when they are not enclosed in `<>` characters. Autolinks for the http, https and ftp
@@ -46,7 +44,7 @@ module MarkdownHelper
     options[:limit]               ||= 0
 
     # What kind of renderer are we using?
-    renderer = options[:xhtml] ? Redcarpet::Render::XHTML : Redcarpet::Render::HTML
+    renderer = RandomStringOfWordsMarkdownRenderer
     # Instance the renderer using the options above
     renderer = renderer.new options
     # Only use the content based on the limit
@@ -71,3 +69,44 @@ module MarkdownHelper
   end
 
 end
+
+class RandomStringOfWordsMarkdownRenderer < Redcarpet::Render::XHTML
+  include Sprockets::Helpers::RailsHelper
+  include Sprockets::Helpers::IsolatedHelper
+  include ActionView::Helpers::UrlHelper
+
+  # Parse the sent link which can come in any of the following formats;
+  # {id or url}
+  # {id or url}|size
+  # {id or url}|size|class
+
+  # ID is the media object id to use.  Go get the image link from the db.
+  # URL is the url of the image.  Just use that.
+  # SIZE is the rails image tag helper {Width}x{Height}
+  # CLASS is any classes you want to send along
+  # Note; My regexp-fu either went up a level with this, or it just shows how bad at regexp I am.
+  def parse_link link
+    matches = link.match(/^([^\|]+)(?:\|)?([^\|]+)?(?:\|)?([^\|]+)?(?:\|)?([^\|]+)?/)
+    puts matches.inspect
+    {   :id         => (matches[1].to_i != 0) ? matches[1].to_i : nil,
+        :url        => (matches[1].to_i == 0) ? matches[1] : nil,
+        :size       =>  matches[2],
+        :css_class  =>  matches[3]
+    } if matches
+  end
+
+  # And here we are rewriting the standard image tag display system used by Redcarpet with one that
+  # will handle the styles, sizes and our media system (if I ever get around to writing it)
+  def image (link, title, alt)
+
+    if (parse = parse_link link).present?
+      if parse[:id].present?
+      else
+        image_tag(parse[:url], :size => parse[:size], :title => title, :alt => alt, :class => parse[:class])
+      end
+    end
+
+  end
+
+end
+
