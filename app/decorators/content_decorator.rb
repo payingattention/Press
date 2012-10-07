@@ -102,6 +102,17 @@ class ContentDecorator < Draper::Base
     end.join.html_safe
   end
 
+  # Posts have a little [Md] far right that you can click to get the actual mark down
+  def render_markdown_link
+    h.content_tag :li, :class => "pull-right" do
+      h.link_to "/#{seo_url}.md/" do
+        h.content_tag :small do
+          "[M&dArr;]".html_safe
+        end
+      end
+    end
+  end
+
   # Render Comments
   def render_comments
     comments.map_with_index do |comment, index|
