@@ -14,6 +14,7 @@
   <%= post.nav_bar do %>
     <%= post.render_taxonomies :categories %>
     <%= post.render_taxonomies :tags %>
+    <%= post.render_markdown_link %>
   <% end %>
 
   <% if post.allow_comments || post.comments.count > 0 %>
