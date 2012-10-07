@@ -88,10 +88,10 @@ class RandomStringOfWordsMarkdownRenderer < Redcarpet::Render::XHTML
   def parse_link link
     matches = link.match(/^([^\|]+)(?:\|)?([^\|]+)?(?:\|)?([^\|]+)?(?:\|)?([^\|]+)?/)
     puts matches.inspect
-    {   :id         => (matches[1].to_i != 0) ? matches[1].to_i : nil,
-        :url        => (matches[1].to_i == 0) ? matches[1] : nil,
-        :size       =>  matches[2],
-        :css_class  =>  matches[3]
+    {   :id     => (matches[1].to_i != 0) ? matches[1].to_i : nil,
+        :url    => (matches[1].to_i == 0) ? matches[1] : nil,
+        :size   =>  matches[2],
+        :class  =>  matches[3]
     } if matches
   end
 
@@ -102,7 +102,12 @@ class RandomStringOfWordsMarkdownRenderer < Redcarpet::Render::XHTML
     if (parse = parse_link link).present?
       if parse[:id].present?
       else
-        image_tag(parse[:url], :size => parse[:size], :title => title, :alt => alt, :class => parse[:class])
+        imgOutput = image_tag(parse[:url], :size => parse[:size], :title => title, :alt => alt, :class => parse[:class])
+        if alt.present?
+          content_tag :div, imgOutput + "<br />".html_safe + alt, :class => "inline-image caption"
+        else
+          content_tag :div, imgOutput, :class => "inline-image"
+        end
       end
     end
 
