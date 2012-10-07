@@ -69,7 +69,7 @@ $(document).ready(function() {
         // Apply the styles
         $('#lightboxShade').css(lightboxShadeCSS);
         // Create the center box
-        $('<div id="lightbox"><img id="lightboxImage"src="/images/loading.gif" /><div class="closeMsg">Click anywhere to close</div></div>').appendTo('body');
+        $('<div id="lightbox"><img id="lightboxImage" /><div class="closeMsg">Click anywhere to close</div></div>').appendTo('body');
 
         var disClick = function() {
             // animate the destruction of the lightbox itself
