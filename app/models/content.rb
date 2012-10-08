@@ -16,6 +16,8 @@ class Content < ActiveRecord::Base
   # Contents (content) can be "posts", "pages", "comments", "messages", "ads"..etc.
   has_many :contents
 
+  has_many :media
+
   # A piece of content belongs to a single layout that will be used to determine how to show that content.
   belongs_to :layout
 
