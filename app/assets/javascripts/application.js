@@ -15,5 +15,6 @@
 //= require jquery.ui.draggable
 //= require jquery.ui.droppable
 //= require jquery.ui.sortable
+//= require jquery.ui.accordion
 //= require twitter/bootstrap
 //= require_tree .
