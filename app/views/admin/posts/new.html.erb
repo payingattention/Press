@@ -1,17 +1,15 @@
-<%= breadcrumbs :controller => { :name => 'Content', :link => admin_content_index_path(:posts) } %>
+<%= form_for @content, :url => admin_posts_path(@content), :html => { :class => '' } do |f| %>
 
-<div class='row'>
+  <%= breadcrumbs :controller => { :name => 'Content', :link => admin_content_index_path(:posts) }, :right_items => [
+        submit_tag("Create Post", :class => 'btn btn-primary btn-mini'),
+        link_to("Cancel", admin_content_index_path(:posts), :class => 'btn btn-mini')
+  ] %>
 
-  <%= form_for @content, :url => admin_posts_path(@content), :html => { :class => '' } do |f| %>
+  <div class='row'>
+      <%= render :partial => 'post_form', :locals => { :f => f } %>
+  </div>
 
-    <%= render :partial => 'post_form', :locals => {
-            :f => f,
-            :submit_label => "Create Post"
-    } %>
-
-  <% end %>
-
-</div>
+<% end %>
 
 <%= render :partial => 'admin/taxonomies/category_modal', :locals => {} %>
 <%= render :partial => 'admin/content/media_modal', :locals => {} %>
