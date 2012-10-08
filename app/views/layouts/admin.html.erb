@@ -17,9 +17,23 @@
           $(obj).css('max-width', $(e).width() - 63);
         })
       });
+      $('.accordion').accordion();
       if ($("#anytime").length > 0) {
         AnyTime.picker('anytime', { format: "%M %d, %z @ %h:%i%p" });
       }
+
+      // Add a jsTabs system that will show and hide tabs all in JS
+      if ($(".jsTabs").length > 0) {
+        $(".jsTabs > div").hide();
+        $($(".jsTabs ul li.active a").first().attr('href')).show();
+        $(".jsTabs ul li").click(function(e) {
+          $(this).siblings().removeClass('active');
+          $(this).addClass('active');
+          $($(this).children('a').first().attr('href')).show().siblings('div').hide();
+          return false;
+        })
+      }
+
     });
   </script>
   <!-- END: Markitup text editor -->
