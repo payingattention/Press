@@ -43,3 +43,5 @@ gem "curb"
 gem "redcarpet"
 # Decorator pattern
 gem "draper"
+# Carrierwave Media uploader
+gem "carrierwave"
