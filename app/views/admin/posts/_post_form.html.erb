@@ -15,70 +15,80 @@
 
   <div class='span3'>
 
-    <h6>SEO Url</h6>
-    <div class='control-group<%= " error" if @content.errors.has_key?(:seo_url) %>'>
-      <div class='controls'><%= f.text_field :seo_url, :class => 'span3', :placeholder => "SEO Url" %></div>
-      <% if @content.errors.has_key?(:seo_url) %>
-        <span class='help-inline'><%= @content.errors.get(:seo_url).first %></span>
-      <% end %>
-    </div>
+    <div class='jsTabs'>
+      <ul class='nav nav-tabs'>
+        <li class='active'><a href="#tabs-1">Settings</a></li>
+        <li><a href="#tabs-2">Media</a></li>
+      </ul>
+      <div id='tabs-1'>
+        <h6>SEO Url</h6>
+        <div class='control-group<%= " error" if @content.errors.has_key?(:seo_url) %>'>
+          <div class='controls'><%= f.text_field :seo_url, :class => 'span3', :placeholder => "SEO Url" %></div>
+          <% if @content.errors.has_key?(:seo_url) %>
+            <span class='help-inline'><%= @content.errors.get(:seo_url).first %></span>
+          <% end %>
+        </div>
 
-    <h6>Publication Options</h6>
-    <div class='control-group'>
-      <div class='control'>
-        <%= select_tag('content[state]', options_for_select([
-          ['Draft', :draft],
-          ['Published', :published],
-          ['Frozen', :frozen]
-        ], @content.state), :class => 'span3') %>
+        <h6>Publication Options</h6>
+        <div class='control-group'>
+          <div class='control'>
+            <%= select_tag('content[state]', options_for_select([
+              ['Draft', :draft],
+              ['Published', :published],
+              ['Frozen', :frozen]
+            ], @content.state), :class => 'span3') %>
+          </div>
+          <div class='control'>
+            <label class='checkbox'>
+              <%= f.check_box :is_sticky %>
+              Is Sticky?
+            </label>
+            <label class='checkbox'>
+              <%= f.check_box :is_closable %>
+              Is Closable?
+            </label>
+            <label class='checkbox'>
+              <%= f.check_box :allow_comments %>
+              Allow Comments?
+            </label>
+            <label class='checkbox'>
+              <%= f.check_box :is_frontable %>
+              Show on frontpage?
+            </label>
+            <label class='checkbox'>
+              <%= f.check_box :is_indexable %>
+              Show up in lists?
+            </label>
+          </div>
+        </div>
+
+        <h6>Layout</h6>
+        <div class='control-group'>
+          <div class='control'>
+            <%= f.select :layout_id, Layout.all.collect {|l| [l.title.capitalize, l.id]}, { :include_blank => "Default layout..." }, { :class => "span3" } %>
+          </div>
+        </div>
+
+        <h6>Go Live Date/Time</h6>
+        <div class='control-group'>
+          <div class='controls'>
+            <%= f.text_field :go_live, :class => 'span3', :id => 'anytime', :placeholder => @content.go_live.strftime("%B %e, %Y @ %I:%M%p"), :value => @content.go_live.strftime("%B %e, %Y @ %I:%M%p") %>
+          </div>
+        </div>
+
+        <%= render :partial => 'admin/taxonomies/category_modal', :locals => {} %>
+        <h6>Categories</h6>
+
+        <div class='control-group'>
+          <% Taxonomy.categories.each do |category| %>
+            <label class='checkbox'><%= check_box_tag "taxonomies[]", "#{category.id}", @content.has_taxonomy?(category.id) %><%= category.name %></label>
+          <% end %>
+        </div>
       </div>
-      <div class='control'>
-        <label class='checkbox'>
-          <%= f.check_box :is_sticky %>
-          Is Sticky?
-        </label>
-        <label class='checkbox'>
-          <%= f.check_box :is_closable %>
-          Is Closable?
-        </label>
-        <label class='checkbox'>
-          <%= f.check_box :allow_comments %>
-          Allow Comments?
-        </label>
-        <label class='checkbox'>
-          <%= f.check_box :is_frontable %>
-          Show on frontpage?
-        </label>
-        <label class='checkbox'>
-          <%= f.check_box :is_indexable %>
-          Show up in lists?
-        </label>
+      <div id="tabs-2">
+        Media
       </div>
     </div>
-
-    <h6>Layout</h6>
-    <div class='control-group'>
-      <div class='control'>
-        <%= f.select :layout_id, Layout.all.collect {|l| [l.title.capitalize, l.id]}, { :include_blank => "Default layout..." }, { :class => "span3" } %>
-      </div>
-    </div>
-
-    <h6>Go Live Date/Time</h6>
-    <div class='control-group'>
-      <div class='controls'>
-        <%= f.text_field :go_live, :class => 'span3', :id => 'anytime', :placeholder => @content.go_live.strftime("%B %e, %Y @ %I:%M%p"), :value => @content.go_live.strftime("%B %e, %Y @ %I:%M%p") %>
-      </div>
-    </div>
-
-    <%= render :partial => 'admin/taxonomies/category_modal', :locals => {} %>
-    <h6>Categories</h6>
-
-    <div class='control-group'>
-      <% Taxonomy.categories.each do |category| %>
-        <label class='checkbox'><%= check_box_tag "taxonomies[]", "#{category.id}", @content.has_taxonomy?(category.id) %><%= category.name %></label>
-      <% end %>
-    </div>
-
   </div>
 
 </fieldset>
