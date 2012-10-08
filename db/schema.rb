@@ -11,12 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121005201539) do
+ActiveRecord::Schema.define(:version => 20121008032456) do
 
   create_table "contents", :force => true do |t|
     t.integer  "user_id",                                                                                                                   :null => false
     t.integer  "content_id"
-    t.integer  "layout_id",                                                                                                                 :null => false
+    t.integer  "media_id"
+    t.integer  "layout_id"
     t.string   "token",                                                                                                                     :null => false
     t.text     "text"
     t.string   "seo_url"
@@ -59,6 +60,13 @@ ActiveRecord::Schema.define(:version => 20121005201539) do
     t.integer "widget_id", :null => false
     t.integer "layout_id", :null => false
     t.integer "sequence",  :null => false
+  end
+
+  create_table "media", :force => true do |t|
+    t.integer  "content_id"
+    t.string   "file"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "settings", :force => true do |t|
