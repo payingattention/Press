@@ -58,7 +58,11 @@ class Content < ActiveRecord::Base
   # Create a hard backup of this file on the file system (outside of the database)
   # that can be indexed and saved using github or some such repository
   def backup
-#    puts self.to_json
+    if Setting.getValue('backup') && Setting.getValue('backup_location').present?
+      File.open("#{Setting.getValue('backup_location')}/content/#{self.token}.json", 'w+') do |fh|
+        fh.write self.to_json
+      end
+    end
   end
 
   # Tags ( Taxonomies with a classification of tag )
