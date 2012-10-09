@@ -23,7 +23,9 @@ class CreateSettings < ActiveRecord::Migration
         {'key' => 'tagline', 'value' => 'Thanks for visiting my blog!', 'area' => :general, 'label' => 'Tagline', 'element' => :text, 'description' => '', 'values' => ''},
         {'key' => 'url', 'value' => 'http://randomstringofwords.com', 'area' => :general, 'label' => 'Site Address (URL)', 'element' => :text, 'description' => '', 'values' => ''},
         {'key' => 'email', 'value' => '', 'area' => :general, 'label' => 'Admin Email Address', 'element' => :text, 'description' => 'This address is used as the from address for notification emails and general site contact.', 'values' => ''},
-        {'key' => 'header_title', 'value' => '<span class="big">RandomStringOfWords</span><span class="micro">.com</span>', 'area' => :general, 'label' => 'Header Title Output', 'element' => :text, 'description' => 'This is the top left header output', 'values' => ''},
+        {'key' => 'header_title', 'value' => '<span class="big">RandomStringOfWords</span><span class="micro">.com</span>', 'label' =>'Header Title HTML', 'area' => :general, 'label' => 'Header Title Output', 'element' => :text, 'description' => 'This is the top left header output', 'values' => ''},
+        {'key' => 'backup', 'value' => '1', 'label' => 'Local Backup', 'area' => :general, 'element' => :checkbox, 'description' => 'Create a local json backup of each item on save? (useful for making git backup)'}
+        {'key' => 'backup_location', 'value' => 'content', 'label' => 'Backup Location', 'area' => :general, 'element' => :text, 'description' => 'Local directory that holds json backup of all objects.'}
 
     ]
 
