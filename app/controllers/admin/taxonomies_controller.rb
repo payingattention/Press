@@ -58,7 +58,7 @@ class Admin::TaxonomiesController < AdminController
     respond_to do |format|
       if @taxonomy.save
         format.html { redirect_to admin_taxonomies_path, notice: 'Taxonomy was successfully created.' }
-        format.json { render json: @taxonomy, status: :created, location: @taxonomy }
+        format.json { render json: @taxonomy, status: :created }
       else
         format.html { render action: "new" }
         format.json { render json: @taxonomy.errors, status: :unprocessable_entity }

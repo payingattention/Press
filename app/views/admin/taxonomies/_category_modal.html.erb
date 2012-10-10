@@ -1,6 +1,6 @@
 
 <div id='category-modal' class='modal hide fade in'>
-  <%= form_for @category, :url => admin_taxonomies_path(@category), :remote => true, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= form_for category, :url => admin_taxonomies_path(category), :remote => true, :html => { :'data-type' => 'json', :class => 'form-horizontal' } do |f| %>
     <%= hidden_field_tag "taxonomy[classification]", :category %>
     <div class='modal-header'>
       <a class="close" data-dismiss='modal'>&times;</a>
@@ -9,32 +9,32 @@
     <div class='modal-body'>
       <fieldset>
 
-        <div class='control-group<%= " error" if @category.errors.has_key?(:name) %>'>
+        <div class='control-group<%= " error" if category.errors.has_key?(:name) %>'>
           <label class='control-label'>Name</label>
           <div class='controls'>
             <%= f.text_field :name, :class => 'input-xlarge' %>
-            <% if @category.errors.has_key?(:name) %>
-              <span class='help-inline'>Name <%= @category.errors.get(:name).first %></span>
+            <% if category.errors.has_key?(:name) %>
+              <span class='help-inline'>Name <%= category.errors.get(:name).first %></span>
             <% end %>
           </div>
         </div>
 
-        <div class='control-group<%= " error" if @category.errors.has_key?(:seo_url) %>'>
+        <div class='control-group<%= " error" if category.errors.has_key?(:seo_url) %>'>
           <label class='control-label'>SEO Url</label>
           <div class='controls'>
             <%= f.text_field :seo_url, :class => 'input-xlarge' %>
-            <% if @category.errors.has_key?(:seo_url) %>
-              <span class='help-inline'>SEO Url <%= @category.errors.get(:seo_url).first %></span>
+            <% if category.errors.has_key?(:seo_url) %>
+              <span class='help-inline'>SEO Url <%= category.errors.get(:seo_url).first %></span>
             <% end %>
           </div>
         </div>
 
-        <div class='control-group<%= " error" if @category.errors.has_key?(:description) %>'>
+        <div class='control-group<%= " error" if category.errors.has_key?(:description) %>'>
           <label class='control-label'>Description</label>
           <div class='controls'>
             <%= f.text_area :description, :size => '50x8', :class => 'input-xlarge' %>
-            <% if @category.errors.has_key?(:description) %>
-              <span class='help-inline'>Description <%= @category.errors.get(:description).first %></span>
+            <% if category.errors.has_key?(:description) %>
+              <span class='help-inline'>Description <%= category.errors.get(:description).first %></span>
             <% end %>
           </div>
         </div>
