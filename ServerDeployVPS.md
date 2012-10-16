@@ -12,7 +12,7 @@ Initial Server Setup
 --------------------
 
   * aptitude update
-  * aptitude install gcc git curl libcurl4-gnutls-dev build-essential openssl libreadline6 libreadline6-dev zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison mysql-server mysql-client libmysql-ruby libmysqlclient-dev nginx nodejs
+  * aptitude install gcc git-core curl libcurl4-gnutls-dev build-essential openssl libreadline6 libreadline6-dev zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison mysql-server mysql-client libmysql-ruby libmysqlclient-dev nginx nodejs screen
 
   * mkdir /ruby
   * cd /ruby
@@ -45,6 +45,14 @@ More server settings
   * chmod +x /ruby/Press/config/unicorn_init.sh
 
   * sudo /usr/sbin/update-rc.d -f unicorn defaults
+
+Rake & Bundle
+-------------
+  * cd /ruby/{dir}
+  * bundle install
+
+  * copy database.yml.dist file to database.yml and edit it accordingly (don't forget to find mysql.sock)
+  * rake db:create db:migrate
 
 Bouncing the server
 -------------------
