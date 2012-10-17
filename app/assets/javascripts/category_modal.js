@@ -31,6 +31,7 @@ $(function() {
                     },
                     success: function(response) {
                         $('.categories-form-partial').html(response);
+                        $('#category_modal :input:not(input[type=hidden])').val('');
                         $('#category-modal').modal('hide');
                     }
                 })
