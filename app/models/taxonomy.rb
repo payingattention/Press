@@ -14,6 +14,10 @@ class Taxonomy < ActiveRecord::Base
   # back to the things they contain.
   has_and_belongs_to_many :contents
 
+  # Add validation
+  validates :name,    :presence => true
+  validates :seo_url, :uniqueness => { :message => "It appears the SEO Url that you entered is already in use" }
+
   # Define some scoped helpers
   scope :tags, where(:classification => :tag)
   scope :categories, where(:classification => :category)
