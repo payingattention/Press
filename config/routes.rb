@@ -12,7 +12,12 @@ Press::Application.routes.draw do
   resources :admin, :only => [ :index ]
   namespace :admin do
     resources :content,  :path => ":type", :constraints => { :type => /posts|pages|comments|messages|ads|blocks/ }, :only => [ :index ]
-    resources :content,   :path => ":type", :constraints => { :type => /post|page|comment|message|ad|block/ }, :only => [ :edit ]
+    resources :content,   :path => ":type", :constraints => { :type => /post|page|comment|message|ad|block/ }, :only => [ :edit ] do
+      collection do
+        get :categories, :path => ":id/categories"
+      end
+    end
+
     # The following are crud for content types
     resources :posts,     :except => [ :index, :show ]
     resources :pages,     :except => [ :index, :show ]
@@ -22,6 +27,7 @@ Press::Application.routes.draw do
     resources :blocks,    :except => [ :index, :show ]
 
     resources :users
+
     resources :taxonomies
     resources :layouts
     resources :widgets
