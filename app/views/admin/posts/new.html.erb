@@ -11,5 +11,5 @@
 
 <% end %>
 
-<%= render :partial => 'admin/taxonomies/category_modal', :locals => { :category => Taxonomy.new } %>
+<%= render :partial => 'admin/taxonomies/category_modal', :locals => { :category => Taxonomy.new, :content => @content } %>
 <%= render :partial => 'admin/content/media_modal', :locals => {} %>
