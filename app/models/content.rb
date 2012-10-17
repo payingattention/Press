@@ -1,3 +1,5 @@
+require 'model_helper'
+
 class Content < ActiveRecord::Base
 
   # Mass assignable fields
@@ -23,6 +25,8 @@ class Content < ActiveRecord::Base
 
   # Before we create our content, generate a unique token id for it that can be used for reference if needed
   before_validation :generate_token, :on => :create
+  # Before we send to validation do any other preprocessing needed
+  before_validation :preprocess
 
   # Add validation
   validates :token,   :presence => true
@@ -124,6 +128,12 @@ class Content < ActiveRecord::Base
     @_header, @_tease = @_header.split(/\*\s\*\s\*/,2)
     @_tease = '' unless @_tease.present?
     @_body = '' unless @_body.present?
+  end
+
+  # Before validation preprocessing
+  def preprocess
+    self.seo_url = self.name unless self.seo_url.present?
+    self.seo_url = ModelHelper::strip_seo_url self.seo_url
   end
 
   # Normalize carriage returns into something we actually want
