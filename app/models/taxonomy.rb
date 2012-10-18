@@ -23,8 +23,17 @@ class Taxonomy < ActiveRecord::Base
   validates :name,    :presence => true
   validates :seo_url, :uniqueness => { :message => "It appears the SEO Url that you entered is already in use" }
 
-  # After we have commit and saved, fire off any post processing commands
-  after_commit :postprocess
+  # Backup this sucker on create or update
+  after_create :backup, :on => :create
+  after_update :backup, :on => :update
+  # Purge the backup on destroy
+  after_destroy :purge, :on => :destroy
+  # Get the original seo_url
+  after_initialize do
+    self.original_seo_url = self.seo_url
+  end
+  # This is the old seo_url
+  attr_accessor :original_seo_url
 
   # Define some scoped helpers
   scope :tags, where(:classification => :tag)
@@ -49,8 +58,13 @@ class Taxonomy < ActiveRecord::Base
   end
 
   # After all is said and done .. do stuff
-  def postprocess
-    ModelHelper::backup 'taxonomy', self.seo_url, self
+  def backup
+    ModelHelper::backup self
+  end
+
+  # After we have destroyed .. do stuff
+  def purge
+    ModelHelper::destroy_backup self
   end
 
 end

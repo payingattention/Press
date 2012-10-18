@@ -31,8 +31,17 @@ class Content < ActiveRecord::Base
   validates :seo_url, :presence => { :message => "SEO Url can't be blank" }
   validates :seo_url, :uniqueness => { :message => "It appears the SEO Url that you entered is already in use by another piece of content" }
 
-  # After we have commit and saved, fire off any post processing commands
-  after_commit :postprocess
+  # Backup this sucker on create or update
+  after_create :backup, :on => :create
+  after_update :backup, :on => :update
+  # Purge the backup on destroy
+  after_destroy :purge, :on => :destroy
+  # Get the original seo_url
+  after_initialize do
+    self.original_seo_url = self.seo_url
+  end
+  # This is the old seo_url
+  attr_accessor :original_seo_url
 
   # Storage for the "parts" of a content
   @_header = nil
@@ -96,8 +105,13 @@ class Content < ActiveRecord::Base
   end
 
   # After all is said and done .. do stuff
-  def postprocess
+  def backup
     ModelHelper::backup 'content', self.seo_url, self
+  end
+
+  # After we have destroyed .. do stuff
+  def purge
+    ModelHelper::destroy_backup 'content', self.seo_url, self
   end
 
 end
