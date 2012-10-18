@@ -1,6 +1,6 @@
-<%= breadcrumbs :action => { :name => 'Manage ' + params[:type].capitalize }, :right_items => [
-    link_to(new_admin_post_path, :class => 'btn btn-primary btn-mini') {
-      "<i class='icon-plus icon-white'></i> Add New #{params[:type].singularize.capitalize}".html_safe
+<%= breadcrumbs :action => { :name => 'Manage Content' }, :right_items => [
+    link_to(new_admin_content_path, :class => 'btn btn-primary btn-mini') {
+      "<i class='icon-plus icon-white'></i> Add New Content".html_safe
     }
 ]%>
 
@@ -41,8 +41,8 @@
           <td><%= content.state.capitalize %></td>
           <td class='small'><%= content.go_live.strftime("%b&nbsp;%e,&nbsp;%Y").html_safe %></td>
           <td class='span2 center'>
-            <%= link_to 'Edit', edit_admin_content_path(content.kind, content), :class => 'btn btn-mini' %>
-            <%= link_to 'Destroy', admin_post_path(content), :method => :delete, :confirm => "You've chosen to delete this content, this can't be undone. Are you sure?", :class => 'btn btn-mini btn-danger' %>
+            <%= link_to 'Edit', edit_admin_content_path(content), :class => 'btn btn-mini' %>
+            <%= link_to 'Destroy', admin_content_path(content), :method => :delete, :confirm => "You've chosen to delete this content, this can't be undone. Are you sure?", :class => 'btn btn-mini btn-danger' %>
           </td>
         </tr>
       <% end %>

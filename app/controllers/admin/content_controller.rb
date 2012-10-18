@@ -22,7 +22,7 @@ class Admin::ContentController < AdminController
     #if !@tag.present? && !@category.present?
 
 
-    @contents = ContentDecorator.decorate(list_models Content.send(params[:type]), [], 'go_live desc')
+    @contents = ContentDecorator.decorate(list_models Content, [], 'go_live desc')
 
     #end
 
@@ -32,16 +32,80 @@ class Admin::ContentController < AdminController
     end
   end
 
-  # EDIT -- Figure out which content type we are talking about and edit that one using it's restful path.
-  # Note this could be done entirely in the routes file but I just incase I needed more I did it here.
-  def edit
-    case params[:type]
-      when "post"
-        redirect_to edit_admin_post_path params[:id]
-      when "page"
-        redirect_to edit_admin_page_path params[:id]
+  # NEW
+  def new
+    # Instance our content object to set form defaults
+    @content = Content.new :go_live => DateTime.now
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @content }
+    end
+  end
+
+  # CREATE
+  def create
+    # Instance new object
+    @content = Content.new params[:content]
+    @content.user_id = current_user
+    # Save object
+    respond_to do |format|
+      if @content.save
+        format.html { redirect_to admin_content_index_path, notice: 'Content was successfully created.' }
+        format.json { render json: @content, status: :created, location: @content }
       else
-        redirect_to admin_content_index_path :type
+        format.html { render action: "new" }
+        format.json { render json: @content.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # EDIT
+  def edit
+    # Instance the content
+    @content = Content.find_by_id params[:id]
+
+    unless @content
+      redirect_to admin_content_index_path
+    end
+  end
+
+  # UPDATE
+  def update
+    @content = Content.find_by_id params[:id]
+    unless @content
+      redirect_to admin_content_index_path
+    end
+
+    respond_to do |format|
+      if @content.update_attributes(params[:content])
+
+        @content.taxonomies.clear
+        params[:taxonomies].each do |tax|
+          taxonomy = Taxonomy.find_by_id tax
+          @content.taxonomies << taxonomy if taxonomy.present?
+        end if params[:taxonomies].present?
+
+        format.html { redirect_to admin_content_index_path, notice: 'Content was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @content.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DESTROY
+  def destroy
+    @content = Content.find_by_id params[:id]
+    unless @content
+      redirect_to admin_content_index_path
+    end
+
+    @content.destroy
+    respond_to do |format|
+      format.html { redirect_to admin_content_index_path }
+      format.json { head :no_content }
     end
   end
 

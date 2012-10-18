@@ -91,8 +91,6 @@ class DefaultController < ApplicationController
     stickies_where[:is_indexable] = true if where[:is_indexable]
     # Get all the published, frontable sticky posts first
     stickies = Content.order('go_live DESC').where( stickies_where )
-    # Make sure they are messages or posts
-    stickies = stickies.where( t[:kind].matches(:post).or(t[:kind].matches(:message)) )
 
     # Get the 6 latest -- TODO this should be configurable
     limit = 6
@@ -100,8 +98,6 @@ class DefaultController < ApplicationController
 
     # Get the latest published, frontable, not sticky and with no password posts by go_live
     contents = contents.order('go_live DESC').where( where )
-    # Make sure we are talking about posts or messages
-    contents = contents.where( t[:kind].matches(:post).or(t[:kind].matches(:message)))
     # If a query is set, use it to filter the output
     contents = contents.where(["text like ?", '%'+@query+'%'] ) if @query.present?
     # Limit the number of content to show
