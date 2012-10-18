@@ -9,9 +9,9 @@ class ContentDecorator < Draper::Base
   # Render the show or tease partial depending on whats being called
   def render options = { :tease => false }
     unless options[:tease]
-      h.render :partial => "default/#{kind}_show", :locals => { :"#{kind}" => self }
+      h.render :partial => "default/content_show", :locals => { :content => self }
     else
-      h.render :partial => "default/#{kind}_tease", :locals => { :"#{kind}" => self }
+      h.render :partial => "default/content_tease", :locals => { :content => self }
     end
   end
 
@@ -47,7 +47,7 @@ class ContentDecorator < Draper::Base
   def edit_link
     if h.current_user == user
       nav_item do
-        h.link_to '<i class="icon-pencil"></i>Edit'.html_safe, h.edit_admin_content_path(kind, self)
+        h.link_to '<i class="icon-pencil"></i>Edit'.html_safe, h.edit_admin_content_path(self)
       end
     end
   end
