@@ -122,7 +122,6 @@ class Content < ActiveRecord::Base
 
   # Before validation preprocessing
   def preprocess
-    self.seo_url = self.name unless self.seo_url.present?
     self.seo_url = ModelHelper::strip_seo_url self.seo_url
   end
 
