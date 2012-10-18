@@ -5,11 +5,9 @@ class CreateContents < ActiveRecord::Migration
       t.references :content                          # Parent post if not a post
       t.references :media                            # Our media reference
       t.references :layout                           # The layout used to display this item (used by pages and posts..etc)
-      t.string    "token", :null => false            # A web safe uuid token for internal reference
       t.text      "text"                             # Text blob
       t.string    "seo_url"                          # Perma link to this object
       t.string    "password", :limit => 40           # PW if set
-      t.enum      "kind", :limit => [:post, :page, :comment, :message, :ad, :block], :default => :post # Type of object
       t.enum      "format", :limit => [:markdown, :html, :csv, :json, :text], :default => :markdown
       t.enum      "style", :limit => [:standard, :featured, :notice, :success, :error, :warning, :borderless], :default => :standard
       t.enum      "state", :limit => [:draft, :published, :frozen], :default => :draft # published, draft, whatever
@@ -26,6 +24,5 @@ class CreateContents < ActiveRecord::Migration
     add_index("contents", "user_id")
     add_index("contents", "content_id")
     add_index("contents", "seo_url")
-    add_index("contents", "token")
   end
 end
