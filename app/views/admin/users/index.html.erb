@@ -1,4 +1,8 @@
-<%= breadcrumbs %>
+<%= breadcrumbs :right_items => [
+        link_to(new_admin_user_path, :class => 'btn btn-primary btn-mini') {
+          "<i class='icon-plus icon-white'></i> Add New User".html_safe
+        }
+]%>
 
 <div class='row'>
   <div class='span12'>
@@ -28,13 +32,6 @@
     </table>
 
     <div class="btn-toolbar">
-      <div class="btn-group">
-        <% #if can? :add, @users %>
-          <%= link_to new_admin_user_path, :class => 'btn btn-primary' do %>
-            <i class='icon-plus icon-white'></i> Add New User
-          <% end %>
-        <% #end %>
-      </div>
 
       <%= pagination %>
 
@@ -42,12 +39,3 @@
 
   </div>
 </div>
-
-<pre>
-  <strong>@TODO for this page</strong>
-  * Add search blank
-  * Add option to only show certain roles
-  * Show metrics for each user (number of posts..etc)
-  * "show" for user shows that users posts, comments etc..
-  * Get "respond_to" in
-</pre>

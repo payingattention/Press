@@ -1,4 +1,4 @@
-<%= breadcrumbs :action => { :name => 'Manage Content' }, :right_items => [
+<%= breadcrumbs :right_items => [
     link_to(new_admin_content_path, :class => 'btn btn-primary btn-mini') {
       "<i class='icon-plus icon-white'></i> Add New Content".html_safe
     }
@@ -66,15 +66,4 @@
 
   </div>
 </div>
-
-<pre>
-  <strong>@TODO for this page</strong>
-  * Add search blank
-  * Add select on what to show, content, pages, comments..etc.
-  * Update breadcrumbs to give full route/controller/action/etc..
-  * Header sorting
-  * Whats the point of checkboxes here?  Move them into the title td or style the td they are in
-  * Tool to convert content to MD
-  * content github integration
-</pre>
 
