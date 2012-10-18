@@ -6,10 +6,10 @@
   ] %>
 
   <div class='row'>
-      <%= render :partial => 'post_form', :locals => { :f => f } %>
+    <%= render :partial => 'post_form', :locals => { :f => f } %>
   </div>
 
 <% end %>
 
-<%= render :partial => 'admin/taxonomies/category_modal', :locals => { :category => Taxonomy.new, :content => @content } %>
+<%= render :partial => 'admin/taxonomies/category_modal', :locals => { :category => Taxonomy.new } %>
 <%= render :partial => 'admin/content/media_modal', :locals => {} %>

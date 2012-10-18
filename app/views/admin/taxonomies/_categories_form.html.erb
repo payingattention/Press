@@ -1,3 +1,7 @@
 <% Taxonomy.categories.each do |category| %>
-  <label class='checkbox'><%= check_box_tag "taxonomies[]", "#{category.id}", @content.has_taxonomy?(category.id) %><%= category.name %></label>
+  <% if @content.present? %>
+    <label class='checkbox'><%= check_box_tag "taxonomies[]", "#{category.id}", @content.has_taxonomy?(category.id) %><%= category.name %></label>
+  <% else %>
+    <label class='checkbox'><%= check_box_tag "taxonomies[]", "#{category.id}", false %><%= category.name %></label>
+  <% end %>
 <% end %>

@@ -50,10 +50,6 @@ class Admin::ContentController < AdminController
     # Instance the content
     @content = Content.find_by_id params[:id]
 
-    unless @content
-      redirect_to admin_content_index_path :posts
-    end
-
     respond_to do |format|
       format.html { render :template => 'admin/taxonomies/_categories_form.html.erb', :layout => nil }
     end
