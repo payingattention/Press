@@ -35,8 +35,8 @@ class Content < ActiveRecord::Base
   validates :seo_url, :presence => { :message => "SEO Url can't be blank for Pages" }, :if => :is_a_page?
   validates :seo_url, :uniqueness => { :message => "It appears the SEO Url that you entered is already in use by another post or page" }, :if => :is_a_post? || :is_a_page?
 
-  # After we have commit and saved, fire off the backup command
-  after_commit :backup
+  # After we have commit and saved, fire off any post processing commands
+  after_commit :postprocess
 
   # Define some scoped helpers
   scope :ads, where(:kind => :ad)
@@ -57,16 +57,6 @@ class Content < ActiveRecord::Base
       token = SecureRandom.urlsafe_base64
     end while Content.where(:token => token).exists?
     self.token = token
-  end
-
-  # Create a hard backup of this file on the file system (outside of the database)
-  # that can be indexed and saved using github or some such repository
-  def backup
-    if Setting.getValue('backup') && Setting.getValue('backup_location').present?
-      File.open("#{Setting.getValue('backup_location')}/content/#{self.token}.json", 'w+') do |fh|
-        fh.write self.to_json
-      end
-    end
   end
 
   # Tags ( Taxonomies with a classification of tag )
@@ -136,9 +126,9 @@ class Content < ActiveRecord::Base
     self.seo_url = ModelHelper::strip_seo_url self.seo_url
   end
 
-  # Normalize carriage returns into something we actually want
-  #def normalize text
-  #  text.gsub("\r\n","\n").gsub("\r","\n").gsub(/\n{2,}/,"\n\n")
-  #end
+  # After all is said and done .. do stuff
+  def postprocess
+    ModelHelper::backup 'content', self.seo_url, self
+  end
 
 end

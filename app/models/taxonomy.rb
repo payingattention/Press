@@ -23,14 +23,34 @@ class Taxonomy < ActiveRecord::Base
   validates :name,    :presence => true
   validates :seo_url, :uniqueness => { :message => "It appears the SEO Url that you entered is already in use" }
 
+  # After we have commit and saved, fire off any post processing commands
+  after_commit :postprocess
+
   # Define some scoped helpers
   scope :tags, where(:classification => :tag)
   scope :categories, where(:classification => :category)
+
+  # Create a hard backup of this file on the file system (outside of the database)
+  # that can be indexed and saved using github or some such repository
+  def backup
+    if Setting.getValue('backup') && Setting.getValue('backup_location').present?
+      File.open("#{Setting.getValue('backup_location')}/taxonomy/#{self.seo_url}.json", 'w+') do |fh|
+        fh.write self.to_json
+      end
+    end
+  end
+
+  private
 
   # Before validation preprocessing
   def preprocess
     self.seo_url = self.name unless self.seo_url.present?
     self.seo_url = ModelHelper::strip_seo_url self.seo_url
+  end
+
+  # After all is said and done .. do stuff
+  def postprocess
+    ModelHelper::backup 'taxonomy', self.seo_url, self
   end
 
 end
