@@ -11,23 +11,14 @@ Press::Application.routes.draw do
   # Below we define all of our administrator namespace routes.. These are for site admin and site staff members only
   resources :admin, :only => [ :index ]
   namespace :admin do
-    resources :content,  :path => ":type", :constraints => { :type => /posts|pages|comments|messages|ads|blocks/ }, :only => [ :index ]
-    resources :content,   :path => ":type", :constraints => { :type => /post|page|comment|message|ad|block/ }, :only => [ :edit ] do
+
+    resources :content do
       collection do
         get :categories, :path => ":id/categories"
       end
     end
 
-    # The following are crud for content types
-    resources :posts,     :except => [ :index, :show ]
-    resources :pages,     :except => [ :index, :show ]
-    resources :comments,  :except => [ :index, :show ]
-    resources :messages,  :except => [ :index, :show ]
-    resources :ads,       :except => [ :index, :show ]
-    resources :blocks,    :except => [ :index, :show ]
-
     resources :users
-
     resources :taxonomies
     resources :layouts
     resources :widgets
