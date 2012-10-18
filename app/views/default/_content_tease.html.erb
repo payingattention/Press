@@ -1,0 +1,19 @@
+<%= content.content_panel do %>
+  <%= content.close_button %>
+  <%= render_markdown content.header(url_query), { :query => @query } %>
+
+  <%= content.nav_bar :class => 'upper' do %>
+    <li><a href="#published"><i class="icon-calendar"></i><%= content.go_live.strftime("%B %e, %Y @ %l:%M%P") %></a></li>
+    <li><a href="#author"><i class="icon-user"></i><%= content.user.display_name %></a></li>
+    <%= content.edit_link %>
+    <%= content.comments_link %>
+  <% end %>
+
+  <%= render_markdown content.tease, { :query => @query } %>
+  <%= content.read_more_link(url_query) %>
+
+  <%= content.nav_bar do %>
+    <%= content.render_taxonomies :categories %>
+    <%= content.render_taxonomies :tags %>
+  <% end %>
+<% end %>
