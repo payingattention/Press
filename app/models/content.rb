@@ -51,6 +51,12 @@ class Content < ActiveRecord::Base
     taxonomies.all :conditions => { :classification => :category }
   end
 
+  # Comments
+  # For now all child content is a "comment" though it may not be
+  def comments
+    contents.all
+  end
+
   # Belongs to any taxonomy kind with id?
   def has_taxonomy? taxonomy_id
     taxonomies.all(:conditions => { :id => taxonomy_id }).present?
