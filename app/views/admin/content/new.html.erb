@@ -1,6 +1,6 @@
 <%= form_for @content, :url => admin_content_index_path, :html => { :class => '' } do |f| %>
 
-  <%= breadcrumbs :controller => { :name => 'Content', :link => admin_content_index_path }, :right_items => [
+  <%= breadcrumbs :right_items => [
         submit_tag("Create Content", :class => 'btn btn-primary btn-mini'),
         link_to("Cancel", admin_content_index_path, :class => 'btn btn-mini')
   ] %>
