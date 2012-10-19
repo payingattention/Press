@@ -106,12 +106,12 @@ class Content < ActiveRecord::Base
 
   # After all is said and done .. do stuff
   def backup
-    ModelHelper::backup 'content', self.seo_url, self
+    ModelHelper::backup self
   end
 
   # After we have destroyed .. do stuff
   def purge
-    ModelHelper::destroy_backup 'content', self.seo_url, self
+    ModelHelper::destroy_backup self
   end
 
 end
