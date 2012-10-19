@@ -12,10 +12,9 @@ class ApplicationController < ActionController::Base
   def list_models seed_list, filter_fields = [], order = 'created_at ASC'
     models = seed_list.order order
     # Get and apply our filter
-    @filter = params[:filter] || ''
-    if @filter.present? && filter_fields.count > 0
-      models = models.where build_filter(@filter, filter_fields)
-    end
+    #if filter_fields.present?
+    #  models = models.where build_filter(@filter, filter_fields)
+    #end
     models = paginate_models models
   end
 

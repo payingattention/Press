@@ -1,4 +1,4 @@
-<%= breadcrumbs :right_items => [
+<%= breadcrumbs :filter => @filter, :right_items => [
     link_to(new_admin_content_path, :class => 'btn btn-primary btn-mini') {
       "<i class='icon-plus icon-white'></i> Add New Content".html_safe
     }
@@ -30,12 +30,12 @@
           </td>
           <td>
             <% content.categories.each do |c| %>
-              <a href="<%= url_for :filter => @filter, :category => c.seo_url %>"><%= c.name.capitalize %></a><% if c != content.categories.last %>,<% end %>
+              <a href="<%= url_for :query => @query, :filter => c.seo_url %>"><%= c.name %></a><% if c != content.categories.last %>,<% end %>
             <% end %>
           </td>
           <td>
             <% content.tags.each do |c| %>
-              <a href="<%= url_for :filter => @filter, :tag => c.seo_url %>"><%= c.name.capitalize %></a><% if c != content.tags.last %>,<% end %>
+              <a href="<%= url_for :query => @query, :filter => c.seo_url %>"><%= c.name %></a><% if c != content.tags.last %>,<% end %>
             <% end %>
           </td>
           <td><%= content.state.capitalize %></td>

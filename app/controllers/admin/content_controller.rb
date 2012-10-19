@@ -4,27 +4,16 @@ class Admin::ContentController < AdminController
   def index
     # Set our limit, this should be dynamic or something.. drop box?
     limit = 12
-
+    # passing on the query
+    @query = params[:query] || ''
     # if we are talking about a tag, get our posts from there
-    #@tag = params[:tag] || ''
-    #if @tag.present?
-    #  tag = Taxonomy.find_by_seo_url @tag
-    #  @posts = list_models tag.posts, [], 'go_live desc' if params[:type] == 'posts'
-    #end
-
-    # If we are talking about a category get the posts from there
-    #@category = params[:category] || ''
-    #if @category.present?
-    #  category = Taxonomy.find_by_seo_url @category
-    #  @posts = list_models category.posts, [], 'go_live desc' if params[:type] == 'posts'
-    #end
-
-    #if !@tag.present? && !@category.present?
-
-
-    @contents = ContentDecorator.decorate(list_models Content, [], 'go_live desc')
-
-    #end
+    if params[:filter].present?
+      taxonomy = Taxonomy.find_by_seo_url params[:filter]
+      @filter = params[:filter]
+      @contents = ContentDecorator.decorate(list_models taxonomy.contents, [:text], 'go_live desc')
+    else
+      @contents = ContentDecorator.decorate(list_models Content, [:text], 'go_live desc')
+    end
 
     respond_to do |format|
       format.html # index.html.erb
