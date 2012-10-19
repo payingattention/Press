@@ -1,50 +1,53 @@
+<fieldset>
+  <div class='span9'>
 
-  <fieldset>
-    <legend><%=  form_legend  %></legend>
-
+    <h6>Taxonomy Display Name</h6>
     <div class='control-group<%= " error" if @taxonomy.errors.has_key?(:name) %>'>
-      <label class='control-label'>Name</label>
       <div class='controls'>
-        <%= f.text_field :name, :class => 'input-xlarge' %>
+        <%= f.text_field :name, :class => 'span9' %>
         <% if @taxonomy.errors.has_key?(:name) %>
           <span class='help-inline'>Name <%= @taxonomy.errors.get(:name).first %></span>
         <% end %>
       </div>
     </div>
 
-    <div class='control-group<%= " error" if @taxonomy.errors.has_key?(:seo_url) %>'>
-      <label class='control-label'>SEO Url</label>
-      <div class='controls'>
-        <%= f.text_field :seo_url, :class => 'input-xlarge' %>
-        <% if @taxonomy.errors.has_key?(:seo_url) %>
-          <span class='help-inline'>SEO Url <%= @taxonomy.errors.get(:seo_url).first %></span>
-        <% end %>
-      </div>
-    </div>
-
+    <h6>Description</h6>
     <div class='control-group<%= " error" if @taxonomy.errors.has_key?(:description) %>'>
-      <label class='control-label'>Description</label>
       <div class='controls'>
-        <%= f.text_area :description, :size => '50x8', :class => 'input-xlarge' %>
+        <%= f.text_area :description, :size => '50x3', :class => 'span9' %>
         <% if @taxonomy.errors.has_key?(:description) %>
           <span class='help-inline'>Description <%= @taxonomy.errors.get(:description).first %></span>
         <% end %>
       </div>
     </div>
 
-    <div class='control-group<%= " error" if @taxonomy.errors.has_key?(:classification) %>'>
-      <label class='control-label'>Classification</label>
+  </div>
+  <div class='span3'>
+
+    <h6>SEO Url
+      <a href="#"><i class="icons-tiny-help"></i></a>
+    </h6>
+    <div class='control-group<%= " error" if @taxonomy.errors.has_key?(:seo_url) %>'>
       <div class='controls'>
-        <%= f.enum_select :classification, {}, :class => 'input-xlarge' %>
+        <%= f.text_field :seo_url, :class => 'span3', :placeholder => "SEO Url" %>
+        <% if @taxonomy.errors.has_key?(:seo_url) %>
+          <span class='help-inline'>SEO Url <%= @taxonomy.errors.get(:seo_url).first %></span>
+        <% end %>
+      </div>
+    </div>
+
+    <h6>Classification</h6>
+    <div class='control-group<%= " error" if @taxonomy.errors.has_key?(:classification) %>'>
+      <div class='controls'>
+        <%= select_tag('taxonomy[classification]', options_for_select([
+                ['Tag', :tag],
+                ['Category', :category]
+        ], @taxonomy.classification), :class => 'span3') %>
         <% if @taxonomy.errors.has_key?(:classification) %>
           <span class='help-inline'>Classification <%= @taxonomy.errors.get(:classification).first %></span>
         <% end %>
       </div>
     </div>
 
-    <div class='form-actions'>
-      <%= submit_tag submit_label, :class => 'btn btn-primary' %>
-      <%= link_to "Cancel", {:action => 'index'}, :class => 'btn' %>
-    </div>
-
-  </fieldset>
+  </div>
+</fieldset>
