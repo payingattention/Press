@@ -1,9 +1,9 @@
 class ContentDecorator < Draper::Base
   decorates :content
 
-  # Render the header based on the model header and replace () with the url for now
+  # Render the header based on the model header and make any ### header a link to itself.
   def header query = nil
-    model.header.gsub '()', "(%s)" % h.url_for("/#{model.seo_url}/#{query}")
+    model.header.gsub(/^\#\#\#\s(.*?)(\r|\n)/, '### [\1](%s)' % h.url_for("/#{model.seo_url}/#{query}"))
   end
 
   # Render the show or tease partial depending on whats being called
