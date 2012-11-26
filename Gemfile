@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.3'
+gem 'rails', '3.2.8'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -16,6 +16,7 @@ group :assets do
   gem 'therubyracer', :platform => :ruby
   gem 'uglifier', '>= 1.0.3'
 end
+gem 'less-rails'
 # Twitter bootstrap baby
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 # json
@@ -45,3 +46,11 @@ gem "redcarpet"
 gem "draper"
 # Carrierwave Media uploader
 gem "carrierwave"
+# Mini Magick gem to interact with ImageMagick
+gem "mini_magick"
+# Fog allows for easy communication with clouds
+gem 'fog'
+# Carrierwave Media uploader
+gem 'carrierwave'
+#TODO replace enum_column3 with enum_simulator for db agnostic enums
+#gem 'enum_simulator'
