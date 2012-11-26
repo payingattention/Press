@@ -12,16 +12,21 @@ Press::Application.routes.draw do
   resources :admin, :only => [ :index ]
   namespace :admin do
 
+    # Content Routes
     resources :content do
       collection do
         get :categories, :path => ":id/categories"
       end
     end
 
+    resources :media
+
     resources :users
     resources :taxonomies
     resources :layouts
     resources :widgets
+
+    # Wordpress import utility
     resources :import_wordpress, :only => [ :new, :create ]
 
     # Site settings :index for showing the form and :create to post it (though not technically correct)
@@ -42,7 +47,7 @@ Press::Application.routes.draw do
 
   end
 
-  # Installation Routes -- @TODO How do we delete this routing entirely after site is installed?
+  # Installation Routes -- #TODO How do we delete this routing entirely after site is installed?
   resources :install, :only => [ :index, :create_owner ] do
     collection do
       post :create_owner, :path => "create_owner"
