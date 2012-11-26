@@ -61,3 +61,4 @@ end
 require 'ext/numeric'
 require 'ext/string'
 require 'ext/array'
+require 'ext/hash'
