@@ -12,4 +12,4 @@
 <% end %>
 
 <%= render :partial => 'admin/taxonomies/category_modal', :locals => { :category => Taxonomy.new } %>
-<%= render :partial => 'admin/content/media_modal', :locals => {} %>
+<%= render :partial => 'admin/content/media_modal', :locals => { :medium => Medium.new } %>
