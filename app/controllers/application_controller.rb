@@ -50,6 +50,6 @@ class ApplicationController < ActionController::Base
   end
 
   def userDecoratorToView
-    @user = UserDecorator.decorate(current_user)
+    @authed_user = UserDecorator.decorate(current_user)
   end
 end
