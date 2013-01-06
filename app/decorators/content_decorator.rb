@@ -56,7 +56,7 @@ class ContentDecorator < Draper::Base
   def comments_link
     if allow_comments
       nav_item do
-        h.link_to "<i class='icon-comment'></i>Comments (#{comments.count})".html_safe, "#{full_url}#comments"
+        h.link_to "<i class='icon-comments'></i>Comments (#{comments.count})".html_safe, "#{full_url}#comments"
       end
     end
   end
