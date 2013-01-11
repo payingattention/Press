@@ -13,9 +13,7 @@
         <li><a href="#tabs-3">Media</a></li>
       </ul>
       <div id='tabs-1'>
-        <h6>SEO Url
-          <a href="#"><i class="icons-tiny-help"></i></a>
-        </h6>
+        <h6>SEO Url</h6>
         <div class='control-group<%= " error" if @content.errors.has_key?(:seo_url) %>'>
           <div class='controls'><%= f.text_field :seo_url, :class => 'span3', :placeholder => "SEO Url" %></div>
           <% if @content.errors.has_key?(:seo_url) %>
